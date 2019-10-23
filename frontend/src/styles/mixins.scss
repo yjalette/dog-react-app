@@ -1,0 +1,48 @@
+@mixin flex($content) {
+    display: flex;
+    align-items: center;
+    justify-content: $content;
+    width: 100%;
+}
+
+@mixin background($img) {
+    display: block;
+    width: 100%;
+    background-image: url($img);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+@mixin column {
+    display: inline-block;
+    width: 44%;
+    padding: 20px;
+}
+
+@mixin grid($cols, $mgn){
+    float: left;
+    margin-right: $mgn;
+    margin-bottom: $mgn;
+    width: ((100% - ($mgn * ( $cols - 1))) / $cols);
+    &:nth-child(#{$cols}n){
+        margin-right: 0;
+    }
+}
+
+@mixin flex-col($cols, $mgn){
+    display: flex;
+    flex: 0 0 ((100% - ($mgn * ( $cols - 1))) / $cols);
+    margin: $mgn;
+}
+
+@mixin signUpActive {
+    .cont.s--signup & {
+      @content;
+    }
+  }
+
+@mixin mQ($arg){
+    @media screen and (max-width: $arg){
+        @content;
+    }
+}

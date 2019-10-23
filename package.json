@@ -1,0 +1,36 @@
+{
+  "name": "dog-app",
+  "version": "1.0.0",
+  "description": "dog app",
+  "main": "server.js",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.6",
+    "react-router-dom": "^5.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  },
+  "scripts": {
+    "client-install": "npm install --prefix frontend",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postBuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yjalette/dog-react-app.git"
+  },
+  "author": "Yekaterina Jalette",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yjalette/dog-react-app/issues"
+  },
+  "homepage": "https://github.com/yjalette/dog-react-app#readme"
+}
