@@ -1,3 +1,4 @@
 module.exports = {
-    mongoURI: 'mongodb://admin:admin123@ds115595.mlab.com:15595/dog_app'
+    mongoURI: 'mongodb+srv://admin:admin123@dog-mern-app-zfwl7.mongodb.net/test?retryWrites=true&w=majority'
+    // mongodb+srv://admin:<password>@dog-mern-app-zfwl7.mongodb.net/test?retryWrites=true&w=majority
 }
