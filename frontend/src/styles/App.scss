@@ -34,10 +34,14 @@ span {
 }
 
 h1 {
-  font-size: $lg;
+  font-size: $sup-large;
 }
 
 h3 {
+  font-size: $lg;
+}
+
+h5 {
   font-size: $md;
 }
 
@@ -70,43 +74,56 @@ button:hover {
   .adoption_form {
     @include flex(center);
     padding: 2em;
-    div {
+    .input_wrapper {
       @include flex-col(6, 1%);
+      flex-direction: column;
       padding: 0.9em;
       label {
+        width: 100%;
         opacity: 0.7;
         padding: 0 0.5em;
       }
       select, input {
         border: 0.5px solid gray;
-        padding: 0.2em;
-        option {
-          
-        }
-       
-    }
+        padding: 0.2em;   
+      }
+
+      button {
+        width: 80%;
+        align-self: flex-end;
+      }
     
     }
   }
   
   .grid {
-    @include flex(center);
-    flex-wrap: wrap;
-  .card {
-    @include flex-col(6, 1%);
-    flex-direction: column;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    text-align: center;
-    .title {
-      color: grey;
-      font-size: 18px;
-    }
-  
-    .card_img {
-      width: 150px;
-      height: 150px;
-    }
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row wrap;
+    padding: 2em;
+    .card {
+      @include flex-col(3, 1%);
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      text-align: center;
+      .title {
+        color: grey;
+        overflow: initial;
+        padding: 0.8em;
+      }
+      div {
+        .card_img {
+          width: 100%;
+          height: 400px;
+          object-fit: cover;
+        }
+      }
     
+      button {
+        float: none;
+        width: 100%;
+      }
     
   }
   
@@ -399,20 +416,41 @@ input {
 
 
 // booking 
-
-form {
+.booking {
   width: 100%;
-  .react-calendar__navigation{
-    background-color: blue;
-
-    .react-calendar__navigation__label {
-      width: 100%;
-      height: 100%;
-      padding: 0;
+  form {
+    @include flex(space-evenly);
+    padding: 1em;
+    .col{
+      div {
+        padding: 0.3em;
+        input {
+          width: 100%;
+          padding: 0.5em;
+        }
+      }
+      .react-calendar{
+        background-color: $green;
+        .react-calendar__navigation{
+          background-color: complement($color: $blue);
+          height: 100%;
+          .react-calendar__navigation__label {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+          }
+      
+        }
+      }
+      
+      button {
+        width: 70%;
+      }
+    
     }
-
+    
   }
-
+  
 }
 
 .fade-enter {

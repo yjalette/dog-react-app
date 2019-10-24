@@ -1,12 +1,10 @@
 import React from 'react'
-import Form from './Form'
 import BookingList from './BookingList'
 
 const Booking = () => {
     return (
-        <div>
+        <div className="booking">
             <BookingList />
-            <Form />
             <hr />
         </div>
     )

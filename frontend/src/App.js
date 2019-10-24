@@ -5,6 +5,7 @@ import Authentication from './components/auth/Authentication';
 import Adoption_View from './components/adoption/Adoption_View';
 import Nav from './components/nav/Nav';
 import Booking from './components/booking/Booking';
+import News from './components/news/News';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route component={Adoption_View} path="/adoption" />
             <Route component={Authentication} path="/authentication" />
             <Route component={Booking} path="/booking" />
+            <Route component={News} path="/news" />
           </Switch>
         </div>
       </Router>

@@ -9,17 +9,6 @@ const BookingList = () => {
         loading: false
     })
 
-
-    // const handleClick = () => {
-    //     const name = prompt("enter name ...")
-    //     if(name){
-    //         setInputs(inputs => ({
-    //             items:[...inputs.items, {name}]
-    //         }))
-    //     }
-
-    // }
-
     useEffect(() => {
         axios
             .get('./api/items')
@@ -31,20 +20,16 @@ const BookingList = () => {
                 })
             })
 
-    }, [])
+    }, [inputs])
 
     
-
     const handleDelete = (id) => {
         setInputs(inputs => ({
             items: inputs.items.filter(item => item.id !== id)
         }))
     }
-
-    
-
     return (
-        <div>
+        <>
             <AddBooking items={inputs.items}/>
             <ul>
                 <TransitionGroup>
@@ -57,7 +42,7 @@ const BookingList = () => {
                     ))}
                 </TransitionGroup>
             </ul>
-        </div>
+        </>
     )
 }
 

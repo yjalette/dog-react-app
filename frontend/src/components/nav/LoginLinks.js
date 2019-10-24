@@ -1,13 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const LoginLinks = () => {
     return (
         <>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Portfolio</a></li>
-            <li><a href="#">Services</a></li >
-            <li><a href="#">Contact</a></li >
+            <li><Link  to="./">Home</Link></li>
+            <li><Link  to="">Doggy News</Link></li>
+            <li><Link  to="./adoption">Adoption</Link></li>
+            <li><Link  to="./booking">Booking</Link></li>
+            <li><Link  to="./authentication">Sign up/Sign In</Link></li >
+            <li><Link  to="./">Contact</Link></li >
         </>
     )
 }

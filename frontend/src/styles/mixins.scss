@@ -31,8 +31,13 @@
 
 @mixin flex-col($cols, $mgn){
     display: flex;
-    flex: 0 0 ((100% - ($mgn * ( $cols - 1))) / $cols);
+    // flex-wrap: wrap;
+    // flex: 0 0 ((100% - ($mgn * ( $cols - 1))) / $cols);
     margin: $mgn;
+    width: ((100% - ($mgn * ( $cols - 1))) / $cols - 2%);
+    &:nth-child(#{$cols}n){
+        margin-right: 0;
+    }
 }
 
 @mixin signUpActive {

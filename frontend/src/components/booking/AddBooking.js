@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import DatePicker from './DatePicker';
 
-const AddBooking = ({items}) => {
-    const [inputs, setInputs] = useState({name: ""})
+const AddBooking = ({ items }) => {
+    const [inputs, setInputs] = useState({ name: "" })
     const handleChange = e => {
         setInputs({
             [e.target.name]: e.target.value
@@ -16,15 +17,24 @@ const AddBooking = ({items}) => {
         }
 
         axios
-        .post('./api/items', newItem)
-        .then(res => console.log(res))
-        
+            .post('./api/items', newItem)
+            .then(res => console.log(res))
+
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input name="name" onChange={handleChange} />
-            <button type="submit" >add a new event</button>
+        <form onSubmit={handleSubmit} className="booking-form">
+            <div className="col">
+                <DatePicker />
+            </div>
+            <div className="col">
+                <div className="input-wrapper">
+                    <label>name</label>
+                    <input name="name" onChange={handleChange} />
+                </div>
+                <button type="submit" >add a new event</button>
+            </div>
+
         </form>
     )
 }

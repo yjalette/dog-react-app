@@ -3,24 +3,22 @@ import { TokenContext } from './Adoption';
 import Grid from '../grid/Grid';
 import { fetchDogs } from './fetchDogs';
 
-
-
 const Form = () => {
     const [inputs, setInputs] = useState({ gender: 'male', breed: '', zipcode: '10032' });
     const [results, setResults] = useState(null);
     const { token } = useContext(TokenContext)
 
     useEffect(() => {
-        if(!token) return;
+        if (!token) return;
 
         fetchDogs({}, token)
-        .then(data => {
-            if (!data.animals) {
-                throw new Error("no animals");
-            }
-            else setResults(data.animals)
-        })
-        .catch(err => console.log('error: ', err));   
+            .then(data => {
+                if (!data.animals) {
+                    throw new Error("no animals");
+                }
+                else setResults(data.animals)
+            })
+            .catch(err => console.log('error: ', err));
     }, [token])
 
     const handleChange = e => {
@@ -68,7 +66,10 @@ const Form = () => {
                     <label>zipcode:</label>
                     <input value={inputs.zipcode} name="zipcode" onChange={handleChange} />
                 </div>
-                <button type="submit">search</button>
+                <div className="input_wrapper">
+                    <label></label>
+                    <button type="submit">search</button>
+                </div>
             </form>
             <Grid animals={results} />
         </>
