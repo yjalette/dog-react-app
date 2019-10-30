@@ -1,5 +1,5 @@
 import React from 'react'
-import BookingList from './BookingList'
+import BookingList from './BookingList';
 
 const Booking = () => {
     return (

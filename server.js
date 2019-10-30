@@ -2,7 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const config = require('config');
-const app = express()
+const app = express();
+var cors = require('cors');
+
+app.use(cors());
 
 if(process.env.Node_ENV === 'production'){
     app.use(express.static('frontend/build'));
@@ -18,7 +21,9 @@ const db = config.get('mongoURI');
 mongoose
     .connect(db, {
         useNewUrlParser: true,
-        useCreateIndex: true
+        useCreateIndex: true,
+        useUnifiedTopology: true,
+        
     })
     .then(() => console.log("mongo connect"))
     .catch((err) => console.log(err))
@@ -27,6 +32,8 @@ mongoose
 app.use('/api/items', require("./routes/api/items"))
 app.use('/api/users', require("./routes/api/users"))
 app.use('/api/auth', require("./routes/api/auth"))
+app.use('/api/contact', require("./routes/api/contact"))
+app.use('/api/booking', require("./routes/api/calendar"))
 
 const port = process.env.PORT || 5000; 
 

@@ -6,11 +6,11 @@ const Card = ({ animal }) => {
     const photo = getPic[0] || getPic[1] || adopt_me;
     return (
         <div className="card">
+            <p className="title">{animal.name}</p>
             <div>
                 <img src={photo} alt="Avatar" className="card_img"/>
             </div>
             <p>{animal.breeds.primary}</p>
-            <p className="title">{animal.name}</p>
             <button>more info</button>
         </div>
     )

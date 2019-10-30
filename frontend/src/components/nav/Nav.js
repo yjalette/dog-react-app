@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SignOutLinks from './SignOutLinks'
+import Logout from '../auth/Logout';
 
 const Nav = () => {
     return (
@@ -9,7 +10,8 @@ const Nav = () => {
                 <ul>
                     <li><Link to="./" id="logo">LOGO</Link></li>
                     <SignOutLinks />
-                    <Link to="./" id="menu-icon"></Link>
+                    <li><Link  to="./contact">Contact</Link></li >
+                    <li><Logout /></li >
                 </ul >
             </nav >
         </>

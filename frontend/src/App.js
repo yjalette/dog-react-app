@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './styles/App.scss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Authentication from './components/auth/Authentication';
@@ -6,21 +6,33 @@ import Adoption_View from './components/adoption/Adoption_View';
 import Nav from './components/nav/Nav';
 import Booking from './components/booking/Booking';
 import News from './components/news/News';
+import Contact from './components/contact/Contact';
+import { AuthContext } from './contexts/AuthContext'
+import './axios';
+
+const routes = [
+  {component: Authentication, path: "/authentication", role: ['authUser', 'notAuthUser']},
+  {component: Adoption_View, path: "/adoption", role: ['authUser', 'notAuthUser'] },
+  {component: News, path: "/news", role: ['authUser', 'notAuthUser'] },
+  {component: Booking, path: "/booking", role: ['authUser', 'notAuthUser'] },
+  {component: Contact, path: "/contact", role: ['authUser', 'notAuthUser']}
+]
 
 function App() {
+  const [auth, setAuth] = useState();
+
   return (
     <div className="App">
-      <Router>
-        <Nav />
-        <div className="showcase">
-          <Switch>
-            <Route component={Adoption_View} path="/adoption" />
-            <Route component={Authentication} path="/authentication" />
-            <Route component={Booking} path="/booking" />
-            <Route component={News} path="/news" />
-          </Switch>
-        </div>
-      </Router>
+      <AuthContext.Provider value={{auth, setAuth}}>
+        <Router>
+          <Nav />
+          <div className="showcase">
+            <Switch>
+               {routes.filter(route => auth || route.role.includes('notAuthUser')).map(route => <Route key={route.path} component={route.component} path={route.path} />)}
+            </Switch>
+          </div>
+        </Router>
+      </AuthContext.Provider>
     </div>
   );
 }
