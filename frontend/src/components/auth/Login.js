@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 import { Redirect } from 'react-router-dom'
 // import { withRouter } from 'react-router-dom';
 
-const Login = (props) => {
+const Login = () => {
     const [inputs, setInputs] = useState({ email: "", password: "" });
     const [user, setUser] = useState(false)
     const context = useContext(AuthContext);
@@ -20,7 +20,7 @@ const Login = (props) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        fetch('http://localhost:5000/api/auth', {
+        fetch('./api/auth', {
             method: 'POST',
             body: JSON.stringify(inputs),
             headers: {

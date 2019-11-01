@@ -29,11 +29,11 @@ mongoose
     .catch((err) => console.log(err))
 
 
-app.use('/api/items', require("./routes/api/items"))
+app.use('/api/dbEvents', require("./routes/api/dbEvents"))
 app.use('/api/users', require("./routes/api/users"))
 app.use('/api/auth', require("./routes/api/auth"))
-app.use('/api/contact', require("./routes/api/contact"))
-app.use('/api/booking', require("./routes/api/calendar"))
+app.use('/api/emailEvents', require("./routes/api/emailEvents"))
+app.use('/api/googleEvents', require("./routes/api/googleEvents"))
 
 const port = process.env.PORT || 5000; 
 

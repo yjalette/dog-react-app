@@ -74,6 +74,72 @@ button:hover {
   opacity: 0.7;
 }
 
+.showcase {
+  background: linear-gradient(-30deg, $green, $blue);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+
+.homepage {
+  display: block;
+  .landing {
+    @include flex(center);
+    background-color: $blue;
+    .hero_image{
+      background-image: url(../images/hero_image-blue.jpg);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      height: 500px;
+      width: 50%;
+    }
+    .headline {
+      padding: 2em;
+      
+      
+    }
+  }
+  .services {
+    @include flex(center);
+    flex-direction: column;
+    :root {
+      --web-view-ids: Web_1920___1;
+    }
+    #Web_1920___1 * {
+      margin: 0;
+      padding: 0;
+    }
+    #Web_1920___1 {
+      position: relative;
+      box-sizing: border-box;
+      background: #E5E5E5;
+      width: 1956px;
+      height: 1001px;
+      background-color: rgba(255,255,255,1);
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      --web-view-name: Web 1920 – 1;
+      --web-view-id: Web_1920___1;
+      --web-enable-deep-linking: true;
+    }
+    #Ellipse_1 {
+      fill: $green;
+    }
+    .Ellipse_1 {
+      position: absolute;
+      overflow: visible;
+      width: 2312px;
+      height: 999px;
+      left: -178px;
+      top: -396px;
+    }
+  }
+}
+
+
 
 .wrapper {
   .adoption_form {
@@ -88,7 +154,7 @@ button:hover {
         opacity: 0.7;
         padding: 0 0.5em;
       }
-      select, input {
+      select, input, option {
         border: 0.5px solid gray;
         padding: 0.2em;   
       }
@@ -136,12 +202,6 @@ button:hover {
   
 }
 
-.showcase {
-  background: linear-gradient(-30deg, $green, $blue);
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
 
 
 // nav 
@@ -219,7 +279,7 @@ nav {
     top: 0;
     width: $contW;
     height: 100%;
-    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/sections-3.jpg');
+    background-image: url('../images/dogs-line.jpg');
     background-size: cover;
     transition: transform $switchAT ease-in-out;
   }
@@ -421,15 +481,21 @@ input, textarea {
 
 // booking 
 .add-booking {
-  @include flex(space-evenly);
+  
+  form {
+    @include flex(space-evenly);
   width: 100%;
+  
   .col {
     @include flex(space-evenly);
     flex-direction: column;
     padding: 1em; 
+    button {
+      width: 70%;
+    } 
       div {
         padding: 0.3em;
-        input {
+        input, select, option {
           width: 100%;
           padding: 0.5em;
         }
@@ -448,10 +514,10 @@ input, textarea {
         }
       }
 
-      button {
-        width: 70%;
-      }    
- 
+      
   }  
+     
+
+}
 }
 

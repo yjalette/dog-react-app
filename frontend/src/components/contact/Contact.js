@@ -16,7 +16,7 @@ const Contact = () => {
     }
     const handleSubmit = e => {
         e.preventDefault(e);
-        fetch("http://localhost:5000/api/contact", {
+        fetch("./api/emailEvents", {
             method: 'POST',
             body: JSON.stringify(inputs),
             headers: {

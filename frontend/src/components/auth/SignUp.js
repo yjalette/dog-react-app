@@ -3,6 +3,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 
 const SignUp = () => {
     const [inputs, setInputs] = useState({ name: "", email: "", password: "" });
+    const [confirmation, setConfirmation] = useState(false)
     const context = useContext(AuthContext);
     
     const handleChange = e => {
@@ -26,12 +27,25 @@ const SignUp = () => {
             return res.json()
         }).then(data => {
             console.log(data)
-            context.setAuth(data)
-        })
+            context.setAuth(data);
+            setConfirmation(true)
+            fetch(`http://localhost:5000/api/emailEvents/${data.token}`, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => {
+                console.log(res)
+                return res.json()
+            }).then(data => console.log(data))
+            })
+        }
 
-    }
     return (
-        <form className="form sign-up" onSubmit={handleSubmit}>
+        <>
+        {confirmation && <p>Please confirm your email to complete registration</p>}
+       <form className="form sign-up" onSubmit={handleSubmit}>
             <h2>Sign Up</h2>
             <label>
                 <span>Name</span>
@@ -47,6 +61,7 @@ const SignUp = () => {
             </label>
             <button type="submit" className="form-btn">Sign Up</button>
         </form>
+        </>
     )
 }
 

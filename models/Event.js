@@ -1,18 +1,18 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const ItemSchema = new Schema({
+const EventSchema = new Schema({
     name: {
         type: String,
         required: true
     },
     appt_date: {
         type: String,
-        required: true
+        required: false
     },
     appt_time: {
-        type: String,
-        required: true
+        type: Number,
+        required: false
     },
     date: {
         type: Date,
@@ -21,5 +21,5 @@ const ItemSchema = new Schema({
 })
 
 
-module.exports = Item = mongoose.model('item', ItemSchema)
+module.exports = Event = mongoose.model('event', EventSchema)
 
