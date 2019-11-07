@@ -25,8 +25,8 @@ mongoose
         useUnifiedTopology: true,
         
     })
-    .then(() => console.log("mongo connect"))
-    .catch((err) => console.log(err))
+    .then(() => console.log("mongo is connecting"))
+    .catch((err) => console.log("this is the errorrrrr:", err))
 
 
 app.use('/api/users', require("./routes/api/users"))
