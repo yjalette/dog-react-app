@@ -5,14 +5,14 @@ const config = require('config');
 const app = express();
 var cors = require('cors');
 
-// app.use(cors());
+app.use(cors());
 
 app.use(express.json())
 
 const db = config.get('mongoURI');
 
 mongoose
-    .connect(process.env.DATABASE_URL || global.DATABASE_URL || db, {
+    .connect(process.env.DATABASE_URL || db, {
         useNewUrlParser: true,
         useCreateIndex: true,
         useUnifiedTopology: true,
@@ -36,7 +36,7 @@ if (process.env.Node_ENV === 'production') {
 }
 
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 0;
 
 
-app.listen(port, () => console.log(`server started on ${port}`))
+app.listen(port, () => console.log(`server started on ${port} `))
