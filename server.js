@@ -12,7 +12,7 @@ app.use(express.json())
 const db = config.get('mongoURI');
 
 mongoose
-    .connect(db, {
+    .connect(process.env.DATABASE_URL || global.DATABASE_URL || db, {
         useNewUrlParser: true,
         useCreateIndex: true,
         useUnifiedTopology: true,
