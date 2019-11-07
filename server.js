@@ -16,10 +16,10 @@ if(process.env.Node_ENV === 'production'){
 
 app.use(express.json())
 
-const db = config.get('mongoURI');
+const db = process.env.config.get('mongoURI');
 
 mongoose
-    .connect(process.env.db, {
+    .connect(db, {
         useNewUrlParser: true,
         useCreateIndex: true,
         useUnifiedTopology: true,
