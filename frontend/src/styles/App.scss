@@ -119,12 +119,17 @@ button:hover {
     }
   .user-menu {
     padding: 1em;
-
     i {
       font-size: $md;
+      color: darken($color: $pink, $amount: 10)
     }
     .dropdown-content {
       display: none;
+      background-color: darken($color: $pink, $amount: 10);
+      color: white;
+      li {
+        padding: .5em;
+      }
       li:hover {
         background-color: $green;
       }
@@ -158,12 +163,13 @@ button:hover {
 }
 
 @-webkit-keyframes nav {
-  from { margin-left: 0;}
-  to { margin-left: 10px;}
+  from {}
+  to {-webkit-transform: translateX(10%);transform: translateX(10%)}
 }
+
 @keyframes nav {
-  from { margin-left: 0;}
-  to { margin-left: 10px;}
+  from {}
+  to {-webkit-transform: translateX(10%);transform: translateX(10%)}
 }
 
 

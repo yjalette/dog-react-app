@@ -6,7 +6,9 @@ import { Redirect } from 'react-router-dom'
 
 const Login = () => {
     const [inputs, setInputs] = useState({ email: "", password: "" });
-    const [user, setUser] = useState(false)
+    const [user, setUser] = useState(false);
+    const [isChecked, setIsChecked] = useState(false);
+
     const context = useContext(AuthContext);
 
     const handleChange = e => {
@@ -15,6 +17,10 @@ const Login = () => {
             ...inputs,
             [name]: value
         })
+    }
+
+    const rememberPwd = e => {
+        setIsChecked(true);
     }
 
     const handleSubmit = e => {
@@ -26,32 +32,39 @@ const Login = () => {
                 'Content-Type': 'application/json'
             }
         }).then(res => {
-            return res.json();  
+            return res.json();
         }).then(data => {
-            console.log(data)
             const { token, user } = data;
             context.setAuth(user);
             Cookies.set('token', token);
-            setUser(true)
+            setUser(true);
+            
+            if(isChecked){
+                sessionStorage.setItem('user', JSON.stringify(context.auth));
+            }
             // props.history.push('./')
         })
     }
     return (
         <>
-        <form className="form sign-in" onSubmit={handleSubmit}>
-            <h2>Welcome back, please login</h2>
-            <label>
-                <span>Email</span>
-                <input type="email" name="email" value={inputs.email} onChange={handleChange} />
-            </label>
-            <label>
-                <span>Password</span>
-                <input type="password" name="password" value={inputs.password} onChange={handleChange} />
-            </label>
-            <p className="forgot-pass">Forgot password?</p>
-            <button type="submit" className="submit">Sign In</button>
-        </form>
-        {user&& <Redirect to="/booking" />}
+            <form className="form sign-in" onSubmit={handleSubmit}>
+                <h2>Welcome back, please login</h2>
+                <label>
+                    <span>Email</span>
+                    <input type="email" name="email" value={inputs.email} onChange={handleChange} />
+                </label>
+                <label>
+                    <span>Password</span>
+                    <input type="password" name="password" value={inputs.password} onChange={handleChange} />
+                </label>
+                <label className="remember-me-wrapper">
+                    <span>remember me</span>
+                    <input type="checkbox" name="remember" checked={isChecked}  onChange={rememberPwd} />
+                </label>
+                <p className="forgot-pwd">Forgot password?</p>
+                <button type="submit" className="submit">Sign In</button>
+            </form>
+            {user && <Redirect to="/booking" />}
         </>
     )
 }

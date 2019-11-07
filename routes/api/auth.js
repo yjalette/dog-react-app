@@ -44,17 +44,13 @@ router.get('/user', auth, (req, res) => {
 })
 
 
-router.get('/logout', function(req, res, next) {
-    if (req.session) {
-     console.log(req.session)
-      req.session.destroy(function(err) {
-        if(err) {
-          return next(err);
-        } else {
-          return res.redirect('/');
-        }
-      });
-    }
-  })
-
+// router.get('/user/logout', (req, res) => {
+//     User.findByIdAndUpdate({id: req.user._id}, {token: ""}, (err, doc) => {
+//       if(err) res.json({success: false, err})
+//       return res.status(200).send({
+//         success: true
+//       })
+//     })
+//   })
+ 
 module.exports = router;

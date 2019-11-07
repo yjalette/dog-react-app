@@ -38,7 +38,7 @@ const AuthBooking = withAuth(Booking);
 
 function App() {
   const [auth, setAuth] = useState(() => {
-    const ls = localStorage.getItem('user');
+    const ls = sessionStorage.getItem('user');
     try {
       return JSON.parse(ls);
     } catch (e) {
@@ -47,7 +47,7 @@ function App() {
   });
 
   useEffect(() => {
-    localStorage.setItem('user', JSON.stringify(auth));
+    sessionStorage.setItem('user', JSON.stringify(auth));
   }, [auth]);
 
   return (

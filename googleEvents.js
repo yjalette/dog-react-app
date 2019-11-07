@@ -93,16 +93,39 @@ function getEvents() {
 
 function createEvent(event) {
   return new Promise((resolve, reject) => {
-    // Load client secrets from a local file.
     fs.readFile('credentials.json', (err, content) => {
       if (err) return console.log('Error loading client secret file:', err);
-      // Authorize a client with credentials, then call the Google Calendar API.
       authorize(JSON.parse(content), function(auth){
         const calendar = google.calendar({version: 'v3', auth});
         calendar.events.insert({
           auth: auth,
           calendarId: 'primary',
           resource: event,
+        }, function(err, event) {
+          if (err) {
+            reject(err);
+            return;
+          }
+            resolve(event);
+        });
+      });
+    });
+  });
+}
+
+
+function deleteEvent(eventId) {
+  return new Promise((resolve, reject) => {
+    // Load client secrets from a local file.
+    fs.readFile('credentials.json', (err, content) => {
+      if (err) return console.log('Error loading client secret file:', err);
+      // Authorize a client with credentials, then call the Google Calendar API.
+      authorize(JSON.parse(content), function(auth){
+        const calendar = google.calendar({version: 'v3', auth});
+        calendar.events.delete({
+          auth: auth,
+          calendarId: 'primary',
+          eventId
         }, function(err, event) {
           if (err) {
             reject(err);
@@ -115,5 +138,4 @@ function createEvent(event) {
   });
 }
 
-
-module.exports = { getEvents, createEvent};
+module.exports = { getEvents, createEvent, deleteEvent};

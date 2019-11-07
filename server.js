@@ -29,12 +29,13 @@ mongoose
     .catch((err) => console.log(err))
 
 
-app.use('/api/dbEvents', require("./routes/api/dbEvents"))
 app.use('/api/users', require("./routes/api/users"))
 app.use('/api/auth', require("./routes/api/auth"))
 app.use('/api/emailEvents', require("./routes/api/emailEvents"))
-app.use('/api/googleEvents', require("./routes/api/googleEvents"))
+app.use('/api/events', require("./routes/api/events"))
 
 const port = process.env.PORT || 5000; 
+
+console.log(process.env)
 
 app.listen(port, () => console.log(`server started on ${port}`))

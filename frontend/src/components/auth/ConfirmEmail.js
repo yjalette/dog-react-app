@@ -1,21 +1,24 @@
-import React, {useState, useEffect} from 'react';
-import { Redirect } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { withRouter } from 'react-router-dom'
 
-const ConfirmEmail = () => {
+const ConfirmEmail = (props) => {
+    const [count, setCount] = useState(10);
 
-const [redirect, setRedirect] = useState(false);
-const [count, setCount] = useState(10);
-useEffect(() => {
-    setTimeout(() => {
-        setRedirect(true)
-    }, 10000);
-})
+    useEffect(() => {
+      if(count === 0){
+          props.history.push("/authentication");
+          return 
+      }
+      setTimeout(() => {
+        setCount(state => state - 1)
+      }, 1000)
+    }, [count])
+
     return (
         <div>
             <span>Your email was confirmed. You will be redicted to your account page in {count} seconds.</span>
-            {redirect && <Redirect exact to="/authentication" />}
         </div>
     )
 }
 
-export default ConfirmEmail
+export default withRouter(ConfirmEmail);

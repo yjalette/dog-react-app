@@ -14,6 +14,10 @@ const EventSchema = new Schema({
         type: Number,
         required: false
     },
+    google_id: {
+        type: String,
+        required: true
+    },
     date: {
         type: Date,
         default: Date.now
