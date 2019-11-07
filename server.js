@@ -36,6 +36,5 @@ app.use('/api/events', require("./routes/api/events"))
 
 const port = process.env.PORT || 5000; 
 
-console.log(process.env)
 
 app.listen(port, () => console.log(`server started on ${port}`))
