@@ -6,8 +6,6 @@ axios.interceptors.request.use(
         if (!config.url.startsWith("http")) {
             config.headers['x-auth-token'] = Cookies.get('token');
         }
-
-        console.log(config)
         return config;
     },
     error => Promise.reject(error)
