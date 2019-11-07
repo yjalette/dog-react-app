@@ -1,11 +1,12 @@
 import React from 'react'
 
-const TopNav = () => {
+const Grooming = () => {
     return (
         <div>
+            <h1>What We Do</h1>
             
         </div>
     )
 }
 
-export default TopNav
+export default Grooming

@@ -1,25 +1,17 @@
-import React from 'react'
+import React, {useContext} from 'react';
+import { AuthContext } from '../../contexts/AuthContext'
 
 const Logout = () => {
+
+    const { setAuth } = useContext(AuthContext);
     
     const handleLogout = e => {
-        fetch('http://localhost:5000/api/auth/logout', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => {
-            console.log(res)
-            return res.json();  
-        }).then(data => {
-
-            console.log(data)
-            // props.history.push('./')
-        })
+        setAuth(null)
+        localStorage.removeItem('user')
     }
 
     return (
-        <span onClick={handleLogout}>Logout</span>
+        <li onClick={handleLogout}>Logout</li>
     )
 }
 

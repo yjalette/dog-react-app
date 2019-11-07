@@ -4,8 +4,6 @@ import DatePicker from './DatePicker';
 
 const AddBooking = () => {
     const [inputs, setInputs] = useState({ name: "", appt_date: new Date(), appt_time: "", size: "", breed: "" });
-
-
     const handleChange = e => {
         const { name, value } = e.target;
         setInputs(inputs => ({
@@ -25,25 +23,20 @@ const AddBooking = () => {
         }));
     }
 
-    useEffect(() => {
-        axios
-            .get("./api/googleEvents")
-            .then(res => console.log(res))
-    }, [])
-
     const handleSubmit = e => {
         e.preventDefault();
         axios
-            .post('./api/googleEvents', inputs)
-            .then(res => console.log(res))
-        axios
-            .post('./api/dbEvents', inputs)
+            .post('api/events', inputs)
             .then(res => console.log(res))
     }
 
     return (
         <section className="add-booking">
+            <h3>Book A Grooming</h3>
             <form onSubmit={handleSubmit}>
+                <div className="col">
+                    <DatePicker handleDate={handleDate} inputs={inputs} />
+                </div>
                 <div className="col">
                     <div className="input-wrapper">
                         <label>name</label>
@@ -64,21 +57,20 @@ const AddBooking = () => {
                     <div className="input-wrapper">
                         <label>time</label>
                         <select name="appt_time" onChange={handleChange}>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
+                            <option value="10">10 am</option>
+                            <option value="11">11 am</option>
+                            <option value="12">12 pm</option>
+                            <option value="13">1 pm</option>
+                            <option value="14">2 pm</option>
+                            <option value="15">3 pm</option>
+                            <option value="16">4 pm</option>
+                            <option value="17">5 pm</option>
                         </select>
                     </div>
+                    <div className="input-wrapper">
+                        <button type="submit" >submit</button>
+                    </div>
                 </div>
-                <div className="col">
-                    <DatePicker handleDate={handleDate} inputs={inputs} />
-                </div>
-                <button type="submit" >add a new event</button>
             </form>
             <div className="">
                 <span>Name: {inputs.name}</span>

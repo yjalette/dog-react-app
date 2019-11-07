@@ -28,6 +28,13 @@ a {
   color: black;
 }
 
+ul {
+  list-style: none;
+  li {
+    cursor: pointer;
+  }
+}
+
 p {
   font-size: $small;
   opacity: 0.8;
@@ -39,20 +46,30 @@ span {
 
 h1 {
   font-size: $sup-large;
+  color: white;
 }
 
 h3 {
   font-size: $lg;
+  text-align: center;
 }
 
 h5 {
   font-size: $md;
 }
 
+// hr {
+//   background-image: url('../images/hr.jpg');
+//   opacity: 0.5;
+//   height: 40px;
+// }
+
 hr {
-  background-image: url('../images/hr.jpg');
-  opacity: 0.5;
-  height: 40px;
+  background-image: url('../images/cloud-nosun.png');
+  opacity: 0.8;
+    background-size: contain;
+    height: 60px;
+   
 }
 
 button {
@@ -75,30 +92,109 @@ button:hover {
 }
 
 .showcase {
-  background: linear-gradient(-30deg, $green, $blue);
+  background: linear-gradient(-30deg, $blue, $green);
   display: flex;
   flex-direction: column;
+  padding-top: 2em;
   width: 100%;
 }
 
 
+// nav 
+.navigation {
+  
+  .upper-nav {
+    background: linear-gradient(-30deg, $blue, $green);
+    padding: 0.3em;
+    @include flex(space-between);
+    li {
+      img {
+        width: 15%;
+        -webkit-animation: nav 2s linear infinite alternate;
+        animation: nav 2s linear infinite alternate;
+      }
+     a {
+      color: white;
+     } 
+    }
+  .user-menu {
+    padding: 1em;
+
+    i {
+      font-size: $md;
+    }
+    .dropdown-content {
+      display: none;
+      li:hover {
+        background-color: $green;
+      }
+    }
+  }
+  .user-menu:hover .dropdown-content {
+      display: block;
+      transition: 2s;
+  }
+}
+  nav {
+    background-color: white;
+    top: 0;
+    z-index: 1;
+    @include flex(center);
+    margin-bottom: 1em;
+    .logo {
+      width: 50%;
+    }
+    ul {
+      @include flex(space-around);
+      padding-top: 1rem;
+      li {
+      a {
+        display: block;  
+        color: darken($color: $pink, $amount: 10)  
+        }
+      }
+      }
+    }
+}
+
+@-webkit-keyframes nav {
+  from { margin-left: 0;}
+  to { margin-left: 10px;}
+}
+@keyframes nav {
+  from { margin-left: 0;}
+  to { margin-left: 10px;}
+}
+
+
 .homepage {
-  display: block;
   .landing {
     @include flex(center);
-    background-color: $blue;
-    .hero_image{
-      background-image: url(../images/hero_image-blue.jpg);
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: contain;
-      height: 500px;
-      width: 50%;
+    height: 100vh;
+    div {
+      height: 100%;
+    }
+    .hero_image_section{
+     @include flex(space-evenly);
+      .ball {
+        height: 120px;
+        -webkit-animation: ball 1s linear infinite alternate;
+        animation: ball 1s linear infinite alternate;
+      }
+      .hero_image {
+        height: 350px;
+        transform: rotateY(-180deg);
+      }
     }
     .headline {
       padding: 2em;
-      
-      
+      h1 {
+       padding: 2em;
+      }
+        button {
+         width: 50%;
+         transform: translateX(-20%);
+        }
     }
   }
   .services {
@@ -116,7 +212,7 @@ button:hover {
       box-sizing: border-box;
       background: #E5E5E5;
       width: 1956px;
-      height: 1001px;
+      height: 701px;
       background-color: rgba(255,255,255,1);
       overflow: hidden;
       margin: 0;
@@ -126,20 +222,28 @@ button:hover {
       --web-enable-deep-linking: true;
     }
     #Ellipse_1 {
-      fill: $green;
+      fill: $blue;
     }
     .Ellipse_1 {
       position: absolute;
       overflow: visible;
       width: 2312px;
-      height: 999px;
+      height: 599px;
       left: -178px;
       top: -396px;
     }
   }
 }
 
+@-webkit-keyframes ball {
+  from {}
+  to {-webkit-transform: translateY(30%);transform: translateY(30%)}
+}
 
+@keyframes ball {
+  from {}
+  to {-webkit-transform: translateY(30%);transform: translateY(30%)}
+}
 
 .wrapper {
   .adoption_form {
@@ -203,25 +307,6 @@ button:hover {
 }
 
 
-
-// nav 
-
-nav {
-  // position: fixed;
-  top: 0;
-  z-index: 1;
-  @include flex(center);
-  margin-bottom: 2em;
-  ul {
-    @include flex(space-around);
-    list-style: none;
-    padding-top: 1rem;
-    a {
-      display: block;    
-      }
-    }
-  }
-
 // auth
 .tip {
   font-size: 20px;
@@ -235,7 +320,7 @@ nav {
   width: $contW;
   height: 550px;
   margin: 0 auto 100px;
-  background: #fff;
+  background-color: white;
 }
 
 .form {
@@ -279,7 +364,7 @@ nav {
     top: 0;
     width: $contW;
     height: 100%;
-    background-image: url('../images/dogs-line.jpg');
+    background-image: url('../images/waving-dog.jpg');
     background-size: cover;
     transition: transform $switchAT ease-in-out;
   }
@@ -363,24 +448,18 @@ nav {
     }
 
     span {
+      @include flex(center);
       position: absolute;
       left: 0;
       top: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
       height: 100%;
       transition: transform $switchAT;
-      
       &.m--in {
-        transform: translateY($btnH*-2);
-        
+        transform: translateY($btnH*-2);   
         @include signUpActive {
           transform: translateY(0);
         }
-      }
-      
+      }   
       &.m--up {
         @include signUpActive {
           transform: translateY($btnH*2);
@@ -400,11 +479,9 @@ label {
   display: block;
   width: $inputW;
   margin: 25px auto 0;
-  text-align: center;
-
   span {
-    font-size: 12px;
-    color: #cfcfcf;
+    font-size: $small/1.5;
+    color: darken($color: gray, $amount: 4);
     text-transform: uppercase;
   }
 }
@@ -416,21 +493,18 @@ input, textarea {
   padding-bottom: 5px;
   font-size: 16px;
   border-bottom: 1px solid rgba(0,0,0,0.4);
-  text-align: center;
 }
 
 .forgot-pass {
   margin-top: 15px;
-  text-align: center;
   font-size: 12px;
-  color: #cfcfcf;
+  text-align: center;
 }
 
 .submit {
-  margin-top: 40px;
-  margin-bottom: 20px;
-  background: #d4af7a;
   text-transform: uppercase;
+  width: 30%;
+  margin: 1em;
 }
 
 .fb-btn {
@@ -461,41 +535,49 @@ input, textarea {
   }
 }
 
-.icon-link {
-  position: absolute;
-  left: 5px;
-  bottom: 5px;
-  width: 32px;
-
-  img {
-    width: 100%;
-    vertical-align: top;
-  }
-
-  &--twitter {
-    left: auto;
-    right: 5px;
-  }
-}
 
 
 // booking 
+.booking {
+  @include flex(space-between);
+  flex-direction: column;
+  padding: 3em;
+  table {
+    width: 80%;
+    padding: 2em;
+    margin: 2em;
+    tr:nth-child(even) {
+      background-color: #eee;
+    }
+    tr:nth-child(odd) {
+      background-color: #fff;
+    }
+    th {
+      color: white;
+      background-color: complement($color: $blue);
+    }
+    td {
+      text-align: center;
+      padding: 1em;
+    }
+  }
+  table, th, td {
+    border: 1px solid gray;
+    border-collapse: collapse;
+  }
+ 
+}
 .add-booking {
   
   form {
     @include flex(space-evenly);
-  width: 100%;
-  
   .col {
     @include flex(space-evenly);
     flex-direction: column;
     padding: 1em; 
-    button {
-      width: 70%;
-    } 
       div {
         padding: 0.3em;
-        input, select, option {
+        input, select, option, button {
           width: 100%;
           padding: 0.5em;
         }

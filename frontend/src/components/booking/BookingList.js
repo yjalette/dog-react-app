@@ -1,57 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import AddBooking from './AddBooking';
+import React from 'react';
 
-const BookingList = () => {
-    const [inputs, setInputs] = useState({
-        events: [],
-        loading: false
-    })
-
-    useEffect(() => {
-        axios
-            .get('./api/dbEvents')
-            .then(res => {
-                console.log(res)
-                setInputs({
-                    ...inputs,
-                    events: res.data
-
-                })
-            })
-
-    }, [])
-
-    const handleDelete = (id) => {
-        console.log("delete id")
-        axios
-            .delete(`./api/dbEvents/${id}`)
-            .then(res => {
-                console.log(res)
-                setInputs(inputs => ({
-                    events: inputs.events.filter(event => event._id !== id)
-                }))
-            })
-
-        axios
-            .delete(`./api/googleEvents/${id}`)
-            .then(res => {
-                console.log(res)
-                setInputs(inputs => ({
-                    events: inputs.events.filter(event => event.id !== id)
-                }))
-            })
-    }
+const BookingList = ({handleDelete, events}) => {
     return (
         <>
-            <AddBooking events={inputs.events} />
-            <ul>
-                {inputs.events.map(({ _id, name }) => (
-                    <li key={_id}>{name}{_id}
-                        <button onClick={() => handleDelete(_id)}>delete</button>
-                    </li>
+        <h3>My Bookings</h3>
+            <table className="booking-list">
+            <tbody>
+                <tr>
+                    <th>name</th>
+                    <th>date</th>
+                    <th>time</th>
+                    <th>cancel</th>
+                </tr>
+                {events.map(({ _id, name, appt_date, appt_time}) => (
+                    <tr key={_id}>
+                        <td>{name}</td>
+                        <td>{appt_date.slice(0,10)}</td>
+                        <td>{appt_time}</td>
+                        <td><i className="fa fa-trash" onClick={() => handleDelete(_id)}></i></td>
+                    </tr>
                 ))}
-            </ul>
+                </tbody>
+            </table>
         </>
     )
 }

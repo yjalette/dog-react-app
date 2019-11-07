@@ -8,7 +8,6 @@ const Login = () => {
     const [inputs, setInputs] = useState({ email: "", password: "" });
     const [user, setUser] = useState(false)
     const context = useContext(AuthContext);
-    console.log(context)
 
     const handleChange = e => {
         const { name, value } = e.target;
@@ -40,7 +39,7 @@ const Login = () => {
     return (
         <>
         <form className="form sign-in" onSubmit={handleSubmit}>
-            <h2>Welcome back,</h2>
+            <h2>Welcome back, please login</h2>
             <label>
                 <span>Email</span>
                 <input type="email" name="email" value={inputs.email} onChange={handleChange} />

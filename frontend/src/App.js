@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import './styles/App.scss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Authentication from './components/auth/Authentication';
@@ -11,19 +11,44 @@ import Contact from './components/contact/Contact';
 import Landing from './components/home/Landing';
 import { AuthContext } from './contexts/AuthContext'
 import './axios';
+import Grooming from './components/grooming/Grooming';
+import Footer from './components/footer/Footer';
 
-const routes = [
-  {component: Landing, path: "/", role: ['authUser', 'notAuthUser']},
-  {component: Authentication, path: "/authentication", role: ['authUser', 'notAuthUser']},
-  {component: ConfirmEmail, path: "/email-confirmation", role: ['authUser', 'notAuthUser']},
-  {component: Adoption_View, path: "/adoption", role: ['authUser', 'notAuthUser'] },
-  {component: News, path: "/news", role: ['authUser', 'notAuthUser'] },
-  {component: Booking, path: "/booking", role: ['authUser', 'notAuthUser'] },
-  {component: Contact, path: "/contact", role: ['authUser', 'notAuthUser']}
-]
+// const routes = [
+//   {component: Landing, path: "/", role: ['authUser', 'notAuthUser']},
+//   {component: Authentication, path: "/authentication", role: ['authUser', 'notAuthUser']},
+//   {component: ConfirmEmail, path: "/email-confirmation", role: ['authUser', 'notAuthUser']},
+//   {component: Adoption_View, path: "/adoption", role: ['authUser', 'notAuthUser'] },
+//   {component: News, path: "/news", role: ['authUser', 'notAuthUser'] },
+//   {component: Booking, path: "/booking", role: ['authUser', 'notAuthUser'] },
+//   {component: Contact, path: "/contact", role: ['authUser', 'notAuthUser']}
+// ]
+
+function withAuth(Component) {
+  return function(props) {
+    const { auth } = useContext(AuthContext);
+    if (!auth) {
+      return <Authentication msg="please login to view this page"/>
+    }
+    return <Component {...props} />;
+  }
+}
+
+const AuthBooking = withAuth(Booking);
 
 function App() {
-  const [auth, setAuth] = useState();
+  const [auth, setAuth] = useState(() => {
+    const ls = localStorage.getItem('user');
+    try {
+      return JSON.parse(ls);
+    } catch (e) {
+      return {};
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem('user', JSON.stringify(auth));
+  }, [auth]);
 
   return (
     <div className="App">
@@ -32,9 +57,17 @@ function App() {
           <Nav />
           <div className="showcase">
             <Switch>
-               {routes.filter(route => auth || route.role.includes('notAuthUser')).map(route => <Route key={route.path} component={route.component} path={route.path} />)}
+              <Route key='landing' component={Landing} exact path="/" />
+              <Route key='authentication' component={Authentication} path='/authentication' />
+              <Route key='grooming' component={Grooming} path="/grooming" />
+              <Route key='booking' component={AuthBooking} path='/booking'/>
+              <Route key='news' component={News} path='/news'/>
+              <Route key='adoption' component={Adoption_View} path='/adoption' />
+              <Route key='confirmEmail' component={ConfirmEmail} path='/confirm-email' />
+              <Route key='contact' component={Contact} path='/contact' />
             </Switch>
           </div>
+          <Footer />
         </Router>
       </AuthContext.Provider>
     </div>

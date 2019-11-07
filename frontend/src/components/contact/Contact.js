@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import Form from './Form'
 
 const state = { name: '', email: '', subject: '', msg: '' };
@@ -16,7 +15,7 @@ const Contact = () => {
     }
     const handleSubmit = e => {
         e.preventDefault(e);
-        fetch("./api/emailEvents", {
+        fetch("http://localhost:5000/api/emailEvents", {
             method: 'POST',
             body: JSON.stringify(inputs),
             headers: {
@@ -31,17 +30,7 @@ const Contact = () => {
         })
 
     }
-
-    // async function handleSubmit (e){
-    //     e.preventDefault(e);
-    //     const { name, email, msg } = inputs;
-    //     const form = await axios('./api/contact', {
-    //         name,
-    //         email,
-    //         msg
-    //     })
-
-    // }
+    
     return (
         <div className="contact">
             {sent && <span>Thank you for contacting us!</span>}

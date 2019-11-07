@@ -59,7 +59,7 @@ const SignUp = () => {
                 <span>Password</span>
                 <input type="password" name="password" value={inputs.password} onChange={handleChange} />
             </label>
-            <button type="submit" className="form-btn">Sign Up</button>
+            <button type="submit" className="submit">Sign Up</button>
         </form>
         </>
     )
