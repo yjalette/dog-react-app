@@ -57,7 +57,7 @@ router.post(`/:token`, (req, res) => {
     nodemailer.createTestAccount((err, account) => {
         const htmlEmail = `
             <h3>Name: ${req.body.user.name}!</h3>
-            <a href="${host}/confirm-email/${req.body.token}">click here</a>
+            
         `
         
         let mailOptions = {
@@ -82,6 +82,8 @@ router.post(`/:token`, (req, res) => {
 
 
 })
+
+{/* <a href="${host}/confirm-email/${req.body.token}">click here</a> */}
 
 
 module.exports = router;
