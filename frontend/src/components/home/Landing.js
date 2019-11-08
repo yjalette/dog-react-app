@@ -11,7 +11,7 @@ const Landing = () => {
                     <img src={ball} className="ball" />
                 </div>
                 <div className="headline">
-                    <h1>Rosica’s grooming is your friendly dog groomer located in Queens, NY.</h1>
+                    <h1>Rosica is grooming is your friendly dog groomer located in Queens, NY.</h1>
                     <button>Make an Appointment</button>
                 </div>
             </div>
