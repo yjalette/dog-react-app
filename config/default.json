@@ -1,6 +1,6 @@
 {
     "mongoURI": "mongodb+srv://admin:admin123@dog-mern-app-zfwl7.mongodb.net/test?retryWrites=true&w=majority",
     "jwtSecret": "sl_myJwtSecret",
-    "host": "process.env.HOST"
+    "host": "https://dog-mern-app.herokuapp.com"
 }
     
