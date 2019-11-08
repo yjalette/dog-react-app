@@ -24,7 +24,7 @@
   "scripts": {
     "client-install": "npm install --prefix frontend",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "NODE_ENV=production && node server.js",
+    "start": "SET NODE_ENV=production && node server.js",
     "server": "NODE_ENV=development && nodemon server.js --ignore client",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",

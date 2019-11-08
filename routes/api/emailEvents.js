@@ -4,6 +4,8 @@ const nodemailer = require('nodemailer');
 require('dotenv').config()
 const { host} = require('../../config/domain');
 
+console.log("this is host: ", host)
+
 const transporterOptions = {
     port: 587,
     host: 'smtp.gmail.com',

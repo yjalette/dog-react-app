@@ -1,17 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { getEvents, createEvent, deleteEvent } = require('../../googleEvents');
+const { createEvent, deleteEvent } = require('../../googleEvents');
 const auth = require('../../middleware/auth');
 const Event = require('../../models/Event');
-
-// router.get('/', auth, (req, res) => {
-// //   getEvents()
-// //     .then((data) => res.status(200).json(data))
-// //     .catch((err) => {
-// //       // console.dir(err);
-// //       res.status(500).json(err.toString())
-// //     })
-// // })
 
 router.get('/', auth, (req, res) => {
   Event.find()
