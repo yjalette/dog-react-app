@@ -7,7 +7,7 @@ const config = require('config');
 
 const url = config.get('host')
 
-console.log("this is host: ", host)
+console.log("this is host: ", url)
 
 const transporterOptions = {
     port: 587,
