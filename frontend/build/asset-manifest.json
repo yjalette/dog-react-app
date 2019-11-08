@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.48ad040c.chunk.css",
+    "main.js": "/static/js/main.82d1c871.chunk.js",
+    "main.js.map": "/static/js/main.82d1c871.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.e73818e5.js",
+    "runtime-main.js.map": "/static/js/runtime-main.e73818e5.js.map",
+    "static/css/2.c51b6406.chunk.css": "/static/css/2.c51b6406.chunk.css",
+    "static/js/2.5effd06a.chunk.js": "/static/js/2.5effd06a.chunk.js",
+    "static/js/2.5effd06a.chunk.js.map": "/static/js/2.5effd06a.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.c9dae5d46a415e63f7a146ced40e2922.js": "/precache-manifest.c9dae5d46a415e63f7a146ced40e2922.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.c51b6406.chunk.css.map": "/static/css/2.c51b6406.chunk.css.map",
+    "static/css/main.48ad040c.chunk.css.map": "/static/css/main.48ad040c.chunk.css.map",
+    "static/media/adopt.png": "/static/media/adopt.0383f898.png",
+    "static/media/ball-pink.png": "/static/media/ball-pink.162bab0a.png",
+    "static/media/cloud-home.png": "/static/media/cloud-home.ab0bb22e.png",
+    "static/media/App.scss": "/static/media/waving-dog.ab001438.jpg",
+    "static/media/happy-dog.png": "/static/media/happy-dog.fa333da2.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e73818e5.js",
+    "static/css/2.c51b6406.chunk.css",
+    "static/js/2.5effd06a.chunk.js",
+    "static/css/main.48ad040c.chunk.css",
+    "static/js/main.82d1c871.chunk.js"
+  ]
+}
