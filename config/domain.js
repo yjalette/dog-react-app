@@ -1,4 +1,2 @@
-module.exports = {
-    host: process.env.HOST 
-}
+export const host = process.env.HOST;
 

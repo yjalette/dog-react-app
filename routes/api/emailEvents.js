@@ -2,7 +2,10 @@ const express = require('express');
 const router = express.Router();
 const nodemailer = require('nodemailer');
 require('dotenv').config()
-const { host} = require('../../config/domain');
+const config = require('config');
+// const { host} = require('../../config/domain');
+
+const url = config.get('host')
 
 console.log("this is host: ", host)
 
@@ -59,7 +62,7 @@ router.post(`/:token`, (req, res) => {
     nodemailer.createTestAccount((err, account) => {
         const htmlEmail = `
             <h3>Name: ${req.body.user.name}!</h3>
-            <a href="${host}/confirm-email/${req.body.token}">click here</a> 
+            <a href="${url}/confirm-email/${req.body.token}">click here</a> 
         `
         
         let mailOptions = {
