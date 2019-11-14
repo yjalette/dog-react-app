@@ -1,8 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from "../../contexts/AuthContext";
 import Cookies from 'js-cookie';
-import { Redirect } from 'react-router-dom'
-// import { withRouter } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom'
 
 const Login = () => {
     const [inputs, setInputs] = useState({ email: "", password: "" });
@@ -37,12 +36,10 @@ const Login = () => {
             const { token, user } = data;
             context.setAuth(user);
             Cookies.set('token', token);
-            setUser(true);
-            
+            setUser(true);      
             if(isChecked){
                 sessionStorage.setItem('user', JSON.stringify(context.auth));
             }
-            // props.history.push('./')
         })
     }
     return (
@@ -61,7 +58,7 @@ const Login = () => {
                     <span>remember me</span>
                     <input type="checkbox" name="remember" checked={isChecked}  onChange={rememberPwd} />
                 </label>
-                <p className="forgot-pwd">Forgot password?</p>
+                <Link className="forgot-pwd" to="password-reset">Forgot password?</Link>
                 <button type="submit" className="submit">Sign In</button>
             </form>
             {user && <Redirect to="/booking" />}

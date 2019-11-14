@@ -3,11 +3,9 @@ const router = express.Router();
 const nodemailer = require('nodemailer');
 require('dotenv').config()
 const config = require('config');
-// const { host} = require('../../config/domain');
-
-const url = config.get('host')
-
-console.log("this is host: ", url)
+const jwt = require('jsonwebtoken');
+const User = require('../../models/User');
+const url = config.get('host');
 
 const transporterOptions = {
     port: 587,
@@ -33,8 +31,10 @@ let transporter = nodemailer.createTransport(transporterOptions);
 router.post('/', (req, res) => {
     nodemailer.createTestAccount((err, account) => {
         const htmlEmail = `
-            <h3>Name: ${req.body.name}!</h3>
+        <div style="background-color: #87aeb1">
+            <h3>Name: ${req.body.name}</h3>
             <p>${req.body.msg}</p>
+            </div>
         `
 
         let mailOptions = {
@@ -58,37 +58,78 @@ router.post('/', (req, res) => {
 
 })
 
-router.post(`/:token`, (req, res) => {
-    nodemailer.createTestAccount((err, account) => {
-        const htmlEmail = `
-            <h3>Name: ${req.body.user.name}!</h3>
-            <a href="${url}/confirm-email/${req.body.token}">click here</a> 
+
+router.post('/reset', (req, res) => {
+    User.findOne({ email: req.body.email })
+        .then(user => {
+            jwt.sign(            
+            {
+                id: user._id,
+                exp: Math.floor(Date.now() / 1000) + (60 * 60)
+            },  config.get('jwtSecret'), 
+                (err, token) => {
+                if (err) throw err;
+
+                nodemailer.createTestAccount((err, account) => {
+                    const htmlEmail = `
+        <div style="background-color: #87aeb1">
+            <p>In order to change your password please click button below</p>
+            <button style="background-color: #87aeb1"><a href="http://localhost:3000/update-account/${token}">click</a></button>
+        </div>
         `
-        
-        let mailOptions = {
-            from: "szanto@donotreply.com", // sender address
-            to: req.body.user.email,
-            replyTo: req.body.email,
-            subject: 'email confirmation', // Subject line
-            text: req.body.msg,
-            html: htmlEmail // html body
-        }
+                    let mailOptions = {
+                        from: "szanto@donotreply.com", // sender address
+                        to: req.body.email,
+                        replyTo: "szanto@donotreply.com",
+                        subject: 'password reset', // Subject line
+                        text: req.body.msg,
+                        html: htmlEmail // html body
+                    }
 
-        transporter.sendMail(mailOptions, (err, info) => {
-            if (err) console.log(err);
+                    transporter.sendMail(mailOptions, (err, info) => {
+                        if (err) console.log(err);
 
-            console.log("msg was sent", mailOptions);
+                        console.log("msg was sent", mailOptions);
 
-            res.json(mailOptions)
+                        res.status(200).json({token})
+
+                    })
+                })
+
+            })
+        }).catch(err => console.log("sent email err", err))
+})
+
+    router.post(`/:token`, (req, res) => {
+        nodemailer.createTestAccount((err, account) => {
+            const htmlEmail = `
+        <div style="background-color: #87aeb1">
+            <h3 style="color: #b18987">Dear, ${req.body.user.name}!</h3>
+            <p>Please confirm your account by clicking button below</p>
+            <button style="background-color: #87aeb1"><a href="${url}/confirm-email/${req.body.token}">click here</a></button>
+        </div>
+        `
+
+            let mailOptions = {
+                from: "szanto@donotreply.com", // sender address
+                to: req.body.user.email,
+                replyTo: req.body.email,
+                subject: 'email confirmation', // Subject line
+                text: req.body.msg,
+                html: htmlEmail // html body
+            }
+
+            transporter.sendMail(mailOptions, (err, info) => {
+                if (err) console.log(err);
+
+                console.log("msg was sent", mailOptions);
+
+                res.json(mailOptions)
+            })
+
         })
-
     })
 
 
 
-})
-
-
-
-
-module.exports = router;
+    module.exports = router;

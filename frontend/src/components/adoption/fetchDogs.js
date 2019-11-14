@@ -8,4 +8,5 @@ export const fetchDogs = (params, token )=> {
             }
         })
             .then(res => res.json())
+            .catch(err => console.log(err))
 }

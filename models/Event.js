@@ -6,7 +6,23 @@ const EventSchema = new Schema({
         type: String,
         required: true
     },
+    size: {
+        type: String,
+        required: false
+    },
+    breed: {
+        type: String,
+        required: false
+    },
+    user_id: {
+        type: String,
+        required: true
+    },
     appt_date: {
+        type: String,
+        required: false
+    },
+    orig_date: {
         type: String,
         required: false
     },

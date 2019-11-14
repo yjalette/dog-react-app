@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './styles/App.scss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Authentication from './components/auth/Authentication';
@@ -13,22 +13,16 @@ import { AuthContext } from './contexts/AuthContext'
 import './axios';
 import Grooming from './components/grooming/Grooming';
 import Footer from './components/footer/Footer';
+import Account from './components/account/Account';
+import PwdReset from './components/auth/PwdReset';
+import EnterNewCred from './components/account/EnterNewCred';
 
-// const routes = [
-//   {component: Landing, path: "/", role: ['authUser', 'notAuthUser']},
-//   {component: Authentication, path: "/authentication", role: ['authUser', 'notAuthUser']},
-//   {component: ConfirmEmail, path: "/email-confirmation", role: ['authUser', 'notAuthUser']},
-//   {component: Adoption_View, path: "/adoption", role: ['authUser', 'notAuthUser'] },
-//   {component: News, path: "/news", role: ['authUser', 'notAuthUser'] },
-//   {component: Booking, path: "/booking", role: ['authUser', 'notAuthUser'] },
-//   {component: Contact, path: "/contact", role: ['authUser', 'notAuthUser']}
-// ]
 
 function withAuth(Component) {
-  return function(props) {
+  return function (props) {
     const { auth } = useContext(AuthContext);
     if (!auth) {
-      return <Authentication msg="please login to view this page"/>
+      return <Authentication />
     }
     return <Component {...props} />;
   }
@@ -52,7 +46,7 @@ function App() {
 
   return (
     <div className="App">
-      <AuthContext.Provider value={{auth, setAuth}}>
+      <AuthContext.Provider value={{ auth, setAuth }}>
         <Router>
           <Nav />
           <div className="showcase">
@@ -60,10 +54,13 @@ function App() {
               <Route key='landing' component={Landing} exact path="/" />
               <Route key='authentication' component={Authentication} path='/authentication' />
               <Route key='grooming' component={Grooming} path="/grooming" />
-              <Route key='booking' component={AuthBooking} path='/booking'/>
-              <Route key='news' component={News} path='/news'/>
+              <Route key='booking' component={AuthBooking} path='/booking' />
+              <Route key='news' component={News} path='/news' />
               <Route key='adoption' component={Adoption_View} path='/adoption' />
               <Route key='confirmEmail' component={ConfirmEmail} path='/confirm-email' />
+              <Route key='account' component={Account} path='/account' />
+              <Route component={PwdReset} path='/password-reset' />
+              <Route component={EnterNewCred} path='/update-account' />
               <Route key='contact' component={Contact} path='/contact' />
             </Switch>
           </div>

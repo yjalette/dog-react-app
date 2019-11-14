@@ -4,7 +4,7 @@ import Card from './Card'
 const Grid = ({animals}) => {
     return (
         <div className="grid">
-            {animals && animals.map(animal => <Card key={animal.id} animal={animal} />)}
+            {animals && animals.slice(8).map(animal => <Card key={animal.id} animal={animal} />)}
         </div>
     )
 }

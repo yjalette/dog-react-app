@@ -7,15 +7,15 @@ const Landing = () => {
         <div className="homepage">
             <div className="landing">
                 <div className="hero_image_section">
-                    <img src={dog} className="hero_image" />
-                    <img src={ball} className="ball" />
+                    <img src={dog} className="hero_image" alt="heroimage" />
+                    <img src={ball} className="ball" alt="ball"/>
                 </div>
                 <div className="headline">
-                    <h1>Rosica is grooming is your friendly dog groomer located in Queens, NY.</h1>
+                    <h1>Lojzika is grooming is your friendly dog groomer located in Queens, NY.</h1>
                     <button>Make an Appointment</button>
                 </div>
             </div>
-            {/* <div className="services">
+            <div className="services">
             <h1>What We Do</h1>
                 <div id="Web_1920___1">
                     <svg className="Ellipse_1">
@@ -23,7 +23,7 @@ const Landing = () => {
                         </ellipse>
                     </svg>
                 </div>
-            </div> */}
+            </div>
         </div>
 
     )

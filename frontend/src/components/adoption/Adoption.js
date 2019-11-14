@@ -20,9 +20,7 @@ const Adoption = () => {
             })
         })
             .then(response => response.json())
-            .then(res => {  
-                setToken(res.access_token)
-            } )
+            .then(res => setToken(res.access_token))
             .catch(err => console.log(err))
     }, [])
 

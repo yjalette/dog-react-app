@@ -44,13 +44,6 @@ router.get('/user', auth, (req, res) => {
 })
 
 
-// router.get('/user/logout', (req, res) => {
-//     User.findByIdAndUpdate({id: req.user._id}, {token: ""}, (err, doc) => {
-//       if(err) res.json({success: false, err})
-//       return res.status(200).send({
-//         success: true
-//       })
-//     })
-//   })
- 
+
+
 module.exports = router;

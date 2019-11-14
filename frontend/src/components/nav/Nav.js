@@ -8,11 +8,10 @@ const Nav = () => {
     const { auth } = useContext(AuthContext);
     return (
         <section className="navigation">
-            <UpperNav auth={auth}/>
-        
+            <UpperNav auth={auth}/>   
             <nav>
                 <ul>
-                    <li><Link to="/" id="logo"><img src={logo} className="logo"/></Link></li>
+                    <li><Link to="/" id="logo"><img src={logo} className="logo" alt="logo"/></Link></li>
                     <li><Link to="/grooming">Grooming</Link></li>
                     <li><Link to="/adoption">Adoption</Link></li>
                     <li><Link to="/news">Doggy News</Link></li>

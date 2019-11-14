@@ -4,7 +4,6 @@ const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
 
-
 const User = require('../../models/User');
 
 router.post('/', (req, res) => {
@@ -29,10 +28,10 @@ router.post('/', (req, res) => {
                     newUser.save()
                         .then(user => {
                             jwt.sign(
-                                { id: user.id},
+                                { id: user.id },
                                 config.get('jwtSecret'),
                                 (err, token) => {
-                                    if(err) throw err;
+                                    if (err) throw err;
                                     res.json({
                                         token,
                                         user: {
@@ -44,11 +43,30 @@ router.post('/', (req, res) => {
 
                                 }
                             )
-                            
-                        })
+
+                        }).catch(err => console.log(err))
                 })
             })
         })
+})
+
+
+router.put('/reset/:token', (req, res) => {
+    const { temp_token} = req.body;
+    jwt.verify(temp_token, config.get('jwtSecret'), (err, decoded) => {
+        try {
+            bcrypt.genSalt(10, (err, salt) => {
+                bcrypt.hash(req.body.password , salt, async (err, hash) => {
+                    req.body.password = hash
+                    await User.findOneAndUpdate({ _id: decoded.id }, { password: hash }) 
+                    res.status(200).json(true);  
+                });    
+            });   
+        }
+        catch (err) {
+            console.log("errr", err)
+        }
+    })
 })
 
 module.exports = router;

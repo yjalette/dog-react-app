@@ -20,6 +20,7 @@
 
 body {
   height: 100vh;
+  background: linear-gradient(-90deg, $blue, $light-green);
 }
 
 a {
@@ -46,7 +47,7 @@ span {
 
 h1 {
   font-size: $sup-large;
-  color: white;
+  color: $white;
 }
 
 h3 {
@@ -76,15 +77,16 @@ button {
   border: none;
   outline: 0;
   display: inline-block;
-  padding: 0.5em;
+  padding: .5em;
+  margin: .4em 0;
   color: $white;
-  background-color: complement($color: $blue);
+  background-color: darken($color: $pink, $amount: 15);
+  border: 2px solid darken($color: $pink, $amount: 10);
   text-align: center;
   cursor: pointer;
   width: 100%;
   font-size: $small;
   width: 10%;
-  float: right;
 }
 
 button:hover {
@@ -92,7 +94,6 @@ button:hover {
 }
 
 .showcase {
-  background: linear-gradient(-30deg, $blue, $green);
   display: flex;
   flex-direction: column;
   padding-top: 2em;
@@ -104,9 +105,14 @@ button:hover {
 .navigation {
   
   .upper-nav {
-    background: linear-gradient(-30deg, $blue, $green);
     padding: 0.3em;
     @include flex(space-between);
+    .book-btn {
+      background-color: darken($color: $pink, $amount: 8);
+      border: 1px solid $pink;
+      border-radius: 20px;
+      padding: .6em;
+    }
     li {
       img {
         width: 15%;
@@ -114,7 +120,7 @@ button:hover {
         animation: nav 2s linear infinite alternate;
       }
      a {
-      color: white;
+      color: $white;
      } 
     }
   .user-menu {
@@ -126,7 +132,7 @@ button:hover {
     .dropdown-content {
       display: none;
       background-color: darken($color: $pink, $amount: 10);
-      color: white;
+      color: $white;
       li {
         padding: .5em;
       }
@@ -141,18 +147,19 @@ button:hover {
   }
 }
   nav {
-    background-color: white;
+    background-color: $white;
     top: 0;
     z-index: 1;
     @include flex(center);
     margin-bottom: 1em;
     .logo {
-      width: 50%;
+      width: 30%;
     }
     ul {
       @include flex(space-around);
       padding-top: 1rem;
       li {
+        
       a {
         display: block;  
         color: darken($color: $pink, $amount: 10)  
@@ -216,10 +223,8 @@ button:hover {
     #Web_1920___1 {
       position: relative;
       box-sizing: border-box;
-      background: #E5E5E5;
       width: 1956px;
       height: 701px;
-      background-color: rgba(255,255,255,1);
       overflow: hidden;
       margin: 0;
       padding: 0;
@@ -228,7 +233,7 @@ button:hover {
       --web-enable-deep-linking: true;
     }
     #Ellipse_1 {
-      fill: $blue;
+      fill: $white;
     }
     .Ellipse_1 {
       position: absolute;
@@ -252,6 +257,25 @@ button:hover {
 }
 
 .wrapper {
+  @include flex(center);
+  flex-direction: column;
+  .wrapper-header {
+    @include flex(center);
+    background-color: darken($color: $pink, $amount: 25);
+    filter: drop-shadow(2px 4px 6px black);
+    width: 80%;
+    padding: 2em;
+    img {
+      width: 70%;
+    }
+    div {
+      @include flex(space-evenly);
+      flex-direction: column;
+      button {
+        width: 40%;
+      }
+    }
+  }
   .adoption_form {
     @include flex(center);
     padding: 2em;
@@ -287,23 +311,27 @@ button:hover {
       flex-direction: column;
       justify-content: space-between;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      background-color: $white;
+      // background-color: darken($color: $pink, $amount: 20);
       text-align: center;
       .title {
-        color: grey;
+        color: $pink;
         overflow: initial;
         padding: 0.8em;
       }
       div {
         .card_img {
           width: 100%;
-          height: 200px;
+          height: 300px;
           object-fit: cover;
         }
       }
     
       button {
+        border: 0;
         float: none;
         width: 100%;
+        margin-bottom: 0;
       }
     
   }
@@ -326,7 +354,7 @@ button:hover {
   width: $contW;
   height: 550px;
   margin: 0 auto 100px;
-  background-color: white;
+  background-color: $white;
 }
 
 .form {
@@ -559,7 +587,7 @@ input, textarea {
       background-color: #fff;
     }
     th {
-      color: white;
+      color: $white;
       background-color: complement($color: $blue);
     }
     td {

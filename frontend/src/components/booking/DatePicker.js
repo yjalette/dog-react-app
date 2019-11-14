@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Calendar from 'react-calendar';
 
-const DatePicker = ({handleDate, inputs}) => {
+const DatePicker = ({handleDate, eventDate}) => {
     return (
         <> 
                 <Calendar
                     onChange={handleDate}
-                    value={inputs.appt_date}
+                    value={eventDate}
                     name="appt_date"
 
                 />

@@ -4,14 +4,14 @@ const { createEvent, deleteEvent } = require('../../googleEvents');
 const auth = require('../../middleware/auth');
 const Event = require('../../models/Event');
 
-router.get('/', auth, (req, res) => {
+router.get(`/`, auth, (req, res) => {
   Event.find()
-      .sort({ date: -1 })
-      .then(Events => res.json(Events))
+    .sort({ date: -1 })
+    .then(Events => res.json(Events))
 })
 
 router.post('/', auth, async (req, res) => {
-  const { appt_date, name, appt_time, size, breed } = req.body;
+  const { appt_date, name, appt_time, size, breed, user_id } = req.body;
   const startDate = new Date(appt_date)
   startDate.setHours(appt_time);
   const endDate = new Date(appt_date);
@@ -36,9 +36,11 @@ router.post('/', auth, async (req, res) => {
   try {
     const googleResponse = await createEvent(googleEvent);
     const newEvent = new Event({
-      name: name,
-      appt_date: appt_date,
-      appt_time: appt_time,
+      name,
+      size,
+      user_id,
+      appt_date,
+      appt_time,
       google_id: googleResponse.data.id
     })
     const dbResponse = await newEvent.save();
@@ -50,10 +52,28 @@ router.post('/', auth, async (req, res) => {
   }
 })
 
+router.put(('/:id'), auth, async (req, res) => {
+  console.log("req =>>>>", req.body)
+  try {
+    const event = await Event.findById(req.params.id);
+
+    // const googleEvent  = client.get_event('primary', req.params.id)
+    // googleEvent.summary = req.body
+    // const result = client.update_event('primary', req.params.id, googleEvent)
+    await event.update({ "resource": req.body})
+
+    await event.updateOne({ $set: req.body });
+    res.status(200).json(true);
+  }
+  catch (err) {
+    console.log("update err", err);
+    res.status(500).json(err);
+  }
+})
 
 router.delete(('/:id'), auth, async (req, res) => {
   try {
-    const event = await Event.findById(req.params.id);   
+    const event = await Event.findById(req.params.id);
     await deleteEvent(event.google_id);
     await event.remove();
     res.status(200).json(true);
