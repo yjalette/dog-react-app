@@ -28,7 +28,7 @@ const transporterOptions = {
 let transporter = nodemailer.createTransport(transporterOptions);
 
 
-router.post('/', (req, res) => {
+router.post('/send-message', (req, res) => {
     nodemailer.createTestAccount((err, account) => {
         const htmlEmail = `
         <div style="background-color: #87aeb1">
@@ -47,11 +47,11 @@ router.post('/', (req, res) => {
         }
 
         transporter.sendMail(mailOptions, (err, info) => {
-            if (err) console.log(err);
+            if (err) res.status(500).json(err);
 
             console.log("msg was sent", mailOptions);
 
-            res.json(mailOptions)
+            res.status(200).json(mailOptions)
         })
 
     })
@@ -100,17 +100,16 @@ router.post('/reset', (req, res) => {
         }).catch(err => console.log("sent email err", err))
 })
 
-    router.post(`/:token`, (req, res) => {
+    router.post(`/confirm-email/:token`, (req, res) => {
         nodemailer.createTestAccount((err, account) => {
             const htmlEmail = `
         <div style="background-color: #87aeb1">
-            <h3 style="color: #b18987">Dear, ${req.body.user.name}!</h3>
+            <h3 style="color: #b18987">Dear, ${req.body.user.firstName}!</h3>
             <p>Please confirm your account by clicking button below</p>
-            <button style="background-color: #87aeb1"><a href="${url}/confirm-email/${req.body.token}">click here</a></button>
+            <button style="background-color: #87aeb1"><a href="http://localhost:3000/confirm-email/${req.body.token}">click here</a></button>
         </div>
         `
-
-            let mailOptions = {
+                let mailOptions = {
                 from: "szanto@donotreply.com", // sender address
                 to: req.body.user.email,
                 replyTo: req.body.email,
@@ -122,9 +121,7 @@ router.post('/reset', (req, res) => {
             transporter.sendMail(mailOptions, (err, info) => {
                 if (err) console.log(err);
 
-                console.log("msg was sent", mailOptions);
-
-                res.json(mailOptions)
+                res.json("Your account was succusefully created. Please login")
             })
 
         })

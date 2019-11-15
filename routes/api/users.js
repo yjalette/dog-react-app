@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../../models/User');
 
 router.post('/', (req, res) => {
-    const { name, email, password } = req.body;
+    const { firstName, lastName, email, password } = req.body;
 
     // if (!email || !password || !name) return res.status(400).json({ msg: "please enter all fields" });
 
@@ -16,7 +16,8 @@ router.post('/', (req, res) => {
             if (user) return res.status(400).json({ msg: "User already exists" });
 
             const newUser = new User({
-                name,
+                firstName,
+                lastName,
                 email,
                 password
             })
@@ -32,11 +33,13 @@ router.post('/', (req, res) => {
                                 config.get('jwtSecret'),
                                 (err, token) => {
                                     if (err) throw err;
+                                    console.log("sign up token error====>", err)
                                     res.json({
                                         token,
                                         user: {
                                             id: user.id,
-                                            name: user.name,
+                                            firstName: user.firstName,
+                                            lastName: user.lastName,
                                             email: user.email
                                         }
                                     })
@@ -64,7 +67,7 @@ router.put('/reset/:token', (req, res) => {
             });   
         }
         catch (err) {
-            console.log("errr", err)
+            console.log("reset password error", err)
         }
     })
 })

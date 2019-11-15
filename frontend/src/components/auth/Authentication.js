@@ -3,10 +3,11 @@ import Login from './Login'
 import SignUp from './SignUp'
 
 const Authentication = () => {
-    const [signUp, setSignUp] = useState(false)
+    const [signUp, setSignUp] = useState(false);
+    const [msg, setMsg] = useState("");
     return (
         <div className={!signUp ? "cont" : "cont s--signup"}>
-            <Login />
+            <Login msg={msg} setMsg={setMsg}/>
             <div className="sub-cont">
                 <div className="img">
                     <div className="img__text m--up">
@@ -22,7 +23,7 @@ const Authentication = () => {
                         <span className="m--in" >Sign In</span>
                     </div>
                 </div>
-                <SignUp />
+                <SignUp msg={msg} setMsg={setMsg}/>
             </div>
 
         </div>

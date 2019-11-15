@@ -51,3 +51,23 @@
         @content;
     }
 }
+
+@mixin dropdown {
+    padding: 1em;
+    i {
+      font-size: $md;
+      color: darken($color: $pink, $amount: 18)
+    }
+    .dropdown-content {
+      display: none;
+      background-color: darken($color: $pink, $amount: 10);
+      color: $white;
+      span, label {
+        padding: .5em;
+        display: block;
+      }
+      span:hover {
+        background-color: $green;
+      }
+    }
+}

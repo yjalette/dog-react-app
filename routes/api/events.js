@@ -47,7 +47,6 @@ router.post('/', auth, async (req, res) => {
     return res.status(200).json(dbResponse);
   }
   catch (err) {
-    console.log("eta=>>>", err);
     res.status(500).json(err);
   }
 })

@@ -63,8 +63,7 @@ const Booking = () => {
 
     return (
         <div className="booking">
-            <BookingList handleDelete={handleDelete} setEditMode={setIdEditEvent} events={inputs.events} onEdit={handleEdit}/>
-           
+            <BookingList handleDelete={handleDelete} setEditMode={setIdEditEvent} events={inputs.events} onEdit={handleEdit}/>      
             {idEditEvent && <EditBooking event={inputs.events.find(event => event._id === idEditEvent)} onEdit={handleEdit} onEventUpdate={onEventUpdate}/>}
             <span>{inputs.msg}</span>
             <hr />

@@ -6,7 +6,6 @@ import { Redirect, Link } from 'react-router-dom'
 const Login = () => {
     const [inputs, setInputs] = useState({ email: "", password: "" });
     const [user, setUser] = useState(false);
-    const [isChecked, setIsChecked] = useState(false);
 
     const context = useContext(AuthContext);
 
@@ -18,8 +17,9 @@ const Login = () => {
         })
     }
 
-    const rememberPwd = e => {
-        setIsChecked(true);
+    const rememberPwd = () => {
+        console.log("checked")
+        context.setIsChecked(true);
     }
 
     const handleSubmit = e => {
@@ -37,9 +37,8 @@ const Login = () => {
             context.setAuth(user);
             Cookies.set('token', token);
             setUser(true);      
-            if(isChecked){
-                sessionStorage.setItem('user', JSON.stringify(context.auth));
-            }
+            if(context.isChecked) localStorage.setItem('user', JSON.stringify(context.auth));
+            else sessionStorage.setItem('user', JSON.stringify(context.auth))
         })
     }
     return (
@@ -56,7 +55,7 @@ const Login = () => {
                 </label>
                 <label className="remember-me-wrapper">
                     <span>remember me</span>
-                    <input type="checkbox" name="remember" checked={isChecked}  onChange={rememberPwd} />
+                    <input type="checkbox" name="remember" checked={context.isChecked}  onChange={rememberPwd} />
                 </label>
                 <Link className="forgot-pwd" to="password-reset">Forgot password?</Link>
                 <button type="submit" className="submit">Sign In</button>

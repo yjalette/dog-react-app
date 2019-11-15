@@ -77,33 +77,56 @@ button {
   border: none;
   outline: 0;
   display: inline-block;
-  padding: .5em;
+  padding: .8em;
   margin: .4em 0;
   color: $white;
   background-color: darken($color: $pink, $amount: 15);
   border: 2px solid darken($color: $pink, $amount: 10);
   text-align: center;
   cursor: pointer;
-  width: 100%;
+  width: auto;
   font-size: $small;
-  width: 10%;
 }
 
 button:hover {
   opacity: 0.7;
 }
 
-.showcase {
-  display: flex;
-  flex-direction: column;
-  padding-top: 2em;
+input, textarea, select, option {
+  display: block;
   width: 100%;
+  margin-top: 5px;
+  padding-bottom: 5px;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(0,0,0,0.3);
+  background: none;
 }
 
 
+.showcase {
+  @include flex(center);
+  padding-top: 2em;
+}
+
+.msg {
+    color: red;
+    font-weight: 400;
+    text-align: center;
+    width: 100%;
+    background: none;
+    padding: 1em 0;
+}
+
+.none {
+  display: none;
+}
+
+.opacity {
+  opacity: 0.2;
+}
+
 // nav 
 .navigation {
-  
   .upper-nav {
     padding: 0.3em;
     @include flex(space-between);
@@ -124,22 +147,7 @@ button:hover {
      } 
     }
   .user-menu {
-    padding: 1em;
-    i {
-      font-size: $md;
-      color: darken($color: $pink, $amount: 10)
-    }
-    .dropdown-content {
-      display: none;
-      background-color: darken($color: $pink, $amount: 10);
-      color: $white;
-      li {
-        padding: .5em;
-      }
-      li:hover {
-        background-color: $green;
-      }
-    }
+    @include dropdown;
   }
   .user-menu:hover .dropdown-content {
       display: block;
@@ -259,11 +267,13 @@ button:hover {
 .wrapper {
   @include flex(center);
   flex-direction: column;
+  left: 20%;
+  width: 80%;
   .wrapper-header {
     @include flex(center);
     background-color: darken($color: $pink, $amount: 25);
     filter: drop-shadow(2px 4px 6px black);
-    width: 80%;
+    width: 100%;
     padding: 2em;
     img {
       width: 70%;
@@ -276,29 +286,57 @@ button:hover {
       }
     }
   }
+  .grid-form-wrapper{
+    position: relative;
+    width: 100%;
+    .adoption-filter-wrapper {
+      text-align: right;
+      color: $white;
+      padding: .5em;
+      .adoption-filter-btn{
+      cursor: pointer;
+       font-size: $md;
+       letter-spacing: 2px;
+      }
+    }
   .adoption_form {
-    @include flex(center);
+    @include flex(space-evenly);
+    flex-direction: column;
+    align-items: stretch;
+    width: 30%;
+    left: 100%;
+    top: 20%;
     padding: 2em;
+    background-color: white;
+    z-index: 2;
+    position: absolute;
+    padding: 2em;
+    
     .input_wrapper {
-      @include flex-col(6, 1%);
-      flex-direction: column;
+      overflow: hidden;
       padding: 0.9em;
       label {
         width: 100%;
         opacity: 0.7;
-        padding: 0 0.5em;
+        padding: 0.5em;
+        text-align: center;
+        color: darken($color: $pink, $amount: 20);
       }
-      select, input, option {
-        border: 0.5px solid gray;
-        padding: 0.2em;   
-      }
-
       button {
         width: 80%;
         align-self: flex-end;
       }
-    
+      input {
+        color: rgb(82, 80, 80);
+      }
+      .environment_wrapper {
+        @include flex(space-between);
+        i {
+          // color: darken($color: $pink, $amount: 20);
+        }
+      }
     }
+    
   }
   
   .grid {
@@ -306,6 +344,7 @@ button:hover {
     justify-content: space-evenly;
     flex-flow: row wrap;
     padding: 2em;
+    z-index: 1;
     .card {
       @include flex-col(3, 1%);
       flex-direction: column;
@@ -336,6 +375,7 @@ button:hover {
     
   }
   
+}
 }
   
 }
@@ -373,7 +413,6 @@ button:hover {
   width: $contW;
   height: 100%;
   padding-left: $imgW;
-  background: #fff;
   transition: transform $switchAT ease-in-out;
 
   @include signUpActive {
@@ -435,11 +474,6 @@ button:hover {
       font-weight: normal;
     }
 
-    p {
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
     &.m--up {
 
       @include signUpActive {
@@ -477,8 +511,6 @@ button:hover {
       top: 0;
       width: 100%;
       height: 100%;
-      border: 2px solid #fff;
-      border-radius: 30px;
     }
 
     span {
@@ -488,6 +520,7 @@ button:hover {
       top: 0;
       height: 100%;
       transition: transform $switchAT;
+      text-decoration: underline;
       &.m--in {
         transform: translateY($btnH*-2);   
         @include signUpActive {
@@ -518,15 +551,6 @@ label {
     color: darken($color: gray, $amount: 4);
     text-transform: uppercase;
   }
-}
-
-input, textarea {
-  display: block;
-  width: 100%;
-  margin-top: 5px;
-  padding-bottom: 5px;
-  font-size: 16px;
-  border-bottom: 1px solid rgba(0,0,0,0.4);
 }
 
 .forgot-pass {
@@ -563,7 +587,7 @@ input, textarea {
 
 .sign-up {
   transform: translate3d($contW * -1,0,0);
-
+background-color: $white;
   @include signUpActive {
     transform: translate3d(0,0,0);
   }
@@ -611,13 +635,13 @@ input, textarea {
     padding: 1em; 
       div {
         padding: 0.3em;
-        input, select, option, button {
-          width: 100%;
-          padding: 0.5em;
-        }
+        // input, select, option, button {
+        //   width: 100%;
+        //   padding: 0.5em;
+        // }
       }
       .react-calendar{
-        background-color: $green;
+        background-color: $white;
         .react-calendar__navigation{
           background-color: complement($color: $blue);
           height: 100%;
@@ -625,6 +649,7 @@ input, textarea {
             width: 100%;
             height: 100%;
             padding: 0;
+           
           }
       
         }

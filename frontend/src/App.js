@@ -18,21 +18,23 @@ import PwdReset from './components/auth/PwdReset';
 import EnterNewCred from './components/account/EnterNewCred';
 
 
-function withAuth(Component) {
-  return function (props) {
-    const { auth } = useContext(AuthContext);
-    if (!auth) {
-      return <Authentication />
-    }
-    return <Component {...props} />;
-  }
-}
+// function withAuth(Component) {
+//   return function (props) {
+//     const { auth } = useContext(AuthContext);
+//     if (!auth) {
+//       return <Authentication />
+//     }
+//     return <Component {...props} />;
+//   }
+// }
 
-const AuthBooking = withAuth(Booking);
+// const AuthBooking = withAuth(Booking);
+
 
 function App() {
+  const [isChecked, setIsChecked] = useState(false);
   const [auth, setAuth] = useState(() => {
-    const ls = sessionStorage.getItem('user');
+    const ls = isChecked ? localStorage.getItem('user') : sessionStorage.getItem('user');
     try {
       return JSON.parse(ls);
     } catch (e) {
@@ -40,13 +42,15 @@ function App() {
     }
   });
 
+  console.log(sessionStorage.getItem('user'))
   useEffect(() => {
-    sessionStorage.setItem('user', JSON.stringify(auth));
+   isChecked && localStorage.setItem('user', JSON.stringify(auth));
+   !isChecked && sessionStorage.setItem('user', JSON.stringify(auth));
   }, [auth]);
 
   return (
     <div className="App">
-      <AuthContext.Provider value={{ auth, setAuth }}>
+      <AuthContext.Provider value={{ auth, setAuth, isChecked, setIsChecked }}>
         <Router>
           <Nav />
           <div className="showcase">
@@ -54,7 +58,7 @@ function App() {
               <Route key='landing' component={Landing} exact path="/" />
               <Route key='authentication' component={Authentication} path='/authentication' />
               <Route key='grooming' component={Grooming} path="/grooming" />
-              <Route key='booking' component={AuthBooking} path='/booking' />
+              <Route key='booking' component={Booking} path='/booking' />
               <Route key='news' component={News} path='/news' />
               <Route key='adoption' component={Adoption_View} path='/adoption' />
               <Route key='confirmEmail' component={ConfirmEmail} path='/confirm-email' />

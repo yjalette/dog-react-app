@@ -1,13 +1,14 @@
 import React, { useEffect, useState, createContext } from 'react'
 import Grid from '../grid/Grid';
 import Form from './Form';
+import DisplayResults from './DisplayResults';
 
 export const TokenContext = createContext();
 
 const Adoption = () => {
-    const [token, setToken] = useState()
+    const [token, setToken] = useState();
 
-    useEffect(()=> {
+    useEffect(() => {
         fetch('https://api.petfinder.com/v2/oauth2/token', {
             method: 'POST',
             headers: {
@@ -24,11 +25,10 @@ const Adoption = () => {
             .catch(err => console.log(err))
     }, [])
 
-    
     return (
         <TokenContext.Provider value={{ token: token }}>
-                <Grid />
-                <Form />
+            <DisplayResults />
+            <Grid />
         </TokenContext.Provider>
     )
 }

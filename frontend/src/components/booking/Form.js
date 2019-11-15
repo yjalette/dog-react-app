@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import DatePicker from './DatePicker';
 
 
-const Form = ({onSubmit,  msg, defaultValues}) => {
+const Form = ({ onSubmit, msg, defaultValues }) => {
     const [newEvent, setNewEvent] = useState({ name: "", appt_date: new Date(), appt_time: "", size: "", breed: "" });
 
     useEffect(() => {
-        if(defaultValues){
+        if (defaultValues) {
             setNewEvent(defaultValues);
         }
-       
+
     }, [defaultValues])
 
     const handleDate = (appt_date) => {
@@ -43,7 +43,7 @@ const Form = ({onSubmit,  msg, defaultValues}) => {
             <h3>{msg}</h3>
             <form onSubmit={handleSubmit}>
                 <div className="col">
-                    <DatePicker handleDate={handleDate} eventDate={new Date(newEvent.appt_date)}/>
+                    <DatePicker handleDate={handleDate} eventDate={new Date(newEvent.appt_date)} />
                 </div>
                 <div className="col">
                     <div className="input-wrapper">
@@ -57,6 +57,7 @@ const Form = ({onSubmit,  msg, defaultValues}) => {
                     <div className="input-wrapper">
                         <label>size</label>
                         <select name="size" value={newEvent.size || ""} onChange={handleChange}>
+                            <option value=""></option>
                             <option value="sm">small</option>
                             <option value="md">medium</option>
                             <option value="lg">large</option>
@@ -65,6 +66,7 @@ const Form = ({onSubmit,  msg, defaultValues}) => {
                     <div className="input-wrapper">
                         <label>time</label>
                         <select name="appt_time" value={newEvent.appt_time || ""} onChange={handleChange}>
+                            <option value=""></option>
                             <option value="10">10 am</option>
                             <option value="11">11 am</option>
                             <option value="12">12 pm</option>

@@ -4,7 +4,6 @@ import adopt_me from '../../images/adopt.jpg'
 const Card = ({ animal }) => {
     const getPic = animal.photos.map(photo => photo.large || photo.medium || photo.small)
     const photo = getPic[0] || getPic[1] || adopt_me;
-    console.log(animal)
     return (
         <div className="card">
             <div>
