@@ -17,7 +17,7 @@ const GetNews = () => {
     }, [])
     return (
         <div className="grid">
-          {state.articles.slice(9).map( article => <Article article={article} key={article.title}/>)}  
+          {state.articles.slice(8).map( article => <Article article={article} key={article.title}/>)}  
         </div>
     )
 }

@@ -6,7 +6,7 @@ const Adoption_View = () => {
     return (
         <div className="wrapper">
             <div className="wrapper-header">
-                <img alt="adoption-heroimage" className="adopt-hero" src={picture} />
+                <img alt="adoption-heroimage" className="adoption-heroimage" src={picture} />
                 <div>
                     <h1>Shelter Animal and Save Life </h1>
                     <button>find a dog</button>

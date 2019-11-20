@@ -5,8 +5,6 @@ $green: #b1c0a6;
 $blue: #87aeb1;
 $white: #fefbf4;
 
-
-
 $small: 1.1em;
 $md: 1.5em;
 $lg: 2em;
@@ -19,3 +17,14 @@ $switchAT: 1.2s;
 $inputW: 260px;
 $btnH: 36px;
 $diffRatio: ($contW - $imgW) / $contW;
+
+$screen-sm: 576px;
+
+// Small tablets (portrait view)
+$screen-md: 768px;
+
+// Tablets and small desktops
+$screen-lg: 992px;
+
+// Large tablets and desktops
+$screen-xl: 1200px;

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from "../../contexts/AuthContext";
 
-const SignUp = ({msg, setMsg}) => {
+const SignUp = ({error_context}) => {
     const [inputs, setInputs] = useState({ firstName: "", lastName: "", email: "", password: "" });
 
     const context = useContext(AuthContext);
@@ -27,12 +27,12 @@ const SignUp = ({msg, setMsg}) => {
             if (res.status === 200) {
                 return res.json();
             } else {
-                setMsg("User already exits")
+                error_context.setError("User already exits")
                 throw new Error("User already exits")
             }
         }).then(data => {
             console.log(data)
-            setMsg("Please confirm your email to complete registration")
+            error_context.setError("Please confirm your email to complete registration")
             fetch(`http://localhost:5000/api/emailEvents/confirm-email/${data.token}`, {
                 method: 'POST',
                 body: JSON.stringify(data),
@@ -50,7 +50,7 @@ const SignUp = ({msg, setMsg}) => {
         <>
             
             <form className="form sign-up" onSubmit={handleSubmit}>
-                <h2>Sign Up</h2>
+                <h2>{error_context.error === "" ? "Sign Up" : context.error}</h2>
                 <label>
                     <span>First Name</span>
                     <input type="text" name="firstName" value={inputs.firstName} onChange={handleChange} />

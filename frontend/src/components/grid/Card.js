@@ -1,19 +1,41 @@
 import React from 'react';
-import adopt_me from '../../images/adopt.jpg'
+import adopt_me from '../../images/adopt.jpg';
+
+const icons = {
+    dogs: "fas fa-dog",
+    children: "fa fa-child",
+    cats: "fas fa-cat"
+}
 
 const Card = ({ animal }) => {
-    const getPic = animal.photos.map(photo => photo.large || photo.medium || photo.small)
-    const photo = getPic[0] || getPic[1] || adopt_me;
+    const getPic = animal.photos.map(photo => photo.large || photo.medium || photo.small);
+    const photo = getPic.length === 0 ? adopt_me : getPic[0]
+    const environment = Object.keys(animal.environment).filter(key => animal.environment[key] === true)
+
     return (
+        <>
         <div className="card">
-            <div>
-                <img src={photo} alt="Avatar" className="card_img"/>
+            <div className="card_header">
+                <div className="card_left">
+                    {environment.map(icon => (
+                        <i className={`${icons[icon]} animal-icon`} key={icon}></i>
+                    ))}
+                </div>
+                <div className="card_right">
+                    <i className={animal.gender === 'Female' ? "fa fa-venus" : "fa fa-mars"}></i>
+                    <i className="fa fa-map-marker">{Math.round(animal.distance)}</i>
+                </div>
+                <div className="card_img_wrapper">
+                    <img src={photo} alt="card_img" className="card_img" />
+                </div>
             </div>
-            <p><i className={animal.gender === 'Female' ? "fa fa-venus" : "fa fa-mars"}></i></p>
-            <p className="title">{animal.name}</p>
-            <p>{animal.breeds.primary}</p>
-            <button>more info</button>
+
+            <div className="card_body">
+                <p className="title">{animal.name} * {animal.breeds.primary} </p>
+                <button></button>
+            </div>
         </div>
+        </>
     )
 }
 

@@ -1,6 +1,5 @@
 import React, { useEffect, useState, createContext } from 'react'
 import Grid from '../grid/Grid';
-import Form from './Form';
 import DisplayResults from './DisplayResults';
 
 export const TokenContext = createContext();

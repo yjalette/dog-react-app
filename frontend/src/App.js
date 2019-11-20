@@ -9,13 +9,15 @@ import Booking from './components/booking/Booking';
 import News from './components/news/News';
 import Contact from './components/contact/Contact';
 import Landing from './components/home/Landing';
-import { AuthContext } from './contexts/AuthContext'
+import { AuthContext } from './contexts/AuthContext';
+import {ErrorContext} from './contexts/ErrorContext';
 import './axios';
 import Grooming from './components/grooming/Grooming';
 import Footer from './components/footer/Footer';
 import Account from './components/account/Account';
 import PwdReset from './components/auth/PwdReset';
 import EnterNewCred from './components/account/EnterNewCred';
+import Details from './components/grid/Details';
 
 
 // function withAuth(Component) {
@@ -33,6 +35,9 @@ import EnterNewCred from './components/account/EnterNewCred';
 
 function App() {
   const [isChecked, setIsChecked] = useState(false);
+
+  const [error, setError] = useState("");
+
   const [auth, setAuth] = useState(() => {
     const ls = isChecked ? localStorage.getItem('user') : sessionStorage.getItem('user');
     try {
@@ -50,7 +55,8 @@ function App() {
 
   return (
     <div className="App">
-      <AuthContext.Provider value={{ auth, setAuth, isChecked, setIsChecked }}>
+      <AuthContext.Provider value={{ auth, setAuth, isChecked, setIsChecked, error, setError }}>
+        <ErrorContext.Provider value={{ error, setError }}>
         <Router>
           <Nav />
           <div className="showcase">
@@ -61,6 +67,7 @@ function App() {
               <Route key='booking' component={Booking} path='/booking' />
               <Route key='news' component={News} path='/news' />
               <Route key='adoption' component={Adoption_View} path='/adoption' />
+              <Route component={Details} path='/adoption-details' />
               <Route key='confirmEmail' component={ConfirmEmail} path='/confirm-email' />
               <Route key='account' component={Account} path='/account' />
               <Route component={PwdReset} path='/password-reset' />
@@ -70,6 +77,7 @@ function App() {
           </div>
           <Footer />
         </Router>
+        </ErrorContext.Provider>
       </AuthContext.Provider>
     </div>
   );

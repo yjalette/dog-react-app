@@ -2,20 +2,20 @@
 @import 'mixins';
 
 * {
-    overflow-x: hidden;
-    margin: 0px;
-    padding: 0px;
-    border: 0px;
-    box-sizing: border-box;
-    /*reset Chrome user agent styles*/
-    -webkit-margin-before: 0px;
-    -webkit-margin-after: 0px;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
-    -webkit-padding-before: 0px;
-    -webkit-padding-after: 0px;
-    -webkit-padding-start: 0px;
-    -webkit-padding-end: 0px;
+  overflow-x: hidden;
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+  box-sizing: border-box;
+  /*reset Chrome user agent styles*/
+  -webkit-margin-before: 0px;
+  -webkit-margin-after: 0px;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  -webkit-padding-before: 0px;
+  -webkit-padding-after: 0px;
+  -webkit-padding-start: 0px;
+  -webkit-padding-end: 0px;
 }
 
 body {
@@ -31,6 +31,7 @@ a {
 
 ul {
   list-style: none;
+
   li {
     cursor: pointer;
   }
@@ -48,6 +49,10 @@ span {
 h1 {
   font-size: $sup-large;
   color: $white;
+
+  @include mQ($screen-sm) {
+    font-size: $sup-large / 1.5;
+  }
 }
 
 h3 {
@@ -68,9 +73,9 @@ h5 {
 hr {
   background-image: url('../images/cloud-nosun.png');
   opacity: 0.8;
-    background-size: contain;
-    height: 60px;
-   
+  background-size: contain;
+  height: 60px;
+
 }
 
 button {
@@ -83,22 +88,26 @@ button {
   background-color: darken($color: $pink, $amount: 15);
   border: 2px solid darken($color: $pink, $amount: 10);
   text-align: center;
+  float: right;
   cursor: pointer;
   width: auto;
   font-size: $small;
+
+  &:hover {
+    opacity: 0.3;
+  }
 }
 
-button:hover {
-  opacity: 0.7;
-}
-
-input, textarea, select, option {
+input,
+textarea,
+select,
+option {
   display: block;
   width: 100%;
   margin-top: 5px;
   padding-bottom: 5px;
   font-size: 14px;
-  border-bottom: 1px solid rgba(0,0,0,0.3);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.493);
   background: none;
 }
 
@@ -108,13 +117,13 @@ input, textarea, select, option {
   padding-top: 2em;
 }
 
-.msg {
-    color: red;
-    font-weight: 400;
-    text-align: center;
-    width: 100%;
-    background: none;
-    padding: 1em 0;
+.error {
+  color: red;
+  font-weight: 400;
+  text-align: center;
+  width: 100%;
+  background: none;
+  padding: 1em 0;
 }
 
 .none {
@@ -137,54 +146,73 @@ input, textarea, select, option {
       padding: .6em;
     }
     li {
+      @include mQ($screen-md) {
+        width: 100%;
+      }
       img {
         width: 15%;
         -webkit-animation: nav 2s linear infinite alternate;
         animation: nav 2s linear infinite alternate;
       }
-     a {
-      color: $white;
-     } 
+      a {
+        color: $white;
+        text-align: center;
+      }
     }
-  .user-menu {
-    @include dropdown;
+
+    .user-menu {
+      @include dropdown;
+
+      &:hover .dropdown-content {
+        display: block;
+        transition: 2s;
+      }
+    }
+
   }
-  .user-menu:hover .dropdown-content {
-      display: block;
-      transition: 2s;
-  }
-}
+
   nav {
     background-color: $white;
     top: 0;
     z-index: 1;
     @include flex(center);
     margin-bottom: 1em;
+
     .logo {
       width: 30%;
     }
+
     ul {
       @include flex(space-around);
       padding-top: 1rem;
+
       li {
-        
-      a {
-        display: block;  
-        color: darken($color: $pink, $amount: 10)  
+
+        a {
+          display: block;
+          color: darken($color: $pink, $amount: 10)
         }
       }
-      }
     }
+  }
 }
 
 @-webkit-keyframes nav {
   from {}
-  to {-webkit-transform: translateX(10%);transform: translateX(10%)}
+
+  to {
+    -webkit-transform: translateX(10%);
+    transform: translateX(10%)
+  }
 }
 
 @keyframes nav {
   from {}
-  to {-webkit-transform: translateX(10%);transform: translateX(10%)}
+
+  to {
+    -webkit-transform: translateX(10%);
+    transform: translateX(10%)
+  }
 }
 
 
@@ -192,42 +220,73 @@ input, textarea, select, option {
   .landing {
     @include flex(center);
     height: 100vh;
-    div {
+    @include mQ($screen-md) {
+      flex-direction: column;
       height: 100%;
     }
-    .hero_image_section{
-     @include flex(space-evenly);
+    div {
+      height: 100%;
+      @include mQ($screen-md) {
+        height: auto;
+      }
+    }
+    .hero_image_section {
+      @include flex(space-evenly);
+
       .ball {
         height: 120px;
         -webkit-animation: ball 1s linear infinite alternate;
         animation: ball 1s linear infinite alternate;
+
+        @include mQ($screen-md) {
+          height: 60px;
+        }
       }
+
       .hero_image {
         height: 350px;
         transform: rotateY(-180deg);
+
+        @include mQ($screen-md) {
+          height: 170px;
+        }
       }
     }
+
     .headline {
       padding: 2em;
+
       h1 {
-       padding: 2em;
-      }
-        button {
-         width: 50%;
-         transform: translateX(-20%);
+        padding: 2em;
+        @include mQ($screen-md) {
+          padding: .5em;
         }
+      }
+
+      button {
+        width: 50%;
+        transform: translateX(-20%);
+        @include mQ($screen-md) {
+          width: 100%;
+          transform: none;
+        }
+      }
     }
   }
+
   .services {
     @include flex(center);
     flex-direction: column;
+
     :root {
       --web-view-ids: Web_1920___1;
     }
+
     #Web_1920___1 * {
       margin: 0;
       padding: 0;
     }
+
     #Web_1920___1 {
       position: relative;
       box-sizing: border-box;
@@ -240,9 +299,11 @@ input, textarea, select, option {
       --web-view-id: Web_1920___1;
       --web-enable-deep-linking: true;
     }
+
     #Ellipse_1 {
       fill: $white;
     }
+
     .Ellipse_1 {
       position: absolute;
       overflow: visible;
@@ -255,13 +316,17 @@ input, textarea, select, option {
 }
 
 @-webkit-keyframes ball {
-  from {}
-  to {-webkit-transform: translateY(30%);transform: translateY(30%)}
+  to {
+    -webkit-transform: translateY(30%);
+    transform: translateY(30%)
+  }
 }
 
 @keyframes ball {
-  from {}
-  to {-webkit-transform: translateY(30%);transform: translateY(30%)}
+  to {
+    -webkit-transform: translateY(30%);
+    transform: translateY(30%)
+  }
 }
 
 .wrapper {
@@ -269,115 +334,222 @@ input, textarea, select, option {
   flex-direction: column;
   left: 20%;
   width: 80%;
+
+  @include mQ($screen-md) {
+    width: 100%;
+  }
+
   .wrapper-header {
     @include flex(center);
     background-color: darken($color: $pink, $amount: 25);
     filter: drop-shadow(2px 4px 6px black);
     width: 100%;
     padding: 2em;
-    img {
-      width: 70%;
+
+    @include mQ($screen-md) {
+      flex-direction: column;
+      filter: none;
+      padding: 1em;
     }
+
+    .news-heroimage {
+      width: 50%;
+
+      @include mQ($screen-md) {
+        width: 100%;
+      }
+    }
+
+    .adoption-heroimage {
+      width: 70%;
+
+      @include mQ($screen-md) {
+        width: 100%;
+      }
+    }
+
     div {
       @include flex(space-evenly);
       flex-direction: column;
+
       button {
         width: 40%;
       }
     }
   }
-  .grid-form-wrapper{
+
+  .grid-form-wrapper {
     position: relative;
     width: 100%;
+
     .adoption-filter-wrapper {
-      text-align: right;
+      @include flex(space-between);
       color: $white;
       padding: .5em;
-      .adoption-filter-btn{
       cursor: pointer;
-       font-size: $md;
-       letter-spacing: 2px;
+
+      .i {
+        letter-spacing: 2px;
       }
     }
-  .adoption_form {
-    @include flex(space-evenly);
-    flex-direction: column;
-    align-items: stretch;
-    width: 30%;
-    left: 100%;
-    top: 20%;
-    padding: 2em;
-    background-color: white;
-    z-index: 2;
-    position: absolute;
-    padding: 2em;
-    
-    .input_wrapper {
-      overflow: hidden;
-      padding: 0.9em;
-      label {
-        width: 100%;
-        opacity: 0.7;
-        padding: 0.5em;
-        text-align: center;
-        color: darken($color: $pink, $amount: 20);
-      }
-      button {
-        width: 80%;
-        align-self: flex-end;
-      }
-      input {
-        color: rgb(82, 80, 80);
-      }
-      .environment_wrapper {
-        @include flex(space-between);
-        i {
-          // color: darken($color: $pink, $amount: 20);
-        }
-      }
-    }
-    
-  }
-  
-  .grid {
-    display: flex;
-    justify-content: space-evenly;
-    flex-flow: row wrap;
-    padding: 2em;
-    z-index: 1;
-    .card {
-      @include flex-col(3, 1%);
+
+    .adoption_form {
+      @include flex(space-evenly);
       flex-direction: column;
-      justify-content: space-between;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-      background-color: $white;
-      // background-color: darken($color: $pink, $amount: 20);
-      text-align: center;
-      .title {
-        color: $pink;
-        overflow: initial;
-        padding: 0.8em;
+      align-items: stretch;
+      width: 40%;
+      height: 100vh;
+      right: 0;
+      top: 20%;
+      padding: 2em;
+      background-color: white;
+      z-index: 2;
+      position: absolute;
+      padding: 2em;
+
+      @include mQ($screen-sm) {
+        width: 100%;
+        top: 0;
+        position: none;
       }
-      div {
-        .card_img {
+
+      .input_wrapper {
+        overflow: hidden;
+        padding: 0.9em;
+        width: 100%;
+
+        label {
           width: 100%;
-          height: 300px;
-          object-fit: cover;
+          opacity: 0.7;
+          padding: 0.5em;
+          text-align: left;
+          color: darken($color: $pink, $amount: 20);
+        }
+
+        button {
+          float: right;
+        }
+
+        .environment_wrapper {
+          @include flex(space-around);
+
+          i {
+            // color: darken($color: $pink, $amount: 20);
+          }
         }
       }
-    
-      button {
-        border: 0;
-        float: none;
-        width: 100%;
-        margin-bottom: 0;
+
+    }
+
+    .grid {
+      display: flex;
+      justify-content: space-evenly;
+      flex-flow: row wrap;
+      padding: 2em;
+      z-index: 1;
+
+      @include mQ($screen-sm) {
+        padding: 1em;
       }
-    
+
+      .card {
+        @include flex-col(3, 1%);
+
+        @include mQ($screen-md) {
+          @include flex-col(2, 1%);
+        }
+
+        @include mQ($screen-sm) {
+          width: 100%;
+        }
+
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        background-color: $white;
+        // background-color: darken($color: $pink, $amount: 20);
+
+        .card_header {
+          position: relative;
+
+          .card_left {
+            position: absolute;
+            z-index: 2;
+            right: 0;
+            bottom: 0;
+
+            i {
+              background-color: #876160;
+              padding: 0.5em;
+              color: white;
+            }
+          }
+
+          .card_right {
+            @include flex(space-between);
+            position: absolute;
+            z-index: 2;
+
+            i {
+              background-color: #876160;
+              padding: 0.5em;
+              color: white;
+            }
+
+            .fa-map-marker::first-letter {
+              padding-right: 0.3em;
+            }
+
+            .fa-map-marker::after {
+              content: " mi";
+            }
+
+          }
+
+          .card_img_wrapper {
+            position: relative;
+            z-index: 1;
+
+            .card_img {
+              width: 100%;
+              height: 300px;
+              object-fit: cover;
+            }
+          }
+
+
+        }
+
+
+        .card_body {
+
+          .title {
+            color: darken($color: $pink, $amount: 25);
+            overflow: initial;
+            padding: 0.8em;
+          }
+
+          button {
+            border: 0;
+            float: none;
+            width: 100%;
+            margin-bottom: 0;
+          }
+
+        }
+
+      }
+
+    }
   }
-  
-}
-}
-  
+
+  // news
+  .card_img_news {
+    @include mQ($screen-md) {
+      width: 100%;
+    }
+  }
+
 }
 
 
@@ -416,7 +588,7 @@ input, textarea, select, option {
   transition: transform $switchAT ease-in-out;
 
   @include signUpActive {
-    transform: translate3d($formW * -1,0,0);
+    transform: translate3d($formW * -1, 0, 0);
   }
 }
 
@@ -449,12 +621,12 @@ input, textarea, select, option {
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
   }
 
   @include signUpActive {
     &:before {
-      transform: translate3d($formW,0,0);
+      transform: translate3d($formW, 0, 0);
     }
   }
 
@@ -502,7 +674,7 @@ input, textarea, select, option {
     text-transform: uppercase;
     font-size: 15px;
     cursor: pointer;
-    
+
     &:after {
       content: '';
       z-index: 2;
@@ -521,12 +693,15 @@ input, textarea, select, option {
       height: 100%;
       transition: transform $switchAT;
       text-decoration: underline;
+
       &.m--in {
-        transform: translateY($btnH*-2);   
+        transform: translateY($btnH*-2);
+
         @include signUpActive {
           transform: translateY(0);
         }
-      }   
+      }
+
       &.m--up {
         @include signUpActive {
           transform: translateY($btnH*2);
@@ -546,6 +721,7 @@ label {
   display: block;
   width: $inputW;
   margin: 25px auto 0;
+
   span {
     font-size: $small/1.5;
     color: darken($color: gray, $amount: 4);
@@ -581,15 +757,16 @@ label {
   @include signUpActive {
     transition-timing-function: ease-in-out;
     transition-duration: $switchAT;
-    transform: translate3d($formW,0,0);
+    transform: translate3d($formW, 0, 0);
   }
 }
 
 .sign-up {
-  transform: translate3d($contW * -1,0,0);
-background-color: $white;
+  transform: translate3d($contW * -1, 0, 0);
+  background-color: $white;
+
   @include signUpActive {
-    transform: translate3d(0,0,0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -600,65 +777,67 @@ background-color: $white;
   @include flex(space-between);
   flex-direction: column;
   padding: 3em;
+
   table {
     width: 80%;
     padding: 2em;
     margin: 2em;
+
     tr:nth-child(even) {
       background-color: #eee;
     }
+
     tr:nth-child(odd) {
       background-color: #fff;
     }
+
     th {
       color: $white;
       background-color: complement($color: $blue);
     }
+
     td {
       text-align: center;
       padding: 1em;
     }
   }
-  table, th, td {
+
+  table,
+  th,
+  td {
     border: 1px solid gray;
     border-collapse: collapse;
   }
- 
+
 }
+
 .add-booking {
-  
   form {
     @include flex(space-evenly);
-  .col {
-    @include flex(space-evenly);
-    flex-direction: column;
-    padding: 1em; 
+
+    .col {
+      @include flex(space-evenly);
+      flex-direction: column;
+      padding: 1em;
+
       div {
         padding: 0.3em;
-        // input, select, option, button {
-        //   width: 100%;
-        //   padding: 0.5em;
-        // }
       }
-      .react-calendar{
+
+      .react-calendar {
         background-color: $white;
-        .react-calendar__navigation{
+
+        .react-calendar__navigation {
           background-color: complement($color: $blue);
           height: 100%;
+
           .react-calendar__navigation__label {
             width: 100%;
             height: 100%;
             padding: 0;
-           
           }
-      
         }
       }
-
-      
-  }  
-     
-
+    }
+  }
 }
-}
-

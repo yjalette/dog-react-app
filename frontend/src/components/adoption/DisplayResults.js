@@ -3,49 +3,58 @@ import { TokenContext } from './Adoption';
 import Grid from '../grid/Grid';
 import { fetchDogs } from './fetchDogs';
 import Form from './Form';
+import { ErrorContext } from '../../contexts/ErrorContext';
+import Details from '../grid/Details';
 
 const myDivToFocus = React.createRef()
 
 const DisplayResults = () => {
+
     const [inputs, setInputs] = useState({
         gender: 'male',
         breed: '',
-        zipcode: '10032',
         color: 'black',
-        environment: {
-            cats: false,
-            children: false,
-            dogs: false
-        }
+        good_with_cats: false,
+        good_with_dogs: false,
+        good_with_children: false,
+        location: '10032',
+        distance: 50,
+        sort: ""
     });
-  
+
     const [results, setResults] = useState(null);
+
     const [filter, showFilter] = useState(false);
+
     const { token } = useContext(TokenContext);
+
+    const context = useContext(ErrorContext)
 
     const handleClick = async () => {
         await showFilter(true);
         myDivToFocus.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
+
     const handleCancel = () => {
-        showFilter(true);
+        showFilter(false);
     }
 
     useEffect(() => {
         if (!token) return;
         fetchDogs({}, token)
             .then(data => {
-                console.log(data)
+                const animals = data.animals.filter(animal => animal.photos.length !== 0)
+                console.log(animals)
                 if (!data.animals) {
+                    console.log("this is error")
                     throw new Error("no animals");
                 }
-                else setResults(data.animals)
+                else setResults(animals)
             })
             .catch(err => console.log('error: ', err));
     }, [token])
 
     const handleChange = e => {
-        console.log(inputs)
         setInputs({
             ...inputs,
             [e.target.name]: e.target.value
@@ -53,26 +62,26 @@ const DisplayResults = () => {
     }
 
     const handleEnvironmentChange = e => {
-        console.log(e.target.value)
         setInputs({
             ...inputs,
-            environment: {
-                ...inputs.environment,
-                [e.target.value]: true
-            }
+                [e.target.name]: true
         })
     }
 
     const handleSubmit = async e => {
         e.preventDefault();
-        console.log(inputs)
+        context.setError("");
         try {
             const data = await fetchDogs(inputs, token);
             if (!data.animals) {
+                showFilter(false);
+                context.setError("Sorry, but nothing matched your search criteria. Please try again with some different keywords.");
                 throw new Error("no animals");
             }
             else
-                setResults(data.animals);
+            showFilter(false);
+            console.log(data.animals)
+            setResults(data.animals);
         }
         catch (err) {
             return console.log('error: ', err);
@@ -82,12 +91,13 @@ const DisplayResults = () => {
     return (
         <>
             <div className="grid-form-wrapper">
+                <h2 className="error">{context.error}</h2>
                 <Form handleClick={handleClick} handleCancel={handleCancel} handleSubmit={handleSubmit} handleChange={handleChange} handleEnvironmentChange={handleEnvironmentChange} inputs={inputs} filter={filter} myDivToFocus={myDivToFocus} />
-               <div className={filter ? "opacity" : ""}>
-                     <Grid animals={results}/>
-               </div>
+                <div className={filter ? "opacity" : ""}>
+                    <Grid animals={results}/>
+                </div>
             </div>
-           
+
         </>
     )
 }

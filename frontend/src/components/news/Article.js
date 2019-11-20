@@ -5,7 +5,7 @@ const Article = ({ article }) => {
     return (
         <div className="card">
             <div>
-                <img src={article.urlToImage} alt="Avatar" className="card_img" />
+                <img src={article.urlToImage} alt="Avatar" className="card_img_news" />
             </div>
             <h5 className="title">{article.title}</h5>
             <p>{article.description.slice(0, 150)}...</p>
