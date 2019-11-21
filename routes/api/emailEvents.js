@@ -74,7 +74,7 @@ router.post('/reset', (req, res) => {
                     const htmlEmail = `
         <div style="background-color: #87aeb1">
             <p>In order to change your password please click button below</p>
-            <button style="background-color: #87aeb1"><a href="http://localhost:3000/update-account/${token}">click</a></button>
+            <button style="background-color: #87aeb1"><a href="http://localhost:3000/forgot-password/${token}">click</a></button>
         </div>
         `
                     let mailOptions = {

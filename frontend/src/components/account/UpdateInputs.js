@@ -1,21 +1,89 @@
-import React from 'react'
-import Account from './Account'
+import React, { useState, useContext } from 'react'
+import Account from './Account';
+import Cookies from 'js-cookie';
+import { AuthContext } from '../../contexts/AuthContext';
+import { ErrorContext } from '../../contexts/ErrorContext';
+import axios from 'axios';
 
 const UpdateInputs = () => {
 
-    const updateName = () => {
+    const user_context = useContext(AuthContext);
+    const error_context = useContext(ErrorContext);
 
+    const [inputs, setinputs] = useState({
+        creds: user_context.auth,
+        pwd: {
+            newPassword: "",
+            oldPassword: ""
+        }
     }
-    const updateEmail = () => {
-        
+    )
+
+    const token = Cookies.get('token')
+
+    const handleChange = (e) => {
+        setinputs({
+            ...inputs,
+            creds: {
+                ...inputs.creds,
+                [e.target.name]: e.target.value
+            }
+
+        })
     }
-    const updatePwd = () => {
-        
+
+    const handleChangePassword = (e) => {
+        setinputs({
+            ...inputs,
+            pwd: {
+                ...inputs.pwd,
+                [e.target.name]: e.target.value
+            }
+        })
+    }
+
+    const updatePassword = e => {
+        e.preventDefault()
+        axios
+            .put(`api/auth/change-password/${token}`, {
+                ...inputs.pwd
+            }).then(res => {
+                if (res.status === 400) {
+                    error_context.setError("wrong creds")
+                    return
+                }
+                return 
+            }).catch(err => console.log(err))
+    }
+
+    const updateCreds = e => {
+        e.preventDefault()
+        axios
+            .put(`api/auth/change-creds/${token}`, {
+                ...inputs.creds
+            }).then(res => {
+                if (res.status === 400) {
+                    error_context.setError("wrong creds")
+                    return
+                }
+                axios
+                    .get(`api/auth/user`)
+                    .then(res => {
+                        Cookies.set('user', {
+                            id: res.data._id,
+                            email: res.data.email,
+                            firstName: res.data.firstName,
+                            lastName: res.data.lastName,
+                        })
+
+                    }).catch(err => console.log(err))
+            }).catch(err => console.log(err))
     }
     return (
-        <>
-            <Account updateEmail={updateEmail} updateName={updateName} updatePwd={updatePwd}/>
-        </>
+        <section className="account">
+            <h2 className="error">{error_context.error}</h2>
+            <Account handleChangePassword={handleChangePassword} updatePassword={updatePassword} handleChange={handleChange} updateCreds={updateCreds} inputs={inputs} />
+        </section>
     )
 }
 

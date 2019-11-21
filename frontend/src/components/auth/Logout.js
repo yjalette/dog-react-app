@@ -1,13 +1,14 @@
 import React, {useContext} from 'react';
-import { AuthContext } from '../../contexts/AuthContext'
+import {withRouter} from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
+import Cookies from 'js-cookie';
 
-const Logout = () => {
-
-    const { setAuth } = useContext(AuthContext);
-    
+const Logout = (props) => {
+    const { setAuth } = useContext(AuthContext);    
     const handleLogout = e => {
         setAuth(null)
-        localStorage.removeItem('user')
+        Cookies.remove('token');
+        props.history.push('/')
     }
 
     return (
@@ -15,4 +16,4 @@ const Logout = () => {
     )
 }
 
-export default Logout
+export default withRouter(Logout);

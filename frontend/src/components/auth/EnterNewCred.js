@@ -6,11 +6,9 @@ const EnterNewCred = (props) => {
     const [input, setInput] = useState({password: ""});
 
     const tempToken = localStorage.getItem('tempToken');
-    console.log(tempToken)
 
     const handleChange = (e) => {
-        setInput({
-            
+        setInput({            
             [e.target.name]: e.target.value
         })
     } 

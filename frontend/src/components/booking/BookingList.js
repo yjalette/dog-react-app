@@ -1,7 +1,7 @@
 import React from 'react';
 
 const BookingList = ({handleDelete, events, onEdit}) => {
-    
+    console.log(events)
     return (
         <>
         <h3>My Bookings</h3>

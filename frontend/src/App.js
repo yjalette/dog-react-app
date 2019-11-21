@@ -1,6 +1,7 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles/App.scss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import Authentication from './components/auth/Authentication';
 import ConfirmEmail from './components/auth/ConfirmEmail';
 import Adoption_View from './components/adoption/Adoption_View';
@@ -14,10 +15,10 @@ import {ErrorContext} from './contexts/ErrorContext';
 import './axios';
 import Grooming from './components/grooming/Grooming';
 import Footer from './components/footer/Footer';
-import Account from './components/account/Account';
 import PwdReset from './components/auth/PwdReset';
-import EnterNewCred from './components/account/EnterNewCred';
+import EnterNewCred from './components/auth/EnterNewCred';
 import Details from './components/grid/Details';
+import UpdateInputs from './components/account/UpdateInputs';
 
 
 // function withAuth(Component) {
@@ -34,12 +35,10 @@ import Details from './components/grid/Details';
 
 
 function App() {
-  const [isChecked, setIsChecked] = useState(false);
-
   const [error, setError] = useState("");
-
   const [auth, setAuth] = useState(() => {
-    const ls = isChecked ? localStorage.getItem('user') : sessionStorage.getItem('user');
+    const ls = Cookies.get('user');
+    console.log("ls==>", ls)
     try {
       return JSON.parse(ls);
     } catch (e) {
@@ -47,15 +46,14 @@ function App() {
     }
   });
 
-  console.log(sessionStorage.getItem('user'))
+  
   useEffect(() => {
-   isChecked && localStorage.setItem('user', JSON.stringify(auth));
-   !isChecked && sessionStorage.setItem('user', JSON.stringify(auth));
+    Cookies.set('user', JSON.stringify(auth))
   }, [auth]);
 
   return (
     <div className="App">
-      <AuthContext.Provider value={{ auth, setAuth, isChecked, setIsChecked, error, setError }}>
+      <AuthContext.Provider value={{ auth, setAuth, error, setError }}>
         <ErrorContext.Provider value={{ error, setError }}>
         <Router>
           <Nav />
@@ -69,9 +67,9 @@ function App() {
               <Route key='adoption' component={Adoption_View} path='/adoption' />
               <Route component={Details} path='/adoption-details' />
               <Route key='confirmEmail' component={ConfirmEmail} path='/confirm-email' />
-              <Route key='account' component={Account} path='/account' />
+              <Route key='account' component={UpdateInputs} path='/account' />
               <Route component={PwdReset} path='/password-reset' />
-              <Route component={EnterNewCred} path='/update-account' />
+              <Route component={EnterNewCred} path='/forgot-password' />
               <Route key='contact' component={Contact} path='/contact' />
             </Switch>
           </div>

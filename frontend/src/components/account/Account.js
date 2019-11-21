@@ -1,21 +1,37 @@
 import React from 'react'
 
-const Account = ({ updateName, updateEmail, updatePwd }) => {
+const Account = ({ handleChange, inputs, updateCreds, handleChangePassword, updatePassword}) => {
+    console.log(inputs)
     return (
+        <>
         <div className="account">
             <div className="input-wrapper">
-                <label>name <i className="fa fa-edit"></i></label>
-                <input value="" name="name" onChange={updateName} />
+                <label>First Name</label>
+                <input value={inputs.creds.firstName} name="firstName" onChange={handleChange} />
+                <button type="click" onClick={updateCreds}>save</button>
             </div>
             <div className="input-wrapper">
-                <label>email <i className="fa fa-edit"></i></label>
-                <input value="" name="name" onChange={updateEmail} />
+                <label>Last Name</label>
+                <input value={inputs.creds.lastName} name="lastName" onChange={handleChange} />
+                <button type="click" onClick={updateCreds}>save</button>
             </div>
             <div className="input-wrapper">
-                <label>password <i className="fa fa-edit"></i></label>
-                <input value="" name="name" onChange={updatePwd} />
+                <label>email </label>
+                <input value={inputs.creds.email} name="email" onChange={handleChange} />
+                <button type="click" onClick={updateCreds}>save</button>
+            </div>
+            <div className="input-wrapper">
+                <label>password </label> 
+                <input value={inputs.pwd.oldPassword} name="oldPassword" onChange={handleChangePassword} />
+                <input value={inputs.pwd.newPassword} name="newPassword" onChange={handleChangePassword} />
+                <button type="click" onClick={updatePassword}>save</button>              
             </div>
         </div>
+       
+
+                
+    
+        </>
     )
 }
 

@@ -7,6 +7,7 @@ const path = require('path');
 const session = require('express-session');
 const flash = require('connect-flash');
 
+
 app.use(cors());
 
 app.use(express.json());
@@ -26,7 +27,7 @@ mongoose
         useNewUrlParser: true,
         useCreateIndex: true,
         useUnifiedTopology: true,
-
+        useFindAndModify: false 
     })
     .then(() => console.log("mongo is connecting"))
     .catch((err) => console.log("this is the errorrrrr:", err))

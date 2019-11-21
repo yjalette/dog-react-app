@@ -81,7 +81,6 @@ hr {
 button {
   border: none;
   outline: 0;
-  display: inline-block;
   padding: .8em;
   margin: .4em 0;
   color: $white;
@@ -159,13 +158,18 @@ option {
         text-align: center;
       }
     }
-
     .user-menu {
       @include dropdown;
-
       &:hover .dropdown-content {
         display: block;
         transition: 2s;
+      }
+      i {
+        color: $white;
+        font-size: $small;
+        &::first-letter{
+          margin-right: .2em;
+        }
       }
     }
 
@@ -840,4 +844,12 @@ label {
       }
     }
   }
+}
+
+
+// account 
+
+.account {
+  @include flex(center);
+  flex-direction: column;
 }

@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d0c176b08ca4e805a1bfa9a8c4241aba",
+    "revision": "5cb83cd1108f415cbc34269342f0971e",
     "url": "/index.html"
   },
   {
-    "revision": "963c2a95e2ec796eba68",
+    "revision": "7564f64d98a8f5a35b60",
     "url": "/static/css/2.c51b6406.chunk.css"
   },
   {
-    "revision": "d714a8ed703b6e943570",
-    "url": "/static/css/main.a84fe7f1.chunk.css"
+    "revision": "eea04f04a9edfecd424b",
+    "url": "/static/css/main.f6c8f528.chunk.css"
   },
   {
-    "revision": "963c2a95e2ec796eba68",
-    "url": "/static/js/2.e0da9a42.chunk.js"
+    "revision": "7564f64d98a8f5a35b60",
+    "url": "/static/js/2.6d323e66.chunk.js"
   },
   {
-    "revision": "d714a8ed703b6e943570",
-    "url": "/static/js/main.3cb499e1.chunk.js"
+    "revision": "eea04f04a9edfecd424b",
+    "url": "/static/js/main.b6d7cabd.chunk.js"
   },
   {
     "revision": "8bac65c430d186c31b70",
@@ -44,8 +44,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/happy-dog.fa333da2.png"
   },
   {
-    "revision": "70795b86f5f431ca9e41e5978f8db1e5",
-    "url": "/static/media/vizla-two.70795b86.png"
+    "revision": "93b7ad991b9f89d16eca931fd3bdf756",
+    "url": "/static/media/vizla-two.93b7ad99.png"
   },
   {
     "revision": "4d98ace35cd6d214282c478f4f1e8053",

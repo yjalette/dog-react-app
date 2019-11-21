@@ -5,10 +5,9 @@ import { AuthContext } from "../../contexts/AuthContext";
 
 const AddBooking = () => {
    const context = useContext(AuthContext);
-
    const handleSubmit = newEvent => {
       axios
-          .post('api/events', {
+          .post('./api/events', {
               ...newEvent,
               user_id: context.auth.id
           })

@@ -92,6 +92,8 @@ function getEvents() {
 
 
 function createEvent(event) {
+  const googleEvent = constractGoogleEvent(event);
+
   return new Promise((resolve, reject) => {
     fs.readFile('credentials.json', (err, content) => {
       if (err) return console.log('Error loading client secret file:', err);
@@ -100,7 +102,7 @@ function createEvent(event) {
         calendar.events.insert({
           auth: auth,
           calendarId: 'primary',
-          resource: event,
+          resource: googleEvent,
         }, function(err, event) {
           if (err) {
             reject(err);
@@ -138,4 +140,57 @@ function deleteEvent(eventId) {
   });
 }
 
-module.exports = { getEvents, createEvent, deleteEvent};
+function updateEvent(event, eventId) {
+  const googleEvent = constractGoogleEvent(event);
+  console.log(googleEvent)
+  return new Promise((resolve, reject) => {
+    // Load client secrets from a local file.
+    fs.readFile('credentials.json', (err, content) => {
+      if (err) return console.log('Error loading client secret file:', err);
+      // Authorize a client with credentials, then call the Google Calendar API.
+      authorize(JSON.parse(content), function(auth){
+        const calendar = google.calendar({version: 'v3', auth});
+        calendar.events.update({
+          auth: auth,
+          calendarId: 'primary',
+          eventId: eventId,
+          resource: googleEvent
+        }, function(err, event) {
+          if (err) {
+            reject(err);
+            return;
+          }
+            resolve(event.htmlLink);
+        });
+      });
+    });
+  });
+}
+
+function constractGoogleEvent(event){
+  const { appt_date, name, appt_time, size, breed} = event;
+  const startDate = new Date(appt_date)
+  startDate.setHours(appt_time);
+  const endDate = new Date(appt_date);
+  endDate.setHours(+appt_time + 3);
+  return {
+    'summary': name,
+    'start': {
+      'dateTime': startDate.toISOString(),
+      'timeZone': 'America/New_York'
+    },
+    'end': {
+      'dateTime': endDate.toISOString(),
+      'timeZone': 'America/New_York'
+    },
+    'description': `size: ${size}, breed: ${breed}`,
+    'reminders': {
+      'useDefault': false,
+      'overrides': [
+        { 'method': 'email', 'minutes': 13 * 60 },
+      ],
+    },
+  }
+}
+
+module.exports = { getEvents, createEvent, deleteEvent, updateEvent};

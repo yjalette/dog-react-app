@@ -54,20 +54,19 @@
 
 @mixin dropdown {
     padding: 1em;
-    i {
-      font-size: $md;
-      color: darken($color: $pink, $amount: 18)
-    }
     .dropdown-content {
       display: none;
       background-color: darken($color: $pink, $amount: 10);
       color: $white;
       span, label {
+        font-size: $small;
         padding: .5em;
         display: block;
+
+        &:hover {
+          background-color: lighten($color: $pink, $amount: 10);
+        }
       }
-      span:hover {
-        background-color: $green;
-      }
+      
     }
 }

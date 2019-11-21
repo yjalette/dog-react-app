@@ -15,8 +15,6 @@ const Booking = () => {
         loading: false
     })
 
-    
-
     useEffect(() => {
         axios
             .get('./api/events')

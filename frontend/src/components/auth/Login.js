@@ -1,13 +1,15 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from "../../contexts/AuthContext";
+import { ErrorContext } from './../../contexts/ErrorContext';
 import Cookies from 'js-cookie';
-import { Redirect, Link } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
-const Login = () => {
+const Login = (props) => {
     const [inputs, setInputs] = useState({ email: "", password: "" });
-    const [user, setUser] = useState(false);
+    const [isChecked, setIsChecked] = useState(false);
 
-    const context = useContext(AuthContext);
+    const user_context = useContext(AuthContext);
+    const error_context = useContext(ErrorContext);
 
     const handleChange = e => {
         const { name, value } = e.target;
@@ -18,8 +20,7 @@ const Login = () => {
     }
 
     const rememberPwd = () => {
-        console.log("checked")
-        context.setIsChecked(true);
+        setIsChecked(true);
     }
 
     const handleSubmit = e => {
@@ -31,20 +32,24 @@ const Login = () => {
                 'Content-Type': 'application/json'
             }
         }).then(res => {
+            console.log(res)
+            if(res.status === 400){
+                error_context.setError("wrong password")
+                return 
+            } 
             return res.json();
         }).then(data => {
             const { token, user } = data;
-            context.setAuth(user);
-            Cookies.set('token', token);
-            setUser(true);      
-            if(context.isChecked) localStorage.setItem('user', JSON.stringify(context.auth));
-            else sessionStorage.setItem('user', JSON.stringify(context.auth))
-        })
+            user_context.setAuth(user);
+            Cookies.set('token', token, { expires: isChecked ? 100 : 1 })
+            props.history.push("/booking");
+        }).catch(err => console.log("login err", err))
     }
     return (
         <>
             <form className="form sign-in" onSubmit={handleSubmit}>
                 <h2>Welcome back, please login</h2>
+                <h2 className="error">{error_context.error}</h2>
                 <label>
                     <span>Email</span>
                     <input type="email" name="email" value={inputs.email} onChange={handleChange} />
@@ -55,14 +60,13 @@ const Login = () => {
                 </label>
                 <label className="remember-me-wrapper">
                     <span>remember me</span>
-                    <input type="checkbox" name="remember" checked={context.isChecked}  onChange={rememberPwd} />
+                    <input type="checkbox" name="remember" checked={user_context.isChecked} onChange={rememberPwd} />
                 </label>
                 <Link className="forgot-pwd" to="password-reset">Forgot password?</Link>
                 <button type="submit" className="submit">Sign In</button>
             </form>
-            {user && <Redirect to="/booking" />}
         </>
     )
 }
 
-export default Login
+export default withRouter(Login); 
