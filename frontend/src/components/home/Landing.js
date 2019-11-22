@@ -15,7 +15,7 @@ const Landing = () => {
                     <button>Make an Appointment</button>
                 </div>
             </div>
-            <div className="services">
+            {/* <div className="services">
             <h1>What We Do</h1>
                 <div id="Web_1920___1">
                     <svg className="Ellipse_1">
@@ -23,7 +23,7 @@ const Landing = () => {
                         </ellipse>
                     </svg>
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }

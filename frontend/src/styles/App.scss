@@ -1,855 +1,931 @@
-@import 'variables';
-@import 'mixins';
+@import "variables";
+@import "mixins";
 
 * {
-  overflow-x: hidden;
-  margin: 0px;
-  padding: 0px;
-  border: 0px;
-  box-sizing: border-box;
-  /*reset Chrome user agent styles*/
-  -webkit-margin-before: 0px;
-  -webkit-margin-after: 0px;
-  -webkit-margin-start: 0px;
-  -webkit-margin-end: 0px;
-  -webkit-padding-before: 0px;
-  -webkit-padding-after: 0px;
-  -webkit-padding-start: 0px;
-  -webkit-padding-end: 0px;
+    overflow-x: hidden;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    box-sizing: border-box;
+
+    /*reset Chrome user agent styles*/
+    -webkit-margin-before: 0px;
+    -webkit-margin-after: 0px;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-before: 0px;
+    -webkit-padding-after: 0px;
+    -webkit-padding-start: 0px;
+    -webkit-padding-end: 0px;
 }
 
 body {
-  height: 100vh;
-  background: linear-gradient(-90deg, $blue, $light-green);
+    height: 100vh;
+    background: linear-gradient(-90deg, $blue, $light-green);
 }
 
 a {
-  text-decoration: none;
-  font-size: $small;
-  color: black;
+    text-decoration: none;
+    font-size: $small;
+    color: black;
 }
 
 ul {
-  list-style: none;
+    list-style: none;
 
-  li {
-    cursor: pointer;
-  }
+    li {
+        cursor: pointer;
+    }
 }
 
 p {
-  font-size: $small;
-  opacity: 0.8;
+    font-size: $small;
+    opacity: 0.5;
+    padding: 0.5em;
 }
 
 span {
-  font-size: $md;
+    font-size: $md;
 }
 
 h1 {
-  font-size: $sup-large;
-  color: $white;
+    font-size: $sup-large;
+    color: $white;
 
-  @include mQ($screen-sm) {
-    font-size: $sup-large / 1.5;
-  }
+    @include mQ($screen-sm) {
+        font-size: $sup-large / 1.5;
+    }
 }
 
 h3 {
-  font-size: $lg;
-  text-align: center;
+    font-size: $lg;
+    text-align: center;
+    color: $white;
 }
 
 h5 {
-  font-size: $md;
+    color: darken($color: $blue, $amount: 12);
+    font-size: $md;
+    padding: 0.2em;
+}
+
+hr {
+  background-image: url('../images/hr.jpg');
+  opacity: 0.5;
+  height: 40px;
+  width: 100%;
 }
 
 // hr {
-//   background-image: url('../images/hr.jpg');
-//   opacity: 0.5;
-//   height: 40px;
+//     background-image: url("../images/cloud-nosun.png");
+//     opacity: 0.8;
+//     background-size: contain;
+//     height: 60px;
 // }
 
-hr {
-  background-image: url('../images/cloud-nosun.png');
-  opacity: 0.8;
-  background-size: contain;
-  height: 60px;
-
-}
-
 button {
-  border: none;
-  outline: 0;
-  padding: .8em;
-  margin: .4em 0;
-  color: $white;
-  background-color: darken($color: $pink, $amount: 15);
-  border: 2px solid darken($color: $pink, $amount: 10);
-  text-align: center;
-  float: right;
-  cursor: pointer;
-  width: auto;
-  font-size: $small;
+    border: none;
+    outline: 0;
+    padding: .8em;
+    margin: .4em 0;
+    color: $white;
+    background-color: darken($color: $pink, $amount: 15);
+    border: 1px solid darken($color: $pink, $amount: 10);
+    text-align: center;
+    cursor: pointer;
+    width: auto;
+    font-size: $small;
+    transition: opacity 2s;
+    filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.349));
 
-  &:hover {
-    opacity: 0.3;
-  }
+    &:hover {
+        opacity: 0.5;
+    }
 }
 
 input,
 textarea,
 select,
 option {
-  display: block;
-  width: 100%;
-  margin-top: 5px;
-  padding-bottom: 5px;
-  font-size: 14px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.493);
-  background: none;
-}
-
-
-.showcase {
-  @include flex(center);
-  padding-top: 2em;
-}
-
-.error {
-  color: red;
-  font-weight: 400;
-  text-align: center;
-  width: 100%;
-  background: none;
-  padding: 1em 0;
-}
-
-.none {
-  display: none;
-}
-
-.opacity {
-  opacity: 0.2;
-}
-
-// nav 
-.navigation {
-  .upper-nav {
-    padding: 0.3em;
-    @include flex(space-between);
-    .book-btn {
-      background-color: darken($color: $pink, $amount: 8);
-      border: 1px solid $pink;
-      border-radius: 20px;
-      padding: .6em;
-    }
-    li {
-      @include mQ($screen-md) {
-        width: 100%;
-      }
-      img {
-        width: 15%;
-        -webkit-animation: nav 2s linear infinite alternate;
-        animation: nav 2s linear infinite alternate;
-      }
-      a {
-        color: $white;
-        text-align: center;
-      }
-    }
-    .user-menu {
-      @include dropdown;
-      &:hover .dropdown-content {
-        display: block;
-        transition: 2s;
-      }
-      i {
-        color: $white;
-        font-size: $small;
-        &::first-letter{
-          margin-right: .2em;
-        }
-      }
-    }
-
-  }
-
-  nav {
-    background-color: $white;
-    top: 0;
-    z-index: 1;
-    @include flex(center);
-    margin-bottom: 1em;
-
-    .logo {
-      width: 30%;
-    }
-
-    ul {
-      @include flex(space-around);
-      padding-top: 1rem;
-
-      li {
-
-        a {
-          display: block;
-          color: darken($color: $pink, $amount: 10)
-        }
-      }
-    }
-  }
-}
-
-@-webkit-keyframes nav {
-  from {}
-
-  to {
-    -webkit-transform: translateX(10%);
-    transform: translateX(10%)
-  }
-}
-
-@keyframes nav {
-  from {}
-
-  to {
-    -webkit-transform: translateX(10%);
-    transform: translateX(10%)
-  }
-}
-
-
-.homepage {
-  .landing {
-    @include flex(center);
-    height: 100vh;
-    @include mQ($screen-md) {
-      flex-direction: column;
-      height: 100%;
-    }
-    div {
-      height: 100%;
-      @include mQ($screen-md) {
-        height: auto;
-      }
-    }
-    .hero_image_section {
-      @include flex(space-evenly);
-
-      .ball {
-        height: 120px;
-        -webkit-animation: ball 1s linear infinite alternate;
-        animation: ball 1s linear infinite alternate;
-
-        @include mQ($screen-md) {
-          height: 60px;
-        }
-      }
-
-      .hero_image {
-        height: 350px;
-        transform: rotateY(-180deg);
-
-        @include mQ($screen-md) {
-          height: 170px;
-        }
-      }
-    }
-
-    .headline {
-      padding: 2em;
-
-      h1 {
-        padding: 2em;
-        @include mQ($screen-md) {
-          padding: .5em;
-        }
-      }
-
-      button {
-        width: 50%;
-        transform: translateX(-20%);
-        @include mQ($screen-md) {
-          width: 100%;
-          transform: none;
-        }
-      }
-    }
-  }
-
-  .services {
-    @include flex(center);
-    flex-direction: column;
-
-    :root {
-      --web-view-ids: Web_1920___1;
-    }
-
-    #Web_1920___1 * {
-      margin: 0;
-      padding: 0;
-    }
-
-    #Web_1920___1 {
-      position: relative;
-      box-sizing: border-box;
-      width: 1956px;
-      height: 701px;
-      overflow: hidden;
-      margin: 0;
-      padding: 0;
-      --web-view-name: Web 1920 – 1;
-      --web-view-id: Web_1920___1;
-      --web-enable-deep-linking: true;
-    }
-
-    #Ellipse_1 {
-      fill: $white;
-    }
-
-    .Ellipse_1 {
-      position: absolute;
-      overflow: visible;
-      width: 2312px;
-      height: 599px;
-      left: -178px;
-      top: -396px;
-    }
-  }
-}
-
-@-webkit-keyframes ball {
-  to {
-    -webkit-transform: translateY(30%);
-    transform: translateY(30%)
-  }
-}
-
-@keyframes ball {
-  to {
-    -webkit-transform: translateY(30%);
-    transform: translateY(30%)
-  }
-}
-
-.wrapper {
-  @include flex(center);
-  flex-direction: column;
-  left: 20%;
-  width: 80%;
-
-  @include mQ($screen-md) {
+    display: block;
     width: 100%;
-  }
-
-  .wrapper-header {
-    @include flex(center);
-    background-color: darken($color: $pink, $amount: 25);
-    filter: drop-shadow(2px 4px 6px black);
-    width: 100%;
-    padding: 2em;
-
-    @include mQ($screen-md) {
-      flex-direction: column;
-      filter: none;
-      padding: 1em;
-    }
-
-    .news-heroimage {
-      width: 50%;
-
-      @include mQ($screen-md) {
-        width: 100%;
-      }
-    }
-
-    .adoption-heroimage {
-      width: 70%;
-
-      @include mQ($screen-md) {
-        width: 100%;
-      }
-    }
-
-    div {
-      @include flex(space-evenly);
-      flex-direction: column;
-
-      button {
-        width: 40%;
-      }
-    }
-  }
-
-  .grid-form-wrapper {
-    position: relative;
-    width: 100%;
-
-    .adoption-filter-wrapper {
-      @include flex(space-between);
-      color: $white;
-      padding: .5em;
-      cursor: pointer;
-
-      .i {
-        letter-spacing: 2px;
-      }
-    }
-
-    .adoption_form {
-      @include flex(space-evenly);
-      flex-direction: column;
-      align-items: stretch;
-      width: 40%;
-      height: 100vh;
-      right: 0;
-      top: 20%;
-      padding: 2em;
-      background-color: white;
-      z-index: 2;
-      position: absolute;
-      padding: 2em;
-
-      @include mQ($screen-sm) {
-        width: 100%;
-        top: 0;
-        position: none;
-      }
-
-      .input_wrapper {
-        overflow: hidden;
-        padding: 0.9em;
-        width: 100%;
-
-        label {
-          width: 100%;
-          opacity: 0.7;
-          padding: 0.5em;
-          text-align: left;
-          color: darken($color: $pink, $amount: 20);
-        }
-
-        button {
-          float: right;
-        }
-
-        .environment_wrapper {
-          @include flex(space-around);
-
-          i {
-            // color: darken($color: $pink, $amount: 20);
-          }
-        }
-      }
-
-    }
-
-    .grid {
-      display: flex;
-      justify-content: space-evenly;
-      flex-flow: row wrap;
-      padding: 2em;
-      z-index: 1;
-
-      @include mQ($screen-sm) {
-        padding: 1em;
-      }
-
-      .card {
-        @include flex-col(3, 1%);
-
-        @include mQ($screen-md) {
-          @include flex-col(2, 1%);
-        }
-
-        @include mQ($screen-sm) {
-          width: 100%;
-        }
-
-        flex-direction: column;
-        justify-content: space-between;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        background-color: $white;
-        // background-color: darken($color: $pink, $amount: 20);
-
-        .card_header {
-          position: relative;
-
-          .card_left {
-            position: absolute;
-            z-index: 2;
-            right: 0;
-            bottom: 0;
-
-            i {
-              background-color: #876160;
-              padding: 0.5em;
-              color: white;
-            }
-          }
-
-          .card_right {
-            @include flex(space-between);
-            position: absolute;
-            z-index: 2;
-
-            i {
-              background-color: #876160;
-              padding: 0.5em;
-              color: white;
-            }
-
-            .fa-map-marker::first-letter {
-              padding-right: 0.3em;
-            }
-
-            .fa-map-marker::after {
-              content: " mi";
-            }
-
-          }
-
-          .card_img_wrapper {
-            position: relative;
-            z-index: 1;
-
-            .card_img {
-              width: 100%;
-              height: 300px;
-              object-fit: cover;
-            }
-          }
-
-
-        }
-
-
-        .card_body {
-
-          .title {
-            color: darken($color: $pink, $amount: 25);
-            overflow: initial;
-            padding: 0.8em;
-          }
-
-          button {
-            border: 0;
-            float: none;
-            width: 100%;
-            margin-bottom: 0;
-          }
-
-        }
-
-      }
-
-    }
-  }
-
-  // news
-  .card_img_news {
-    @include mQ($screen-md) {
-      width: 100%;
-    }
-  }
-
-}
-
-
-// auth
-.tip {
-  font-size: 20px;
-  margin: 40px auto 50px;
-  text-align: center;
-}
-
-.cont {
-  overflow: hidden;
-  position: relative;
-  width: $contW;
-  height: 550px;
-  margin: 0 auto 100px;
-  background-color: $white;
-}
-
-.form {
-  position: relative;
-  width: $formW;
-  height: 100%;
-  transition: transform $switchAT ease-in-out;
-  padding: 50px 30px 0;
-}
-
-.sub-cont {
-  overflow: hidden;
-  position: absolute;
-  left: $formW;
-  top: 0;
-  width: $contW;
-  height: 100%;
-  padding-left: $imgW;
-  transition: transform $switchAT ease-in-out;
-
-  @include signUpActive {
-    transform: translate3d($formW * -1, 0, 0);
-  }
-}
-
-.img {
-  overflow: hidden;
-  z-index: 2;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: $imgW;
-  height: 100%;
-  padding-top: 360px;
-
-  &:before {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: $contW;
-    height: 100%;
-    background-image: url('../images/waving-dog.jpg');
-    background-size: cover;
-    transition: transform $switchAT ease-in-out;
-  }
-
-  &:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-  }
-
-  @include signUpActive {
-    &:before {
-      transform: translate3d($formW, 0, 0);
-    }
-  }
-
-  &__text {
-    z-index: 2;
-    position: absolute;
-    left: 0;
-    top: 50px;
-    width: 100%;
-    padding: 0 20px;
-    text-align: center;
-    color: #fff;
-    transition: transform $switchAT ease-in-out;
-
-    h2 {
-      margin-bottom: 10px;
-      font-weight: normal;
-    }
-
-    &.m--up {
-
-      @include signUpActive {
-        transform: translateX($imgW*2);
-      }
-    }
-
-    &.m--in {
-      transform: translateX($imgW * -2);
-
-      @include signUpActive {
-        transform: translateX(0);
-      }
-    }
-  }
-
-  &__btn {
-    overflow: hidden;
-    z-index: 2;
-    position: relative;
-    width: 100px;
-    height: $btnH;
-    margin: 0 auto;
-    background: transparent;
-    color: #fff;
-    text-transform: uppercase;
-    font-size: 15px;
-    cursor: pointer;
-
-    &:after {
-      content: '';
-      z-index: 2;
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-    span {
-      @include flex(center);
-      position: absolute;
-      left: 0;
-      top: 0;
-      height: 100%;
-      transition: transform $switchAT;
-      text-decoration: underline;
-
-      &.m--in {
-        transform: translateY($btnH*-2);
-
-        @include signUpActive {
-          transform: translateY(0);
-        }
-      }
-
-      &.m--up {
-        @include signUpActive {
-          transform: translateY($btnH*2);
-        }
-      }
-    }
-  }
-}
-
-h2 {
-  width: 100%;
-  font-size: 26px;
-  text-align: center;
+    margin-top: 5px;
+    padding-bottom: 5px;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.493);
+    background: none;
 }
 
 label {
-  display: block;
-  width: $inputW;
-  margin: 25px auto 0;
+    width: 100%;
+    opacity: 0.7;
+    padding: 0.5em;
+    text-align: left;
+    color: $white;
+}
 
-  span {
-    font-size: $small/1.5;
-    color: darken($color: gray, $amount: 4);
-    text-transform: uppercase;
-  }
+
+.App {
+    @include flex(center);
+
+    flex-direction: column;
+}
+
+.showcase {
+    @include flex(center);
+    flex-direction: column;
+    width: 80%;
+    background-color: $white;
+}
+
+.error {
+    color: red;
+    font-weight: 400;
+    text-align: center;
+    width: 100%;
+    background: none;
+    padding: 1em 0;
+}
+
+.none {
+    display: none;
+}
+
+.opacity {
+    opacity: 0.2;
+}
+
+// nav
+.navigation {
+    width: 100%;
+
+    .upper-nav {
+        @include flex(space-between);
+
+        padding: 0.3em;
+
+        .book-btn {
+            background-color: darken($color: $pink, $amount: 8);
+            border: 1px solid $pink;
+            border-radius: 20px;
+            padding: .6em;
+        }
+
+        li {
+            @include mQ($screen-md) {
+                width: 100%;
+            }
+
+
+            img {
+                width: 15%;
+                -webkit-animation: nav 2s linear infinite alternate;
+                animation: nav 2s linear infinite alternate;
+            }
+
+            a {
+                color: $white;
+                text-align: center;
+            }
+        }
+
+        .user-menu {
+            @include dropdown;
+
+            &:hover .dropdown-content {
+                display: block;
+                transition: display 5s;
+            }
+
+            i {
+                color: $white;
+                font-size: $small;
+
+                &::first-letter {
+                    margin-right: .2em;
+                }
+            }
+        }
+    }
+
+    nav {
+        @include flex(center);
+
+        padding: 1em;
+        background-color: $white;
+        top: 0;
+        z-index: 1;
+
+        .logo {
+            width: 30%;
+        }
+
+        ul {
+            @include flex(space-around);
+
+            li {
+                a {
+                    display: block;
+                    color: darken($color: $pink, $amount: 10);
+                }
+            }
+        }
+    }
+}
+
+@-webkit-keyframes nav {
+    to {
+        -webkit-transform: translateX(10%);
+        transform: translateX(10%);
+    }
+}
+
+@keyframes nav {
+    to {
+        -webkit-transform: translateX(10%);
+        transform: translateX(10%);
+    }
+}
+
+.homepage {
+    width: 100%;
+    height: 100vh;
+    .landing {
+        @include flex(center);
+        align-items: flex-start;
+        padding: 0 5em;
+        height: 100%;
+        @include mQ($screen-md) {
+            flex-direction: column;
+            height: 100%;
+            padding: 1em;
+        }
+
+
+        div {
+            height: 100%;
+
+            @include mQ($screen-md) {
+                height: auto;
+            }
+        }
+
+        .hero_image_section {
+            @include flex(space-evenly);
+
+            .ball {
+                height: 120px;
+                -webkit-animation: ball 1s linear infinite alternate;
+                animation: ball 1s linear infinite alternate;
+
+                @include mQ($screen-md) {
+                    height: 60px;
+                }
+            }
+
+            .hero_image {
+                height: 350px;
+                transform: rotateY(-180deg);
+
+                @include mQ($screen-md) {
+                    height: 170px;
+                }
+            }
+        }
+
+        .headline {
+            padding: 1.5em;
+
+            @include flex(center);
+
+            flex-direction: column;
+            align-items: flex-start;
+
+            h1 {
+                padding: 1.5em 0;
+
+                @include mQ($screen-md) {
+                    padding: .5em 0;
+                }
+            }
+
+            button {
+                @include mQ($screen-md) {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .services {
+        @include flex(center);
+
+        flex-direction: column;
+
+        :root {
+            --web-view-ids: Web_1920___1;
+        }
+
+        #Web_1920___1 * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #Web_1920___1 {
+            position: relative;
+            box-sizing: border-box;
+            width: 1956px;
+            height: 701px;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            --web-view-name: Web 1920 – 1;
+            --web-view-id: Web_1920___1;
+            --web-enable-deep-linking: true;
+        }
+
+        #Ellipse_1 {
+            fill: $white;
+        }
+
+        .Ellipse_1 {
+            position: absolute;
+            overflow: visible;
+            width: 2312px;
+            height: 599px;
+            left: -178px;
+            top: -396px;
+        }
+    }
+}
+
+@-webkit-keyframes ball {
+    to {
+        -webkit-transform: translateY(30%);
+        transform: translateY(30%);
+    }
+}
+
+@keyframes ball {
+    to {
+        -webkit-transform: translateY(30%);
+        transform: translateY(30%);
+    }
+}
+
+.wrapper {
+    @include flex(center);
+
+    flex-direction: column;
+
+    .wrapper-header {
+        @include flex(center);
+
+        background-color: darken($color: $pink, $amount: 25);
+
+        // filter: drop-shadow(2px 4px 6px black);
+        padding: 2em;
+
+        @include mQ($screen-md) {
+            flex-direction: column;
+            filter: none;
+            padding: 1em;
+        }
+
+
+        .news-heroimage {
+            width: 50%;
+
+            @include mQ($screen-md) {
+                width: 100%;
+            }
+        }
+
+        .adoption-heroimage {
+            width: 70%;
+
+            @include mQ($screen-md) {
+                width: 100%;
+            }
+        }
+
+        div {
+            @include flex(space-evenly);
+
+            flex-direction: column;
+
+            button {
+                width: 40%;
+            }
+        }
+    }
+
+    .grid-form-wrapper {
+        position: relative;
+        width: 100%;
+
+        .adoption-filter-wrapper {
+            @include flex(space-between);
+
+            color: $pink;
+            text-align: right;
+            padding: .5em;
+            cursor: pointer;
+
+            .i {
+                letter-spacing: 2px;
+            }
+        }
+
+        .adoption_form {
+            @include flex(space-evenly);
+            flex-direction: column;
+            align-items: stretch;
+            width: 40%;
+            height: 100vh;
+            right: 0;
+            top: 1%;
+            padding: 1.5em;
+            background-color: lighten($color: $blue, $amount: 10);
+            z-index: 2;
+            position: absolute;
+            @include mQ($screen-sm) {
+                width: 100%;
+                top: 0;
+                position: none;
+            }
+
+            .input_wrapper {
+                overflow: hidden;
+                padding: 0.6em;
+                label {
+                  padding: 0.5em 0;
+                  margin: 0;
+                }
+                button {
+                    float: right;
+                }
+                .environment_wrapper {
+                    @include flex(space-around);
+                }
+            }
+        }
+
+        .grid {
+            display: flex;
+            justify-content: space-evenly;
+            flex-flow: row wrap;
+            padding: 2em;
+            z-index: 1;
+
+            @include mQ($screen-sm) {
+                padding: 1em;
+            }
+
+
+            .card {
+                @include flex-col(3, 1%);
+                @include mQ($screen-md) {
+                    @include flex-col(2, 1%);
+                }
+
+
+                @include mQ($screen-sm) {
+                    width: 100%;
+                }
+
+
+                flex-direction: column;
+                justify-content: space-between;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                background-color: $white;
+
+                .card_header {
+                    position: relative;
+
+                    .card_left {
+                        position: absolute;
+                        z-index: 2;
+                        right: 0;
+                        bottom: 0;
+
+                        i {
+                            background-color: #876160;
+                            padding: 0.5em;
+                            color: $white;
+                        }
+                    }
+
+                    .card_right {
+                        @include flex(space-between);
+
+                        position: absolute;
+                        z-index: 2;
+
+                        i {
+                            background-color: #876160;
+                            padding: 0.5em;
+                            color: $white;
+                        }
+
+                        .fa-map-marker::first-letter {
+                            padding-right: 0.3em;
+                        }
+
+                        .fa-map-marker::after {
+                            content: " mi";
+                        }
+                    }
+
+                    .card_img_wrapper {
+                        position: relative;
+                        z-index: 1;
+
+                        .card_img {
+                            width: 100%;
+                            height: 300px;
+                            object-fit: cover;
+                        }
+                    }
+                }
+
+                .card_body {
+                    .title {
+                        color: darken($color: $pink, $amount: 25);
+                        overflow: initial;
+                        padding: 0.8em;
+                    }
+
+                    button {
+                        border: 0;
+                        float: none;
+                        width: 100%;
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    // news
+    .card_img_news {
+        width: 100%;
+
+        @include mQ($screen-md) {}
+    }
+}
+
+// auth
+.tip {
+    font-size: 20px;
+    margin: 40px auto 50px;
+    text-align: center;
+}
+
+.cont {
+    overflow: hidden;
+    position: relative;
+    width: $contW;
+    height: 550px;
+    // margin: 0 auto 100px;
+    background-color: $white;
+}
+
+.form {
+    position: relative;
+    width: $formW;
+    height: 100%;
+    transition: transform $switchAT ease-in-out;
+    padding: 50px 30px 0;
+}
+
+.sub-cont {
+    overflow: hidden;
+    position: absolute;
+    left: $formW;
+    top: 0;
+    width: $contW;
+    height: 100%;
+    padding-left: $imgW;
+    transition: transform $switchAT ease-in-out;
+
+    @include signUpActive {
+        transform: translate3d($formW * -1, 0, 0);
+    }
+}
+
+.img {
+    overflow: hidden;
+    z-index: 2;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: $imgW;
+    height: 100%;
+    padding-top: 360px;
+
+    &:before {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: $contW;
+        height: 100%;
+        background-image: url("../images/waving-dog.jpg");
+        background-size: cover;
+        transition: transform $switchAT ease-in-out;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+    }
+
+    @include signUpActive {
+        &:before {
+            transform: translate3d($formW, 0, 0);
+        }
+    }
+
+
+    &__text {
+        z-index: 2;
+        position: absolute;
+        left: 0;
+        top: 30%;
+        width: 100%;
+        padding: 0 20px;
+        text-align: center;
+        color: $white;
+        transition: transform $switchAT ease-in-out;
+
+        h2 {
+            margin-bottom: 10px;
+            font-weight: normal;
+        }
+
+        &.m--up {
+            @include signUpActive {
+                transform: translateX($imgW * 2);
+            }
+        }
+
+        &.m--in {
+            transform: translateX($imgW * -2);
+
+            @include signUpActive {
+                transform: translateX(0);
+            }
+        }
+    }
+
+    &__btn {
+        overflow: hidden;
+        z-index: 2;
+        position: relative;
+        width: 100px;
+        height: $btnH;
+        margin: 0 auto;
+        background: transparent;
+        color: #fff;
+        text-transform: uppercase;
+        font-size: 15px;
+        cursor: pointer;
+
+        &:after {
+            content: '';
+            z-index: 2;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        span {
+            @include flex(center);
+
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            transition: transform $switchAT;
+            text-decoration: underline;
+
+            &.m--in {
+                transform: translateY($btnH * -2);
+
+                @include signUpActive {
+                    transform: translateY(0);
+                }
+            }
+
+            &.m--up {
+                @include signUpActive {
+                    transform: translateY($btnH * 2);
+                }
+            }
+        }
+    }
+}
+
+h2 {
+    width: 100%;
+    font-size: 26px;
+    text-align: center;
+}
+
+label {
+    display: block;
+    width: $inputW;
+    margin: 25px auto 0;
+
+    span {
+        font-size: $small / 1.5;
+        color: darken($color: gray, $amount: 4);
+        text-transform: uppercase;
+    }
 }
 
 .forgot-pass {
-  margin-top: 15px;
-  font-size: 12px;
-  text-align: center;
+    margin-top: 15px;
+    font-size: 12px;
+    text-align: center;
 }
 
 .submit {
-  text-transform: uppercase;
-  width: 30%;
-  margin: 1em;
+    text-transform: uppercase;
+    width: 30%;
+    margin: 1em;
 }
 
 .fb-btn {
-  border: 2px solid #d3dae9;
-  color: darken(#d3dae9, 20%);
+    border: 2px solid #d3dae9;
+    color: darken(#d3dae9, 20%);
 
-  span {
-    font-weight: bold;
-    color: darken(#768cb6, 20%);
-  }
+    span {
+        font-weight: bold;
+        color: darken(#768cb6, 20%);
+    }
 }
 
 .sign-in {
-  transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
 
-  @include signUpActive {
-    transition-timing-function: ease-in-out;
-    transition-duration: $switchAT;
-    transform: translate3d($formW, 0, 0);
-  }
+    @include signUpActive {
+        transition-timing-function: ease-in-out;
+        transition-duration: $switchAT;
+        transform: translate3d($formW, 0, 0);
+    }
 }
 
 .sign-up {
-  transform: translate3d($contW * -1, 0, 0);
-  background-color: $white;
+    transform: translate3d($contW * -1, 0, 0);
+    background-color: $white;
 
-  @include signUpActive {
-    transform: translate3d(0, 0, 0);
-  }
+    @include signUpActive {
+        transform: translate3d(0, 0, 0);
+    }
 }
 
-
-
-// booking 
+// booking
 .booking {
-  @include flex(space-between);
-  flex-direction: column;
-  padding: 3em;
-
-  table {
-    width: 80%;
-    padding: 2em;
-    margin: 2em;
-
-    tr:nth-child(even) {
-      background-color: #eee;
+    @include flex(space-between);
+    flex-direction: column;
+    padding: 3em;
+    .header {
+        @include flex(space-around);
+        background-color: darken($color: $pink, $amount: 10);
+        padding: 2em;
+        img {
+            width: 30%;
+        }
     }
 
-    tr:nth-child(odd) {
-      background-color: #fff;
+    .booking-list {
+      @include flex(center);
+      flex-direction: column;
+      background-color: $pink;
+      margin: 2em 0;
+      padding: 2em;
+        table {
+           width: 80%;
+            padding: 2em;
+            margin: 2em;
+
+            tr:nth-child(even) {
+                background-color: $white;
+            }
+
+            tr:nth-child(odd) {
+                background-color: darken($color: $white, $amount: 1);
+            }
+
+            th {
+                color: $white;
+                background-color: complement($color: $blue);
+            }
+
+            td {
+                text-align: center;
+                padding: 1em;
+            }
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid gray;
+            border-collapse: collapse;
+        }
     }
-
-    th {
-      color: $white;
-      background-color: complement($color: $blue);
-    }
-
-    td {
-      text-align: center;
-      padding: 1em;
-    }
-  }
-
-  table,
-  th,
-  td {
-    border: 1px solid gray;
-    border-collapse: collapse;
-  }
-
 }
 
 .add-booking {
-  form {
-    @include flex(space-evenly);
+    padding: 2em;
+    background-color: $pink;
+    width: 100%;
 
-    .col {
-      @include flex(space-evenly);
-      flex-direction: column;
-      padding: 1em;
+    form {
+        @include flex(space-evenly);
 
-      div {
-        padding: 0.3em;
-      }
+        align-items: flex-start;
 
-      .react-calendar {
-        background-color: $white;
+        .col {
+            @include flex(space-evenly);
 
-        .react-calendar__navigation {
-          background-color: complement($color: $blue);
-          height: 100%;
+            flex-direction: column;
+            padding: 1em;
 
-          .react-calendar__navigation__label {
-            width: 100%;
-            height: 100%;
-            padding: 0;
-          }
+            .react-calendar {
+                background-color: darken($color: $white, $amount: 2);
+                filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.26));
+
+                .react-calendar__tile--active {
+                    background-color: $pink;
+                }
+
+                .react-calendar__navigation button[disabled] {
+                    background: none;
+                }
+
+                .react-calendar__navigation {
+                    background-color: darken($color: $pink, $amount: 12);
+                    height: 100%;
+                    padding: 0.5em;
+
+                    .react-calendar__navigation__label {
+                        width: 100%;
+                        height: 100%;
+                        padding: 0;
+                    }
+                }
+
+                .react-calendar__tile {
+                    color: black;
+                }
+
+                .react-calendar__tile:disabled {
+                    color: #dbada8;
+                    background: none;
+                    filter: none;
+                }
+            }
         }
-      }
     }
-  }
+}
+
+// account
+
+.account {
+    @include flex(center);
+    flex-direction: column;
 }
 
 
-// account 
+// contact 
 
-.account {
+
+.contact {
   @include flex(center);
   flex-direction: column;
+  background-color: $pink;
+  .wrapper { 
+    @include flex(space-around);
+    flex-direction: row;
+    padding: 2em;
+    img {
+        width: auto;
+    }
+    form {
+      width: 50%;
+    }
+    
+}
+
 }

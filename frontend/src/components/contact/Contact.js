@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import Form from './Form'
+import Form from './Form';
+import picture from '../../images/dogphone.png';
 
 const state = { name: '', email: '', subject: '', msg: '' };
 
@@ -33,8 +34,11 @@ const Contact = () => {
     
     return (
         <div className="contact">
-            {sent && <span>Thank you for contacting us!</span>}
-            <Form handleChange={handleChange} handleSubmit={handleSubmit} inputs={inputs} />
+             {sent && <span>Thank you for contacting us!</span>}   
+            <section className="wrapper">
+                <img src={picture} alt="picture" />
+                <Form handleChange={handleChange} handleSubmit={handleSubmit} inputs={inputs} />
+            </section> 
         </div>
     )
 }

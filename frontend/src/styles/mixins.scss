@@ -58,6 +58,7 @@
       display: none;
       background-color: darken($color: $pink, $amount: 10);
       color: $white;
+      transition: background-color 5s;
       span, label {
         font-size: $small;
         padding: .5em;

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import DatePicker from './DatePicker';
 
 
-const Form = ({ onSubmit, msg, defaultValues }) => {
-    const [newEvent, setNewEvent] = useState({ name: "", appt_date: new Date(), appt_time: "", size: "", breed: "" });
+const Form = ({ onSubmit, defaultValues, error }) => {
+    const [newEvent, setNewEvent] = useState({service: "", name: "",  size: "", breed: "", appt_date: new Date(), appt_time: "", msg: "" });
 
     useEffect(() => {
         if (defaultValues) {
@@ -13,10 +13,6 @@ const Form = ({ onSubmit, msg, defaultValues }) => {
     }, [defaultValues])
 
     const handleDate = (appt_date) => {
-        if (appt_date.getDay() === 1 || appt_date.getDay() === 5) {
-            alert("this day is busy");
-            return
-        }
         setNewEvent(newEvent => ({
             ...newEvent,
             appt_date
@@ -36,22 +32,31 @@ const Form = ({ onSubmit, msg, defaultValues }) => {
         onSubmit(newEvent);
     }
 
-    console.log("form===>>>", defaultValues)
+    console.log(error)
 
     return (
         <section className="add-booking">
-            <h3>{msg}</h3>
-            <form onSubmit={handleSubmit}>
+            <h3>Add A New Booking</h3>
+            <h4 className="error">{error}</h4>
+            <form onSubmit={handleSubmit}>   
                 <div className="col">
                     <DatePicker handleDate={handleDate} eventDate={new Date(newEvent.appt_date)} />
                 </div>
                 <div className="col">
+                <div className="input-wrapper">
+                        <label>service*</label>
+                        <select name="service" value={newEvent.service || ""} onChange={handleChange}>
+                            <option value=""></option>
+                            <option value="grooming">grooming</option>
+                            <option value="walking">walking</option>
+                        </select>
+                    </div>
                     <div className="input-wrapper">
-                        <label>name</label>
+                        <label>name*</label>
                         <input value={newEvent.name} name="name" onChange={handleChange} />
                     </div>
                     <div className="input-wrapper">
-                        <label>breed</label>
+                        <label>breed*</label>
                         <input value={newEvent.breed || ""} name="breed" onChange={handleChange} />
                     </div>
                     <div className="input-wrapper">
@@ -64,7 +69,7 @@ const Form = ({ onSubmit, msg, defaultValues }) => {
                         </select>
                     </div>
                     <div className="input-wrapper">
-                        <label>time</label>
+                        <label>time*</label>
                         <select name="appt_time" value={newEvent.appt_time || ""} onChange={handleChange}>
                             <option value=""></option>
                             <option value="10">10 am</option>
@@ -76,6 +81,10 @@ const Form = ({ onSubmit, msg, defaultValues }) => {
                             <option value="16">4 pm</option>
                             <option value="17">5 pm</option>
                         </select>
+                    </div>
+                    <div className="input-wrapper">
+                        <label>additional information</label>
+                        <textarea rows="5" value={newEvent.msg || ""} name="msg" onChange={handleChange}/>
                     </div>
                     <div className="input-wrapper">
                         <button type="submit" >submit</button>

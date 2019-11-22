@@ -11,6 +11,10 @@ const Login = (props) => {
     const user_context = useContext(AuthContext);
     const error_context = useContext(ErrorContext);
 
+    const msg = props.location.state && props.location.state.msg;
+
+    const title = msg || "Welcome back, please login"
+
     const handleChange = e => {
         const { name, value } = e.target;
         setInputs({
@@ -48,7 +52,7 @@ const Login = (props) => {
     return (
         <>
             <form className="form sign-in" onSubmit={handleSubmit}>
-                <h2>Welcome back, please login</h2>
+                <h2>{title}</h2>
                 <h2 className="error">{error_context.error}</h2>
                 <label>
                     <span>Email</span>

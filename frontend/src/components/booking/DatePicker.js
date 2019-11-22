@@ -8,7 +8,8 @@ const DatePicker = ({handleDate, eventDate}) => {
                     onChange={handleDate}
                     value={eventDate}
                     name="appt_date"
-
+                    minDate={new Date()}
+                    tileDisabled={({ date}) => date.getDay() === 1 || date.getDay() === 0}
                 />
         </>
     )

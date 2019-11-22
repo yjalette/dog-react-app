@@ -47,13 +47,8 @@ const UpdateInputs = () => {
         axios
             .put(`api/auth/change-password/${token}`, {
                 ...inputs.pwd
-            }).then(res => {
-                if (res.status === 400) {
-                    error_context.setError("wrong creds")
-                    return
-                }
-                return 
-            }).catch(err => console.log(err))
+            })
+            .catch(err => console.log("eto===>", err.response))
     }
 
     const updateCreds = e => {
@@ -61,11 +56,7 @@ const UpdateInputs = () => {
         axios
             .put(`api/auth/change-creds/${token}`, {
                 ...inputs.creds
-            }).then(res => {
-                if (res.status === 400) {
-                    error_context.setError("wrong creds")
-                    return
-                }
+            }).then(() => {
                 axios
                     .get(`api/auth/user`)
                     .then(res => {
@@ -76,8 +67,8 @@ const UpdateInputs = () => {
                             lastName: res.data.lastName,
                         })
 
-                    }).catch(err => console.log(err))
-            }).catch(err => console.log(err))
+                    }).catch(err => console.log(err.message))
+            }).catch(err => console.log(err.message))
     }
     return (
         <section className="account">

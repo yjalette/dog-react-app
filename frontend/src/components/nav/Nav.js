@@ -7,6 +7,7 @@ import logo from '../../images/logo.png'
 const Nav = () => {
     const { auth } = useContext(AuthContext);
     return (
+        <>
         <section className="navigation">
             <UpperNav auth={auth}/>   
             <nav>
@@ -19,7 +20,8 @@ const Nav = () => {
                 </ul >
             </nav >
         </section>
-
+        <hr />
+        </>
     )
 }
 

@@ -6,12 +6,12 @@ const ConfirmEmail = (props) => {
 
     useEffect(() => {
       if(count === 0){
-          props.history.push("/authentication");
+          props.history.push("/authentication", {msg: "now please login"});
           return 
       }
       setTimeout(() => {
         setCount(state => state - 1)
-      }, 1000)
+      }, 100)
     }, [count])
 
     return (

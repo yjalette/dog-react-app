@@ -57,9 +57,9 @@ function App() {
         <ErrorContext.Provider value={{ error, setError }}>
         <Router>
           <Nav />
+          <Route key='landing' component={Landing} exact path="/" />
           <div className="showcase">
             <Switch>
-              <Route key='landing' component={Landing} exact path="/" />
               <Route key='authentication' component={Authentication} path='/authentication' />
               <Route key='grooming' component={Grooming} path="/grooming" />
               <Route key='booking' component={Booking} path='/booking' />

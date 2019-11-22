@@ -2,7 +2,6 @@ import React from 'react'
 
 const Form = ({handleChange, handleSubmit, inputs}) => {
     return (
-        <div>
             <form onSubmit={handleSubmit}>
                <label>Name
                    <input name="name" value={inputs.name} onChange={handleChange}/>
@@ -18,7 +17,6 @@ const Form = ({handleChange, handleSubmit, inputs}) => {
                 </label>
                 <button type="submit">send</button>
             </form>      
-        </div>
     )
 }
 
