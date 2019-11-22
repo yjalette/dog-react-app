@@ -4,7 +4,6 @@ const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
 const auth = require('../../middleware/auth')
-
 const User = require('../../models/User');
 
 router.post('/', (req, res) => {
@@ -54,14 +53,11 @@ router.put('/change-password/:token', auth, async (req, res) => {
     const { oldPassword, newPassword } = req.body;
     const decoded = jwt.verify(token, config.get('jwtSecret'))
     const user = await User.findById({ _id: decoded.id })
-    console.log("!!!!!!", user)
     try {
         bcrypt.compare(oldPassword, user.password, (err, result) => {
-            if (err) console.log("bscrypt pwd match===>", err)
-            if (result === false) return res.status(400).json({ msg: "Invalid Creds" });
+            if (result === false) return res.status(400).json({ msg: "invalid credentials" });
             bcrypt.genSalt(10, async (err, salt) => {
                 bcrypt.hash(newPassword, salt, async (err, hash) => {
-                    // newPassword = hash
                     await User.findByIdAndUpdate({ _id: decoded.id }, { $set: { password: hash } })
                 })
             })
@@ -81,7 +77,7 @@ router.put('/change-creds/:token', auth, async (req, res) => {
         return res.status(200).send(req.body);
     }
     catch (err) {
-        console.log("update creds err===>", err)
+        return res.status(400).json({msg: err})
     }
 })
 

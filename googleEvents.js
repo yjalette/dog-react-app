@@ -1,6 +1,6 @@
 const fs = require('fs');
 const readline = require('readline');
-const {google} = require('googleapis');
+const { google } = require('googleapis');
 const express = require('express');
 const router = express.Router();
 
@@ -18,9 +18,9 @@ const TOKEN_PATH = 'token.json';
  * @param {function} callback The callback to call with the authorized client.
  */
 function authorize(credentials, callback) {
-  const {client_secret, client_id, redirect_uris} = credentials.installed;
+  const { client_secret, client_id, redirect_uris } = credentials.installed;
   const oAuth2Client = new google.auth.OAuth2(
-      client_id, client_secret, redirect_uris[0]);
+    client_id, client_secret, redirect_uris[0]);
 
   // Check if we have previously stored a token.
   fs.readFile(TOKEN_PATH, (err, token) => {
@@ -68,8 +68,8 @@ function getEvents() {
     fs.readFile('credentials.json', (err, content) => {
       if (err) return console.log('Error loading client secret file:', err);
       // Authorize a client with credentials, then call the Google Calendar API.
-      authorize(JSON.parse(content), function(auth){
-        const calendar = google.calendar({version: 'v3', auth});
+      authorize(JSON.parse(content), function (auth) {
+        const calendar = google.calendar({ version: 'v3', auth });
         calendar.events.list({
           calendarId: 'primary',
           timeMin: (new Date()).toISOString(),
@@ -97,18 +97,18 @@ function createEvent(event) {
   return new Promise((resolve, reject) => {
     fs.readFile('credentials.json', (err, content) => {
       if (err) return console.log('Error loading client secret file:', err);
-      authorize(JSON.parse(content), function(auth){
-        const calendar = google.calendar({version: 'v3', auth});
+      authorize(JSON.parse(content), function (auth) {
+        const calendar = google.calendar({ version: 'v3', auth });
         calendar.events.insert({
           auth: auth,
           calendarId: 'primary',
           resource: googleEvent,
-        }, function(err, event) {
+        }, function (err, event) {
           if (err) {
             reject(err);
             return;
           }
-            resolve(event);
+          resolve(event);
         });
       });
     });
@@ -122,18 +122,18 @@ function deleteEvent(eventId) {
     fs.readFile('credentials.json', (err, content) => {
       if (err) return console.log('Error loading client secret file:', err);
       // Authorize a client with credentials, then call the Google Calendar API.
-      authorize(JSON.parse(content), function(auth){
-        const calendar = google.calendar({version: 'v3', auth});
+      authorize(JSON.parse(content), function (auth) {
+        const calendar = google.calendar({ version: 'v3', auth });
         calendar.events.delete({
           auth: auth,
           calendarId: 'primary',
           eventId
-        }, function(err, event) {
+        }, function (err, event) {
           if (err) {
             reject(err);
             return;
           }
-            resolve(event.htmlLink);
+          resolve(event.htmlLink);
         });
       });
     });
@@ -148,27 +148,27 @@ function updateEvent(event, eventId) {
     fs.readFile('credentials.json', (err, content) => {
       if (err) return console.log('Error loading client secret file:', err);
       // Authorize a client with credentials, then call the Google Calendar API.
-      authorize(JSON.parse(content), function(auth){
-        const calendar = google.calendar({version: 'v3', auth});
+      authorize(JSON.parse(content), function (auth) {
+        const calendar = google.calendar({ version: 'v3', auth });
         calendar.events.update({
           auth: auth,
           calendarId: 'primary',
           eventId: eventId,
           resource: googleEvent
-        }, function(err, event) {
+        }, function (err, event) {
           if (err) {
             reject(err);
             return;
           }
-            resolve(event.htmlLink);
+          resolve(event.htmlLink);
         });
       });
     });
   });
 }
 
-function constractGoogleEvent(event){
-  const { appt_date, name, appt_time, size, breed} = event;
+function constractGoogleEvent(event) {
+  const { appt_date, name, appt_time, size, breed, service, msg, email } = event;
   const startDate = new Date(appt_date)
   startDate.setHours(appt_time);
   const endDate = new Date(appt_date);
@@ -183,14 +183,14 @@ function constractGoogleEvent(event){
       'dateTime': endDate.toISOString(),
       'timeZone': 'America/New_York'
     },
-    'description': `size: ${size}, breed: ${breed}`,
+    'description': `service: ${service}, size: ${size || 'none'}, breed: ${breed || 'none'}, additional information: ${msg || 'none'}, email: ${email}  `,
     'reminders': {
       'useDefault': false,
       'overrides': [
-        { 'method': 'email', 'minutes': 13 * 60 },
+        { 'method': 'email', 'minutes': 3 },
       ],
     },
   }
 }
 
-module.exports = { getEvents, createEvent, deleteEvent, updateEvent};
+module.exports = { getEvents, createEvent, deleteEvent, updateEvent };

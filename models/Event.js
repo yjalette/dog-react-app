@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const EventSchema = new Schema({
+    service: {
+        type: String,
+        required: true
+    },
     name: {
         type: String,
         required: true
@@ -11,6 +15,10 @@ const EventSchema = new Schema({
         required: false
     },
     breed: {
+        type: String,
+        required: false
+    },
+    msg: {
         type: String,
         required: false
     },
