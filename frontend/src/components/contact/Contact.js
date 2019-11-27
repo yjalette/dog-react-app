@@ -25,20 +25,22 @@ const Contact = () => {
             }
         }).then(res => {
             if (res.status === 200) return res.json()
-        }).then(()=> {
+        }).then(() => {
             IsSent(true);
             setInputs(state)
         })
 
     }
-    
+
     return (
         <div className="contact">
-             {sent && <span>Thank you for contacting us!</span>}   
+            {sent && <span>Thank you for contacting us!</span>}
             <section className="wrapper">
-                <img src={picture} alt="picture" />
+                <div>
+                    <img src={picture} alt="picture" />
+                </div>
                 <Form handleChange={handleChange} handleSubmit={handleSubmit} inputs={inputs} />
-            </section> 
+            </section>
         </div>
     )
 }

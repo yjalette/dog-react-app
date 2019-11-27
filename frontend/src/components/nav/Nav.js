@@ -1,26 +1,28 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext'
 import UpperNav from './UpperNav';
-import logo from '../../images/logo.png'
+import logo from '../../images/logo.png';
 
 const Nav = () => {
     const { auth } = useContext(AuthContext);
     return (
         <>
-        <section className="navigation">
-            <UpperNav auth={auth}/>   
-            <nav>
-                <ul>
-                    <li><Link to="/" id="logo"><img src={logo} className="logo" alt="logo"/></Link></li>
-                    <li><Link to="/grooming">Grooming</Link></li>
-                    <li><Link to="/adoption">Adoption</Link></li>
-                    <li><Link to="/news">Doggy News</Link></li>
-                    <li><Link to="/contact">Contact</Link></li >
-                </ul >
-            </nav >
-        </section>
-        <hr />
+            <section className="navigation">
+                <UpperNav auth={auth} />
+                <nav>
+                    <Link to="/" id="logo"><img src={logo} className="logo" alt="logo" /></Link>
+                    <div className="dropdown">
+                        <div className="dropdown-content">
+                            <Link to="/grooming">grooming</Link>
+                            <Link to="/adoption">adoption</Link>
+                            <Link to="/news">dog news</Link>
+                            <Link to="/contact">contact</Link>
+                            {/* <li className="book-btn"><Link to="./booking" >Book Now</Link></li> */}
+                        </div >
+                    </div>
+                </nav >
+            </section>
         </>
     )
 }

@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import DatePicker from './DatePicker';
+import { timeTransformer } from './const';
+import { set } from 'mongoose';
 
+const initState = { service: "", name: "", size: "", breed: "", appt_date: new Date(), appt_time: "", msg: "" }
 
-const Form = ({ onSubmit, defaultValues, error }) => {
-    const [newEvent, setNewEvent] = useState({service: "", name: "",  size: "", breed: "", appt_date: new Date(), appt_time: "", msg: "" });
+const Form = ({ onSubmit, defaultValues, error, msg }) => {
+
+    const [newEvent, setNewEvent] = useState(initState);
 
     useEffect(() => {
         if (defaultValues) {
@@ -30,20 +34,19 @@ const Form = ({ onSubmit, defaultValues, error }) => {
     const handleSubmit = e => {
         e.preventDefault();
         onSubmit(newEvent);
+        setNewEvent(initState)
     }
-
-    console.log(error)
 
     return (
         <section className="add-booking">
-            <h3>Add A New Booking</h3>
+            <h3>{msg}</h3>
             <h4 className="error">{error}</h4>
-            <form onSubmit={handleSubmit}>   
+            <form onSubmit={handleSubmit}>
                 <div className="col">
                     <DatePicker handleDate={handleDate} eventDate={new Date(newEvent.appt_date)} />
                 </div>
                 <div className="col">
-                <div className="input-wrapper">
+                    <div className="input-wrapper">
                         <label>service*</label>
                         <select name="service" value={newEvent.service || ""} onChange={handleChange}>
                             <option value=""></option>
@@ -72,19 +75,14 @@ const Form = ({ onSubmit, defaultValues, error }) => {
                         <label>time*</label>
                         <select name="appt_time" value={newEvent.appt_time || ""} onChange={handleChange}>
                             <option value=""></option>
-                            <option value="10">10 am</option>
-                            <option value="11">11 am</option>
-                            <option value="12">12 pm</option>
-                            <option value="13">1 pm</option>
-                            <option value="14">2 pm</option>
-                            <option value="15">3 pm</option>
-                            <option value="16">4 pm</option>
-                            <option value="17">5 pm</option>
+                            {Object.keys(timeTransformer).map(key => (
+                                <option key={key} value={key}>{timeTransformer[key]}</option>
+                            ))}
                         </select>
                     </div>
                     <div className="input-wrapper">
                         <label>additional information</label>
-                        <textarea rows="5" value={newEvent.msg || ""} name="msg" onChange={handleChange}/>
+                        <textarea rows="5" value={newEvent.msg || ""} name="msg" onChange={handleChange} />
                     </div>
                     <div className="input-wrapper">
                         <button type="submit" >submit</button>

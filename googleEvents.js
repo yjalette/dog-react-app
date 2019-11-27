@@ -170,7 +170,9 @@ function updateEvent(event, eventId) {
 function constractGoogleEvent(event) {
   const { appt_date, name, appt_time, size, breed, service, msg, email } = event;
   const startDate = new Date(appt_date)
+  
   startDate.setHours(appt_time);
+  console.log("startdate======>", startDate)
   const endDate = new Date(appt_date);
   endDate.setHours(+appt_time + 3);
   return {

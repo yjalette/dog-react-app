@@ -3,7 +3,7 @@ import { TokenContext } from './Adoption';
 import Grid from '../grid/Grid';
 import { fetchDogs } from './fetchDogs';
 import Form from './Form';
-import { ErrorContext } from '../../contexts/ErrorContext';
+import { MsgContext } from '../../contexts/MsgContext';
 import Details from '../grid/Details';
 
 const myDivToFocus = React.createRef()
@@ -28,7 +28,7 @@ const DisplayResults = () => {
 
     const { token } = useContext(TokenContext);
 
-    const context = useContext(ErrorContext)
+    const context = useContext(MsgContext)
 
     const handleClick = async () => {
         await showFilter(true);
@@ -44,7 +44,6 @@ const DisplayResults = () => {
         fetchDogs({}, token)
             .then(data => {
                 const animals = data.animals.filter(animal => animal.photos.length !== 0)
-                console.log(animals)
                 if (!data.animals) {
                     console.log("this is error")
                     throw new Error("no animals");
@@ -70,17 +69,24 @@ const DisplayResults = () => {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        context.setError("");
+        context.setMsg(
+            {
+            type: {
+                error: ""
+            }
+        })
         try {
             const data = await fetchDogs(inputs, token);
             if (!data.animals) {
                 showFilter(false);
-                context.setError("Sorry, but nothing matched your search criteria. Please try again with some different keywords.");
+                context.setMsg({
+                    type: {
+                        error: "Sorry, but nothing matched your search criteria. Please try again with some different keywords."
+                    }})
                 throw new Error("no animals");
             }
             else
             showFilter(false);
-            console.log(data.animals)
             setResults(data.animals);
         }
         catch (err) {
@@ -91,7 +97,7 @@ const DisplayResults = () => {
     return (
         <>
             <div className="grid-form-wrapper">
-                <h2 className="error">{context.error}</h2>
+                <h2 className="error">{context.msg.type.error}</h2>
                 <Form handleClick={handleClick} handleCancel={handleCancel} handleSubmit={handleSubmit} handleChange={handleChange} handleEnvironmentChange={handleEnvironmentChange} inputs={inputs} filter={filter} myDivToFocus={myDivToFocus} />
                 <div className={filter ? "opacity" : ""}>
                     <Grid animals={results}/>

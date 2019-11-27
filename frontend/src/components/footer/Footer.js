@@ -2,11 +2,15 @@ import React from 'react'
 
 const Footer = () => {
     return (
-        <footer>
-            <ul>
-                <li>@cgvhkj</li>
-            </ul>
-        </footer>
+        <>
+            <footer>
+                <hr />
+                <ul>
+                    <li><p>&copy; Andrea's</p></li>
+                    <li><a href="mailto:doroskaterina@gmail.com?Subject=Hello%20again" target="_top"><i className="fa fa-envelope"></i></a></li>
+                </ul>
+            </footer>
+        </>
     )
 }
 

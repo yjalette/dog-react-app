@@ -12,7 +12,7 @@ const Logout = (props) => {
     }
 
     return (
-        <span onClick={handleLogout}>Logout</span>
+        <span onClick={handleLogout}>logout</span>
     )
 }
 

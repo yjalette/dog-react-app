@@ -7,8 +7,8 @@ const UserNav = ({username}) => {
         <>
             <i className='fa fa-user'>{username}</i>
             <div className="dropdown-content">
-                <span><Link to="./booking">my bookings</Link></span>
-                <span><Link to="./account">settings</Link></span>
+                <Link to="./booking">my bookings</Link>
+                <Link to="./account">settings</Link>
                 <Logout />
             </div>
         </>

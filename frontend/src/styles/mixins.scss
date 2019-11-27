@@ -53,17 +53,27 @@
 }
 
 @mixin dropdown {
-    padding: 1em;
+    padding: .5em;
+    &:hover .dropdown-content {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        transition: display 5s;
+        position: absolute;
+        z-index: 1000;
+    }
     .dropdown-content {
       display: none;
       background-color: darken($color: $pink, $amount: 10);
       color: $white;
       transition: background-color 5s;
-      span, label {
+      span, a {
         font-size: $small;
-        padding: .5em;
+        padding: .4em;
         display: block;
-
+        color: $white;
+        width: 100%;
+        text-align: left;
         &:hover {
           background-color: lighten($color: $pink, $amount: 10);
         }
@@ -71,3 +81,4 @@
       
     }
 }
+

@@ -32,21 +32,21 @@ const Form = ({ handleSubmit, handleEnvironmentChange, handleChange, inputs, fil
                 <i onClick={handleClick} className={filter ? 'none' : 'fa fa-caret-down adoption-filter-btn'}><span>filter</span></i>
             </div>
             {filter && <form className="adoption_form" onSubmit={handleSubmit} ref={myDivToFocus}>
-                <div className="input_wrapper">
+                <div className="input-wrapper">
                     <i className="fa fa-close" onClick={handleCancel}></i>
                 </div>
-                <div className="input_wrapper">
+                <div className="input-wrapper">
                     <label>gender:</label>
                     <select name="gender" value={inputs.gender} onChange={handleChange}>
                         <option value="male" name="male">male</option>
                         <option value="female" name="female">female</option>
                     </select>
                 </div>
-                <div className="input_wrapper">
+                <div className="input-wrapper">
                     <label>breed:</label>
                     <input value={inputs.breed} name="breed" onChange={handleChange} />
                 </div>
-                <div className="input_wrapper environment_wrapper">
+                <div className="input-wrapper environment_wrapper">
                     <label>environment:</label>
                     <div className="environment_wrapper">
                         {environment.map(option => (
@@ -57,7 +57,7 @@ const Form = ({ handleSubmit, handleEnvironmentChange, handleChange, inputs, fil
                         ))}
                     </div>
                 </div>
-                <div className="input_wrapper">
+                <div className="input-wrapper">
                     <label>color:</label>
                     <select name="color" value={inputs.color} onChange={handleChange}>
                         {colors.map(color => (
@@ -65,18 +65,18 @@ const Form = ({ handleSubmit, handleEnvironmentChange, handleChange, inputs, fil
                         ))}
                     </select>
                 </div>
-                <div className="input_wrapper">
+                <div className="input-wrapper">
                     <label>zipcode:</label>
                     <input value={inputs.location} name="location" onChange={handleChange} />
                 </div>
-                {/* <div className="input_wrapper">
+                {/* <div className="input-wrapper">
                     <label>sort by:</label>
                     <select name="sort" value={inputs.sort} onChange={handleChange}>
                             <option value="recent" name="recent">recent</option>
                             <option value="distance" name="distance">distance</option>
                     </select>
                 </div> */}
-                <div className="input_wrapper">
+                <div className="input-wrapper">
                     <button type="submit">search</button>
                 </div>
             </form>}

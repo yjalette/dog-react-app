@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from "../../contexts/AuthContext";
-import { ErrorContext } from './../../contexts/ErrorContext';
+import { MsgContext } from './../../contexts/MsgContext';
 import Cookies from 'js-cookie';
 import { withRouter, Link } from 'react-router-dom'
 
@@ -9,7 +9,7 @@ const Login = (props) => {
     const [isChecked, setIsChecked] = useState(false);
 
     const user_context = useContext(AuthContext);
-    const error_context = useContext(ErrorContext);
+    const msg_context = useContext(MsgContext);
 
     const msg = props.location.state && props.location.state.msg;
 
@@ -38,14 +38,14 @@ const Login = (props) => {
         }).then(res => {
             console.log(res)
             if(res.status === 400){
-                error_context.setError("wrong password")
+               
                 return 
             } 
             return res.json();
         }).then(data => {
             const { token, user } = data;
             user_context.setAuth(user);
-            Cookies.set('token', token, { expires: isChecked ? 100 : 1 })
+            Cookies.set('token', token, { expires: isChecked ? 1000 : 1 })
             props.history.push("/booking");
         }).catch(err => console.log("login err", err))
     }
@@ -53,7 +53,7 @@ const Login = (props) => {
         <>
             <form className="form sign-in" onSubmit={handleSubmit}>
                 <h2>{title}</h2>
-                <h2 className="error">{error_context.error}</h2>
+                <h2 className="error"></h2>
                 <label>
                     <span>Email</span>
                     <input type="email" name="email" value={inputs.email} onChange={handleChange} />

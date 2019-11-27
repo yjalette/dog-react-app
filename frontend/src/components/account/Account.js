@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Account = ({ handleChange, inputs, updateCreds, handleChangePassword, updatePassword}) => {
-    console.log(inputs)
+const Account = ({ handleChange, inputs, updateCreds, handleChangePassword, updatePassword, error}) => {
     return (
         <>
-        <div className="account">
+        <h4>{error}</h4>
+        <section className="updates">
             <div className="input-wrapper">
                 <label>First Name</label>
                 <input value={inputs.creds.firstName} name="firstName" onChange={handleChange} />
@@ -21,12 +21,13 @@ const Account = ({ handleChange, inputs, updateCreds, handleChangePassword, upda
                 <button type="click" onClick={updateCreds}>save</button>
             </div>
             <div className="input-wrapper">
-                <label>password </label> 
+                <label>old password </label> 
                 <input value={inputs.pwd.oldPassword} name="oldPassword" onChange={handleChangePassword} />
+                <label>new password </label> 
                 <input value={inputs.pwd.newPassword} name="newPassword" onChange={handleChangePassword} />
                 <button type="click" onClick={updatePassword}>save</button>              
             </div>
-        </div>
+        </section>
        
 
                 

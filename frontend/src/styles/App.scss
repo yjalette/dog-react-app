@@ -20,7 +20,6 @@
 }
 
 body {
-    height: 100vh;
     background: linear-gradient(-90deg, $blue, $light-green);
 }
 
@@ -51,6 +50,7 @@ span {
 h1 {
     font-size: $sup-large;
     color: $white;
+    width: 100%;
 
     @include mQ($screen-sm) {
         font-size: $sup-large / 1.5;
@@ -70,10 +70,10 @@ h5 {
 }
 
 hr {
-  background-image: url('../images/hr.jpg');
-  opacity: 0.5;
-  height: 40px;
-  width: 100%;
+    background-image: url("../images/hr.jpg");
+    opacity: 0.5;
+    height: 40px;
+    width: 100%;
 }
 
 // hr {
@@ -124,18 +124,62 @@ label {
     color: $white;
 }
 
+.input-wrapper {
+    width: 100%;
+    overflow: hidden;
+    padding: 0.6em;
+
+    label {
+        padding: 0.5em 0;
+        margin: 0;
+    }
+
+    button {
+        float: right;
+    }
+}
 
 .App {
-    @include flex(center);
+    @include flex(space-between);
 
     flex-direction: column;
+    height: 100%;
+}
+
+.tooltip {
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    display: none;
+    width: 50px;
+    background-color: $blue;
+    color: $white;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    display: block;
 }
 
 .showcase {
     @include flex(center);
+
     flex-direction: column;
     width: 80%;
     background-color: $white;
+
+    @include mQ($screen-md) {
+        width: 100%;
+    }
 }
 
 .error {
@@ -159,17 +203,32 @@ label {
 .navigation {
     width: 100%;
 
+    #logo {
+        img {
+            width: 50%;
+
+            @include mQ($screen-md) {
+                width: 100%;
+            }
+        }
+    }
+
+    .book-btn {
+        background-color: darken($color: $pink, $amount: 8);
+        border: 1px solid $pink;
+        border-radius: 20px;
+        padding: .6em;
+        text-align: center;
+
+        a {
+            color: $white;
+        }
+    }
+
     .upper-nav {
         @include flex(space-between);
 
         padding: 0.3em;
-
-        .book-btn {
-            background-color: darken($color: $pink, $amount: 8);
-            border: 1px solid $pink;
-            border-radius: 20px;
-            padding: .6em;
-        }
 
         li {
             @include mQ($screen-md) {
@@ -181,6 +240,10 @@ label {
                 width: 15%;
                 -webkit-animation: nav 2s linear infinite alternate;
                 animation: nav 2s linear infinite alternate;
+
+                @include mQ($screen-md) {
+                    width: 60%;
+                }
             }
 
             a {
@@ -192,11 +255,9 @@ label {
         .user-menu {
             @include dropdown;
 
-            &:hover .dropdown-content {
-                display: block;
-                transition: display 5s;
-            }
-
+            // .dropdown-content {
+            //     background-color: $;        
+            // }
             i {
                 color: $white;
                 font-size: $small;
@@ -216,17 +277,17 @@ label {
         top: 0;
         z-index: 1;
 
-        .logo {
-            width: 30%;
-        }
-
-        ul {
+        .dropdown {
             @include flex(space-around);
+            @include mQ($screen-md) {
+                @include dropdown;
 
-            li {
-                a {
-                    display: block;
-                    color: darken($color: $pink, $amount: 10);
+                align-items: flex-start;
+
+                &:after {
+                    content: "menu";
+                    color: $blue;
+                    text-align: left;
                 }
             }
         }
@@ -250,14 +311,21 @@ label {
 .homepage {
     width: 100%;
     height: 100vh;
+
+    @include mQ($screen-md) {
+        height: auto;
+    }
+
+
     .landing {
         @include flex(center);
+
         align-items: flex-start;
         padding: 0 5em;
         height: 100%;
+
         @include mQ($screen-md) {
             flex-direction: column;
-            height: 100%;
             padding: 1em;
         }
 
@@ -299,19 +367,24 @@ label {
             @include flex(center);
 
             flex-direction: column;
-            align-items: flex-start;
+
+            @include mQ($screen-md) {
+                padding: 0;
+            }
+
 
             h1 {
                 padding: 1.5em 0;
 
                 @include mQ($screen-md) {
                     padding: .5em 0;
+                    text-align: center;
                 }
             }
 
             button {
                 @include mQ($screen-md) {
-                    width: 100%;
+                    width: auto;
                 }
             }
         }
@@ -386,7 +459,7 @@ label {
         // filter: drop-shadow(2px 4px 6px black);
         padding: 2em;
 
-        @include mQ($screen-md) {
+        @include mQ($screen-sm) {
             flex-direction: column;
             filter: none;
             padding: 1em;
@@ -396,7 +469,7 @@ label {
         .news-heroimage {
             width: 50%;
 
-            @include mQ($screen-md) {
+            @include mQ($screen-sm) {
                 width: 100%;
             }
         }
@@ -404,7 +477,7 @@ label {
         .adoption-heroimage {
             width: 70%;
 
-            @include mQ($screen-md) {
+            @include mQ($screen-sm) {
                 width: 100%;
             }
         }
@@ -439,6 +512,7 @@ label {
 
         .adoption_form {
             @include flex(space-evenly);
+
             flex-direction: column;
             align-items: stretch;
             width: 40%;
@@ -449,22 +523,15 @@ label {
             background-color: lighten($color: $blue, $amount: 10);
             z-index: 2;
             position: absolute;
+
             @include mQ($screen-sm) {
                 width: 100%;
                 top: 0;
-                position: none;
+                position: relative;
             }
 
-            .input_wrapper {
-                overflow: hidden;
-                padding: 0.6em;
-                label {
-                  padding: 0.5em 0;
-                  margin: 0;
-                }
-                button {
-                    float: right;
-                }
+
+            .input-wrapper {
                 .environment_wrapper {
                     @include flex(space-around);
                 }
@@ -485,7 +552,7 @@ label {
 
             .card {
                 @include flex-col(3, 1%);
-                @include mQ($screen-md) {
+                @include mQ($screen-lg) {
                     @include flex-col(2, 1%);
                 }
 
@@ -587,8 +654,12 @@ label {
     position: relative;
     width: $contW;
     height: 550px;
-    // margin: 0 auto 100px;
     background-color: $white;
+    @include mQ($screen-sm){
+        @include flex(center);
+        flex-direction: column;
+        height: 1200px;
+    }
 }
 
 .form {
@@ -597,6 +668,18 @@ label {
     height: 100%;
     transition: transform $switchAT ease-in-out;
     padding: 50px 30px 0;
+    @include mQ($screen-sm){
+        width: 100%;
+        padding: .5em;
+    }
+    
+}
+
+.s--signup{
+    @include mQ($screen-sm){
+        background-color: darkgoldenrod;
+        height: 100%;
+    }
 }
 
 .sub-cont {
@@ -609,15 +692,29 @@ label {
     padding-left: $imgW;
     transition: transform $switchAT ease-in-out;
 
+
+    @include mQ($screen-sm){
+        @include flex(center);
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+        left: 0;
+        height: 100%;
+        padding-left: 0;
+    }
+
     @include signUpActive {
         transform: translate3d($formW * -1, 0, 0);
+        @include mQ($screen-sm){
+            transform: translate3d(0, $formW * -1, 0);
+        }
     }
 }
 
 .img {
     overflow: hidden;
     z-index: 2;
-    position: absolute;
+    position: relative;
     left: 0;
     top: 0;
     width: $imgW;
@@ -647,11 +744,15 @@ label {
     }
 
     @include signUpActive {
-        &:before {
+        &:before {          
             transform: translate3d($formW, 0, 0);
         }
     }
 
+    @include mQ($screen-sm){
+        width: 100%;
+        height: 600px;
+    }
 
     &__text {
         z-index: 2;
@@ -796,27 +897,69 @@ label {
 // booking
 .booking {
     @include flex(space-between);
+
     flex-direction: column;
     padding: 3em;
+
+    @include mQ($screen-md) {
+        padding: 0;
+    }
+
+
     .header {
         @include flex(space-around);
+
         background-color: darken($color: $pink, $amount: 10);
         padding: 2em;
+        height: 100%;
+
+        @include mQ($screen-md) {
+            padding: 0;
+            flex-direction: column;
+        }
+
+
         img {
             width: 30%;
+
+            @include mQ($screen-md) {
+                width: 100%;
+            }
+        }
+
+        h1 {
+            @include mQ($screen-md) {
+                height: 100%;
+            }
         }
     }
 
     .booking-list {
-      @include flex(center);
-      flex-direction: column;
-      background-color: $pink;
-      margin: 2em 0;
-      padding: 2em;
+        @include flex(center);
+
+        flex-direction: column;
+        background-color: $pink;
+        margin: 2em 0;
+        padding: 2em;
+        height: 100%;
+
+        @include mQ($screen-md) {
+            margin: 0;
+            padding: 0;
+        }
+
+
         table {
-           width: 80%;
+            width: 80%;
             padding: 2em;
             margin: 2em;
+            height: 100%;
+
+            @include mQ($screen-md) {
+                width: 100%;
+                height: auto;
+            }
+
 
             tr:nth-child(even) {
                 background-color: $white;
@@ -850,11 +993,23 @@ label {
     padding: 2em;
     background-color: $pink;
     width: 100%;
+    height: 100%;
+
+    @include mQ($screen-md) {
+        flex-direction: column;
+        padding: .2em;
+    }
+
 
     form {
         @include flex(space-evenly);
 
         align-items: flex-start;
+
+        @include mQ($screen-md) {
+            flex-direction: column;
+        }
+
 
         .col {
             @include flex(space-evenly);
@@ -904,28 +1059,74 @@ label {
 
 .account {
     @include flex(center);
+
     flex-direction: column;
+    background-color: $pink;
+
+    .wrapper-header {
+        img {
+            width: 50%;
+        }
+    }
+
+    .updates {
+        background-color: $white;
+        width: 80%;
+
+        label {
+            color: $pink;
+        }
+    }
 }
 
-
-// contact 
-
+// contact
 
 .contact {
-  @include flex(center);
-  flex-direction: column;
-  background-color: $pink;
-  .wrapper { 
-    @include flex(space-around);
-    flex-direction: row;
-    padding: 2em;
-    img {
-        width: auto;
+    @include flex(center);
+
+    flex-direction: column;
+    background-color: $pink;
+
+    .wrapper {
+        @include flex(space-around);
+
+        flex-direction: row;
+        padding: 2em;
+
+        @include mQ($screen-sm) {
+            flex-direction: column;
+        }
+
+
+        div {
+            img {
+                width: auto;
+            }
+        }
+
+        form {
+            width: 50%;
+
+            @include mQ($screen-sm) {
+                width: 100%;
+            }
+        }
     }
-    form {
-      width: 50%;
-    }
-    
 }
 
+footer {
+    @include flex(space-between);
+
+    flex-direction: column;
+    background-color: $white;
+
+    ul {
+        @include flex(space-between);
+
+        padding: 1em;
+
+        i {
+            color: $blue;
+        }
+    }
 }

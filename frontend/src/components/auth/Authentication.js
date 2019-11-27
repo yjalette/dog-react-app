@@ -1,14 +1,14 @@
 import React, { useState, useContext } from 'react'
 import Login from './Login';
 import SignUp from './SignUp';
-import {ErrorContext} from '../../contexts/ErrorContext';
+import {MsgContext} from '../../contexts/MsgContext';
 
 const Authentication = () => {
     const [signUp, setSignUp] = useState(false);
-    const error_context = useContext(ErrorContext);
+    const msg_context = useContext(MsgContext);
     return (
         <div className={!signUp ? "cont" : "cont s--signup"}>
-            <Login error_context={error_context}/>
+            <Login msg_context={msg_context}/>
             <div className="sub-cont">
                 <div className="img">
                     <div className="img__text m--up">
@@ -24,7 +24,7 @@ const Authentication = () => {
                         <span className="m--in" >Sign In</span>
                     </div>
                 </div>
-                <SignUp error_context={error_context}/>
+                <SignUp msg_context={msg_context}/>
             </div>
 
         </div>
