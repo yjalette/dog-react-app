@@ -33,8 +33,9 @@ const Form = ({ onSubmit, defaultValues, error, msg }) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        onSubmit(newEvent);
-        setNewEvent(initState)
+        onSubmit(newEvent)
+        .then(()=> setNewEvent(initState)) 
+           
     }
 
     return (

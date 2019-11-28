@@ -1,5 +1,6 @@
 import React from 'react';
 import adopt_me from '../../images/adopt.jpg';
+import {withRouter} from 'react-router-dom';
 
 const icons = {
     dogs: "fas fa-dog",
@@ -7,11 +8,15 @@ const icons = {
     cats: "fas fa-cat"
 }
 
-const Card = ({ animal }) => {
+const Card = ({ animal, history, handleShowDetails }) => {
     const getPic = animal.photos.map(photo => photo.large || photo.medium || photo.small);
     const photo = getPic.length === 0 ? adopt_me : getPic[0]
     const environment = Object.keys(animal.environment).filter(key => animal.environment[key] === true)
 
+    const handleClick = () => {
+        handleShowDetails();
+        history.push({pathname: 'adoption-details', state: animal})
+    }
     return (
         <>
         <div className="card">
@@ -32,11 +37,11 @@ const Card = ({ animal }) => {
 
             <div className="card_body">
                 <p className="title">{animal.name} * {animal.breeds.primary} </p>
-                <button></button>
+                <button onClick={handleClick}>more info</button>
             </div>
         </div>
         </>
     )
 }
 
-export default Card
+export default withRouter(Card);

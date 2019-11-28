@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Form from './Form';
-import picture from '../../images/dogphone.png';
+import picture_before from '../../images/dogphone.png';
+import picture_after from '../../images/dog-on-phone.png';
 
 const state = { name: '', email: '', subject: '', msg: '' };
 
@@ -33,13 +34,13 @@ const Contact = () => {
     }
 
     return (
-        <div className="contact">
-            {sent && <span>Thank you for contacting us!</span>}
-            <section className="wrapper">
-                <div>
-                    <img src={picture} alt="picture" />
-                </div>
+        <div className="contact wrapper">
+            <h1>{sent ? "Thank you for contacting us – we will get back to you soon!" : "Contact"}</h1>
+            <section className="contact-wrapper wrapper-header">
                 <Form handleChange={handleChange} handleSubmit={handleSubmit} inputs={inputs} />
+                <div>
+                    <img src={sent ? picture_after : picture_before} alt="picture" />
+                </div>
             </section>
         </div>
     )

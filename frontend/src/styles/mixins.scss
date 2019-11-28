@@ -82,3 +82,101 @@
     }
 }
 
+
+@mixin grid-wrapper {
+    .grid {
+        display: flex;
+        justify-content: space-evenly;
+        flex-flow: row wrap;
+        padding: 2em;
+        z-index: 1;
+
+        @include mQ($screen-md) {
+            padding: 0;
+        }
+
+        .card {
+            @include flex-col(3, 1%);
+            @include mQ($screen-lg) {
+                @include flex-col(2, 1%);
+            }
+            @include mQ($screen-sm) {
+                width: 100%;
+            }
+    
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            background-color: $white;
+    
+            .card_header {
+                position: relative;
+    
+                .card_left {
+                    position: absolute;
+                    z-index: 2;
+                    right: 0;
+                    bottom: 0;
+    
+                    i {
+                        background-color: #876160;
+                        padding: 0.5em;
+                        color: $white;
+                    }
+                }
+    
+                .card_right {
+                    @include flex(space-between);
+    
+                    position: absolute;
+                    z-index: 2;
+    
+                    i {
+                        background-color: #876160;
+                        padding: 0.5em;
+                        color: $white;
+                    }
+    
+                    .fa-map-marker::first-letter {
+                        padding-right: 0.3em;
+                    }
+    
+                    .fa-map-marker::after {
+                        content: " mi";
+                    }
+                }
+    
+                .card_img_wrapper {
+                    position: relative;
+                    z-index: 1;
+    
+                    .card_img {
+                        width: 100%;
+                        height: 300px;
+                        object-fit: cover;
+                    }
+                }
+            }
+    
+            .card_body {
+                .title {
+                    color: darken($color: $pink, $amount: 25);
+                    overflow: initial;
+                    padding: 0.8em;
+                }
+    
+                button {
+                    border: 0;
+                    float: none;
+                    width: 100%;
+                    margin-bottom: 0;
+                   
+                }
+            }
+        }
+    
+    }
+}
+
+
+

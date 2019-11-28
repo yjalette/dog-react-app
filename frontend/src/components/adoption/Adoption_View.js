@@ -9,7 +9,7 @@ const Adoption_View = () => {
                 <img alt="adoption-heroimage" className="adoption-heroimage" src={picture} />
                 <div>
                     <h1>Shelter Animal and Save Life </h1>
-                    <button>find a dog</button>
+                    <span>Adopt a homeless puppy and provide a second chance for a deserving animal to know love. Help Save Lives. </span>
                 </div>
             </div>
             <Adoption />

@@ -1,6 +1,7 @@
 import React from 'react'
 import GetNews from './GetNews';
-import picture from '../../images/wall-murals-dog-bringing-newspaper.jpg';
+// import picture from '../../images/wall-murals-dog-bringing-newspaper.jpg';
+import picture from '../../images/dog-news.png'
 
 const News = () => {
     return (

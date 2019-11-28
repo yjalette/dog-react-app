@@ -12,6 +12,7 @@ import Contact from './components/contact/Contact';
 import Landing from './components/home/Landing';
 import { AuthContext } from './contexts/AuthContext';
 import { MsgContext } from './contexts/MsgContext';
+import { AlertProvider } from './contexts/AlertContext';
 import './axios';
 import Grooming from './components/grooming/Grooming';
 import Footer from './components/footer/Footer';
@@ -19,6 +20,7 @@ import PwdReset from './components/auth/PwdReset';
 import EnterNewCred from './components/auth/EnterNewCred';
 import Details from './components/grid/Details';
 import UpdateInputs from './components/account/UpdateInputs';
+import Services from './components/services/Services';
 
 
 function App() {
@@ -51,25 +53,28 @@ function App() {
           <Router>
             <Nav />
             <Route key='landing' component={Landing} exact path="/" />
-            <div className="showcase">
-              <Switch>
-                <Route key='authentication' component={Authentication} path='/authentication' />
-                <Route key='grooming' component={Grooming} path="/grooming" />
-                <Route key='booking' component={Booking} path='/booking' />
-                <Route key='news' component={News} path='/news' />
-                <Route key='adoption' component={Adoption_View} path='/adoption' />
-                <Route component={Details} path='/adoption-details' />
-                <Route key='confirmEmail' component={ConfirmEmail} path='/confirm-email' />
-                <Route key='account' component={UpdateInputs} path='/account' />
-                <Route component={PwdReset} path='/password-reset' />
-                <Route component={EnterNewCred} path='/forgot-password' />
-                <Route key='contact' component={Contact} path='/contact' />
-              </Switch>
-            </div>
-            <Footer />
+            <Route key='services' component={Services} exact path="/services" />
+            <AlertProvider>
+              <div className="showcase">
+                <Switch>
+                  <Route key='authentication' component={Authentication} path='/authentication' />
+                  <Route key='grooming' component={Grooming} path="/grooming" />
+                  <Route key='booking' component={Booking} path='/booking' />
+                  <Route key='news' component={News} path='/news' />
+                  <Route key='adoption' component={Adoption_View} path='/adoption' />
+                  <Route component={Details} path='/adoption-details' />
+                  <Route key='confirmEmail' component={ConfirmEmail} path='/confirm-email' />
+                  <Route key='account' component={UpdateInputs} path='/account' />
+                  <Route component={PwdReset} path='/password-reset' />
+                  <Route component={EnterNewCred} path='/forgot-password' />
+                  <Route key='contact' component={Contact} path='/contact' />
+                </Switch>
+              </div>
+            </AlertProvider>
           </Router>
         </MsgContext.Provider>
       </AuthContext.Provider>
+      <Footer />
     </div>
   );
 }

@@ -1,16 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import cloud from '../../images/cloud-home.png';
 import UserNav from './UserNav';
 
-const UpperNav = ({ auth }) => {
+const UpperNav = ({ auth, history }) => {
     return (
         <ul className="upper-nav">
-            <li><img src={cloud} className="cloud" alt="cloud" /></li>
+            <li><Link to="./"><img src={cloud} className="cloud" alt="cloud" /></Link></li>
             <li className="user-menu">{auth ? <UserNav username={auth.firstName}/> : <Link to="./authentication" className="cloud-btn">Login</Link>}</li>
-            <li className="book-btn"><Link to="./booking" >Book Now</Link></li>
+            <li className="book-btn" onClick={()=> auth ? history.push("/booking") : history.push("/authentication", {msg: "Please Login To Continiue"})} >Book Now</li>
         </ul>
     )
 }
 
-export default UpperNav;
+export default withRouter(UpperNav);

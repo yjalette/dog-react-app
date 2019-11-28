@@ -219,10 +219,7 @@ label {
         border-radius: 20px;
         padding: .6em;
         text-align: center;
-
-        a {
-            color: $white;
-        }
+        color: $white;
     }
 
     .upper-nav {
@@ -290,6 +287,12 @@ label {
                     text-align: left;
                 }
             }
+
+
+            a {
+                color: $blue;
+                margin: .5em;
+            }
         }
     }
 }
@@ -311,15 +314,11 @@ label {
 .homepage {
     width: 100%;
     height: 100vh;
-
     @include mQ($screen-md) {
         height: auto;
     }
-
-
     .landing {
-        @include flex(center);
-
+     @include flex(center);
         align-items: flex-start;
         padding: 0 5em;
         height: 100%;
@@ -329,10 +328,8 @@ label {
             padding: 1em;
         }
 
-
         div {
             height: 100%;
-
             @include mQ($screen-md) {
                 height: auto;
             }
@@ -389,45 +386,76 @@ label {
             }
         }
     }
+}
 
-    .services {
+.services {
+    @include flex(center);
+    flex-direction: column;
+    .wrapper-header {
+        div {
+            span {
+                color: $white;
+            }
+            img {
+                width: 100%;
+            }
+        }
+    }
+
+    :root {
+        --web-view-ids: Web_1920___1;
+    }
+
+    #Web_1920___1 * {
+        margin: 0;
+        padding: 0;
+    }
+
+    #Web_1920___1 {
+        position: relative;
+        box-sizing: border-box;
+        width: 1956px;
+        height: 150px;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        --web-view-name: Web 1920 – 1;
+        --web-view-id: Web_1920___1;
+        --web-enable-deep-linking: true;
+    }
+
+    #Ellipse_1 {
+        fill: #876160;
+    }
+
+    .Ellipse_1 {
+        position: absolute;
+        overflow: visible;
+        width: 2312px;
+        height: 299px;
+        left: -178px;
+        top: -896px;
+    }
+
+    .services_about {
+        width: 100%;
+        padding: 1em;
+    }
+
+    @include grid-wrapper;
+
+    .services_clients {
+        background-color: #876160;
+    }
+
+    .services_contact {
         @include flex(center);
 
         flex-direction: column;
+        padding: 3em 1em;
 
-        :root {
-            --web-view-ids: Web_1920___1;
-        }
-
-        #Web_1920___1 * {
-            margin: 0;
-            padding: 0;
-        }
-
-        #Web_1920___1 {
-            position: relative;
-            box-sizing: border-box;
-            width: 1956px;
-            height: 701px;
-            overflow: hidden;
-            margin: 0;
-            padding: 0;
-            --web-view-name: Web 1920 – 1;
-            --web-view-id: Web_1920___1;
-            --web-enable-deep-linking: true;
-        }
-
-        #Ellipse_1 {
-            fill: $white;
-        }
-
-        .Ellipse_1 {
-            position: absolute;
-            overflow: visible;
-            width: 2312px;
-            height: 599px;
-            left: -178px;
-            top: -396px;
+        button {
+            margin: 1em 0;
         }
     }
 }
@@ -448,27 +476,18 @@ label {
 
 .wrapper {
     @include flex(center);
-
     flex-direction: column;
-
     .wrapper-header {
         @include flex(center);
-
         background-color: darken($color: $pink, $amount: 25);
-
-        // filter: drop-shadow(2px 4px 6px black);
         padding: 2em;
-
-        @include mQ($screen-sm) {
+        @include mQ($screen-lg) {
             flex-direction: column;
             filter: none;
             padding: 1em;
         }
-
-
         .news-heroimage {
-            width: 50%;
-
+            width: 80%;
             @include mQ($screen-sm) {
                 width: 100%;
             }
@@ -484,11 +503,16 @@ label {
 
         div {
             @include flex(space-evenly);
-
             flex-direction: column;
-
-            button {
-                width: 40%;
+            padding: .1em;
+            text-align: center;
+            span {
+                color: $white;
+                text-transform: lowercase;
+                opacity: .8;
+                &::first-letter{
+                    text-transform: uppercase;
+                }
             }
         }
     }
@@ -538,110 +562,77 @@ label {
             }
         }
 
-        .grid {
-            display: flex;
-            justify-content: space-evenly;
-            flex-flow: row wrap;
-            padding: 2em;
-            z-index: 1;
-
-            @include mQ($screen-sm) {
-                padding: 1em;
-            }
-
-
-            .card {
-                @include flex-col(3, 1%);
-                @include mQ($screen-lg) {
-                    @include flex-col(2, 1%);
-                }
-
-
-                @include mQ($screen-sm) {
-                    width: 100%;
-                }
-
-
-                flex-direction: column;
-                justify-content: space-between;
-                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-                background-color: $white;
-
-                .card_header {
-                    position: relative;
-
-                    .card_left {
-                        position: absolute;
-                        z-index: 2;
-                        right: 0;
-                        bottom: 0;
-
-                        i {
-                            background-color: #876160;
-                            padding: 0.5em;
-                            color: $white;
-                        }
-                    }
-
-                    .card_right {
-                        @include flex(space-between);
-
-                        position: absolute;
-                        z-index: 2;
-
-                        i {
-                            background-color: #876160;
-                            padding: 0.5em;
-                            color: $white;
-                        }
-
-                        .fa-map-marker::first-letter {
-                            padding-right: 0.3em;
-                        }
-
-                        .fa-map-marker::after {
-                            content: " mi";
-                        }
-                    }
-
-                    .card_img_wrapper {
-                        position: relative;
-                        z-index: 1;
-
-                        .card_img {
-                            width: 100%;
-                            height: 300px;
-                            object-fit: cover;
-                        }
-                    }
-                }
-
-                .card_body {
-                    .title {
-                        color: darken($color: $pink, $amount: 25);
-                        overflow: initial;
-                        padding: 0.8em;
-                    }
-
-                    button {
-                        border: 0;
-                        float: none;
-                        width: 100%;
-                        margin-bottom: 0;
-                    }
-                }
-            }
-        }
+        @include grid-wrapper;
     }
 
     // news
     .card_img_news {
         width: 100%;
-
-        @include mQ($screen-md) {}
     }
 }
 
+.adoption-wrapper {
+    background-color: $pink;
+.adoption_details {
+    background-color: $white;
+    @include flex(space-between);
+    align-items: flex-start;
+    padding: 2em;
+    margin: 2em 0;
+    @include mQ($screen-sm){
+        flex-direction: column-reverse;
+    }
+    .input-wrapper {
+        @include flex(flex-start);
+
+        label {
+            width: auto;
+            margin-right: .3em;
+            color: $pink;
+        }
+
+        span {
+            font-size: $small;
+            text-transform: lowercase;
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        i {
+            color: darken($color: $green, $amount: 10);
+        }
+    }
+
+    .adoption_address {
+        @include flex(flex-start);
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .dog-slider {
+        @include flex(center);
+        flex-direction: column;
+        width: 50%;
+        @include mQ($screen-sm){
+            width: 100%;
+        }
+img {
+    max-width: 500px;
+    max-height: 500px;
+    object-fit: cover;
+    @include mQ($screen-sm){
+        width: 100%;
+    }
+}
+        .prev-next-btn-wrapper {
+            @include flex(space-between);
+            i {
+                font-size: $lg;
+                color: $green;
+            }
+        }
+    }
+}
+}
 // auth
 .tip {
     font-size: 20px;
@@ -655,8 +646,10 @@ label {
     width: $contW;
     height: 550px;
     background-color: $white;
-    @include mQ($screen-sm){
+
+    @include mQ($screen-sm) {
         @include flex(center);
+
         flex-direction: column;
         height: 1200px;
     }
@@ -668,15 +661,15 @@ label {
     height: 100%;
     transition: transform $switchAT ease-in-out;
     padding: 50px 30px 0;
-    @include mQ($screen-sm){
+
+    @include mQ($screen-sm) {
         width: 100%;
         padding: .5em;
     }
-    
 }
 
-.s--signup{
-    @include mQ($screen-sm){
+.s--signup {
+    @include mQ($screen-sm) {
         background-color: darkgoldenrod;
         height: 100%;
     }
@@ -692,9 +685,9 @@ label {
     padding-left: $imgW;
     transition: transform $switchAT ease-in-out;
 
-
-    @include mQ($screen-sm){
+    @include mQ($screen-sm) {
         @include flex(center);
+
         flex-direction: column;
         position: relative;
         overflow: hidden;
@@ -703,9 +696,11 @@ label {
         padding-left: 0;
     }
 
+
     @include signUpActive {
         transform: translate3d($formW * -1, 0, 0);
-        @include mQ($screen-sm){
+
+        @include mQ($screen-sm) {
             transform: translate3d(0, $formW * -1, 0);
         }
     }
@@ -744,15 +739,17 @@ label {
     }
 
     @include signUpActive {
-        &:before {          
+        &:before {
             transform: translate3d($formW, 0, 0);
         }
     }
 
-    @include mQ($screen-sm){
+
+    @include mQ($screen-sm) {
         width: 100%;
         height: 600px;
     }
+
 
     &__text {
         z-index: 2;
@@ -896,49 +893,40 @@ label {
 
 // booking
 .booking {
+    background-color: $pink;
     @include flex(space-between);
-
     flex-direction: column;
-    padding: 3em;
-
+    padding: 3em 0;
     @include mQ($screen-md) {
         padding: 0;
     }
-
-
-    .header {
-        @include flex(space-around);
-
-        background-color: darken($color: $pink, $amount: 10);
-        padding: 2em;
-        height: 100%;
-
+    .wrapper-header {      
         @include mQ($screen-md) {
             padding: 0;
             flex-direction: column;
         }
-
-
         img {
-            width: 30%;
-
+            width: 100%;
             @include mQ($screen-md) {
                 width: 100%;
             }
         }
 
-        h1 {
-            @include mQ($screen-md) {
-                height: 100%;
-            }
+        div {
+            text-align: left;
+            padding: .7em;
+            h1 {
+                @include mQ($screen-md) {
+                    height: 100%;
+                }
+        }
         }
     }
 
     .booking-list {
+        background-color: $white;
         @include flex(center);
-
         flex-direction: column;
-        background-color: $pink;
         margin: 2em 0;
         padding: 2em;
         height: 100%;
@@ -947,14 +935,16 @@ label {
             margin: 0;
             padding: 0;
         }
-
+        h3{
+            color: $pink;
+        }
 
         table {
             width: 80%;
             padding: 2em;
             margin: 2em;
             height: 100%;
-
+            border: 2px solid $pink;
             @include mQ($screen-md) {
                 width: 100%;
                 height: auto;
@@ -990,8 +980,8 @@ label {
 }
 
 .add-booking {
+    background-color: $white;
     padding: 2em;
-    background-color: $pink;
     width: 100%;
     height: 100%;
 
@@ -1000,23 +990,22 @@ label {
         padding: .2em;
     }
 
-
+h3 {
+    color: $pink;
+}
     form {
         @include flex(space-evenly);
-
         align-items: flex-start;
-
         @include mQ($screen-md) {
             flex-direction: column;
         }
-
-
+        label {
+color: $pink;
+        }
         .col {
             @include flex(space-evenly);
-
             flex-direction: column;
             padding: 1em;
-
             .react-calendar {
                 background-color: darken($color: $white, $amount: 2);
                 filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.26));
@@ -1083,21 +1072,17 @@ label {
 
 .contact {
     @include flex(center);
-
     flex-direction: column;
     background-color: $pink;
-
-    .wrapper {
+    h1 {
+        padding: .5em;
+    }
+    .wrapper-header {
         @include flex(space-around);
-
-        flex-direction: row;
         padding: 2em;
-
         @include mQ($screen-sm) {
-            flex-direction: column;
+            flex-direction: column-reverse;
         }
-
-
         div {
             img {
                 width: auto;
@@ -1105,11 +1090,15 @@ label {
         }
 
         form {
-            width: 50%;
-
-            @include mQ($screen-sm) {
+            width: 100%;
+            .input-wrapper{
                 width: 100%;
+                button{
+                    float: right;
+                    width: 30%;
+                }
             }
+            
         }
     }
 }

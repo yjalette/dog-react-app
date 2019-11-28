@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import {Link} from 'react-router-dom';
 
 const Article = ({ article }) => {
     console.log(article)
@@ -9,7 +10,7 @@ const Article = ({ article }) => {
             </div>
             <h5 className="title">{article.title}</h5>
             <p>{article.description.slice(0, 150)}...</p>
-            <button>read more</button>
+            <button><a href={article.url} style={{color: 'white'}}>read more</a></button>
         </div>
     )
 }
