@@ -1,10 +1,15 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from "../../contexts/AuthContext";
+import { withRouter } from 'react-router-dom'
 
-const SignUp = ({msg_context}) => {
+const SignUp = ({ msg_context, location }) => {
     const [inputs, setInputs] = useState({ firstName: "", lastName: "", email: "", password: "" });
 
     const context = useContext(AuthContext);
+
+    const msg = location.state && location.state.msg;
+
+    console.log(location)
 
     const handleChange = e => {
         const { name, value } = e.target;
@@ -23,18 +28,17 @@ const SignUp = ({msg_context}) => {
                 'Content-Type': 'application/json'
             }
         }).then(res => {
-            console.log(res)
-            if (res.status === 200) {
-                return res.json();
-            } else {
-                msg_context.setError({
-                    type: {error: "User already exits"}
-                })
-                throw new Error("User already exits")
-            }
+            return res.json();
         }).then(data => {
-            console.log(data)
-            msg_context.setError("Please confirm your email to complete registration")
+            if (data.msg) {
+                msg_context.setMsg({
+                    type: { error: data.msg }
+                })
+                throw new Error
+            }
+            msg_context.setMsg({
+                type: { success: "Please confirm your email to complete registration" }
+            })
             fetch(`http://localhost:5000/api/emailEvents/confirm-email/${data.token}`, {
                 method: 'POST',
                 body: JSON.stringify(data),
@@ -49,9 +53,10 @@ const SignUp = ({msg_context}) => {
     }
 
     return (
-        <>           
+        <>
             <form className="form sign-up" onSubmit={handleSubmit}>
-                <h2>{msg_context.msg.type.error === "" ? "Sign Up" : msg_context.msg.type.error}</h2>
+                <h2>{msg_context.msg.type.success || "Sign up and book your first appt today!"}</h2>
+                <h4 className="error">{msg_context.msg.type.error}</h4>
                 <div className="input-wrapper">
                     <label>First Name</label>
                     <input type="text" name="firstName" value={inputs.firstName} onChange={handleChange} />
@@ -74,4 +79,4 @@ const SignUp = ({msg_context}) => {
     )
 }
 
-export default SignUp
+export default withRouter(SignUp); 

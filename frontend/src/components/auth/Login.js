@@ -13,7 +13,7 @@ const Login = (props) => {
 
     const msg = props.location.state && props.location.state.msg;
 
-    const title = msg || "Welcome back, please login"
+    let title = "Welcome back, please login" || msg;
 
     const handleChange = e => {
         const { name, value } = e.target;
@@ -36,24 +36,27 @@ const Login = (props) => {
                 'Content-Type': 'application/json'
             }
         }).then(res => {
-            console.log(res)
-            if(res.status === 400){
-               
-                return 
-            } 
             return res.json();
         }).then(data => {
+            console.log(data);
+            if (data.msg) {
+                msg_context.setMsg({
+                    type: { error: data.msg }
+                })
+                throw new Error
+            }
             const { token, user } = data;
             user_context.setAuth(user);
             Cookies.set('token', token, { expires: isChecked ? 1000 : 1 })
             props.history.push("/booking");
-        }).catch(err => console.log("login err", err))
+        })
+            .catch(err => console.log("login err", err))
     }
     return (
         <>
             <form className="form sign-in" onSubmit={handleSubmit}>
                 <h2>{title}</h2>
-                <h2 className="error"></h2>
+                <h4 className="error">{msg_context.msg.type.error}</h4>
                 <div className="input-wrapper" >
                     <label>Email</label>
                     <input type="email" name="email" value={inputs.email} onChange={handleChange} />
@@ -67,12 +70,12 @@ const Login = (props) => {
                     <input type="checkbox" name="remember" checked={user_context.isChecked} onChange={rememberPwd} />
                 </div>
                 <div className="input-wrapper" >
-                <Link className="forgot-pwd" to="password-reset">forgot password?</Link>
+                    <Link className="forgot-pwd" to="password-reset">forgot password?</Link>
                 </div>
                 <div className="input-wrapper" >
-                <button type="submit" className="submit">login</button>
-                </div>  
-                
+                    <button type="submit" className="submit">login</button>
+                </div>
+
             </form>
         </>
     )

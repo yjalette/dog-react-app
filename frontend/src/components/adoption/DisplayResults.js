@@ -5,25 +5,37 @@ import { fetchDogs } from './fetchDogs';
 import Form from './Form';
 import { useSnackBars } from '../../contexts/AlertContext';
 import Details from '../grid/Details';
+import { withRouter } from 'react-router-dom';
+
+import qs from 'query-string';
 
 const myDivToFocus = React.createRef()
 
-const DisplayResults = () => {
+const initState = {
+    id: "",
+    gender: 'male',
+    breed: '',
+    color: 'black',
+    good_with_cats: false,
+    good_with_dogs: false,
+    good_with_children: false,
+    location: '10032',
+    distance: 50,
+    sort: ""
+}
 
-    const [inputs, setInputs] = useState({
-        id: "",
-        gender: 'male',
-        breed: '',
-        color: 'black',
-        good_with_cats: false,
-        good_with_dogs: false,
-        good_with_children: false,
-        location: '10032',
-        distance: 50,
-        sort: ""
+const DisplayResults = (props) => {
+
+    const [inputs, setInputs] = useState(() => {
+        const { search } = props.location;
+        console.log(search)
+        if (search) return console.log("here") || qs.parse(search);
+        return initState
     });
 
-    const setAlert = useSnackBars();
+
+
+    // const setAlert = useSnackBars();
 
     const [results, setResults] = useState(null);
 
@@ -42,20 +54,26 @@ const DisplayResults = () => {
         showFilter(false);
     }
 
-    const handleShowDetails = ()=> {   
+    const handleShowDetails = () => {
         showDetails(true);
+    }
+
+    const handleReset = () => {
+        setInputs(initState);
     }
 
     useEffect(() => {
         if (!token) return;
-        fetchDogs({}, token)
+        console.log(inputs)
+        fetchDogs(inputs, token)
             .then(data => {
                 const animals = data.animals.filter(animal => animal.photos.length !== 0)
-                if (!data.animals) {
-                    setAlert({msg: "Sorry, but nothing matched your search criteria. Please try again with some different keywords.", type: 'error'})
-                    throw new Error("no animals");
-                }
+                // if (!data.animals) {
+                //     setAlert({msg: "Sorry, but nothing matched your search criteria. Please try again with some different keywords.", type: 'error'})
+                //     throw new Error("no animals");
+                // }
                 setResults(animals);
+
                 // setAlert({msg: `${animals.length} results were found`, type: 'success'})
 
             })
@@ -72,7 +90,7 @@ const DisplayResults = () => {
     const handleEnvironmentChange = e => {
         setInputs({
             ...inputs,
-                [e.target.name]: true
+            [e.target.name]: true
         })
     }
 
@@ -82,12 +100,13 @@ const DisplayResults = () => {
             const data = await fetchDogs(inputs, token);
             if (!data.animals) {
                 showFilter(false);
-                setAlert({msg: "Sorry, but nothing matched your search criteria. Please try again with some different keywords.", type: 'error'})
+                // setAlert({msg: "Sorry, but nothing matched your search criteria. Please try again with some different keywords.", type: 'error'})
                 throw new Error("no animals");
             }
-        
+
             showFilter(false);
             setResults(data.animals);
+            props.history.push({ search: qs.stringify(inputs) })
         }
         catch (err) {
             return console.log('error: ', err);
@@ -96,15 +115,15 @@ const DisplayResults = () => {
 
     return (
         <>
-        <div className="grid-form-wrapper">
-                <Form handleClick={handleClick} handleCancel={handleCancel} handleSubmit={handleSubmit} handleChange={handleChange} handleEnvironmentChange={handleEnvironmentChange} inputs={inputs} filter={filter} myDivToFocus={myDivToFocus} />
+            <div className="grid-form-wrapper">
+                <Form reset={handleReset} handleClick={handleClick} handleCancel={handleCancel} handleSubmit={handleSubmit} handleChange={handleChange} handleEnvironmentChange={handleEnvironmentChange} inputs={inputs} filter={filter} myDivToFocus={myDivToFocus} />
                 <div className={filter ? "opacity" : ""}>
-                    <Grid animals={results} handleShowDetails={handleShowDetails}/>
+                    <Grid animals={results} handleShowDetails={handleShowDetails} />
                 </div>
-        </div>
-        
+            </div>
+
         </>
     )
 }
 
-export default DisplayResults;
+export default withRouter(DisplayResults);

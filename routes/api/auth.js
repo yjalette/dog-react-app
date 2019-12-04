@@ -8,7 +8,7 @@ const User = require('../../models/User');
 
 router.post('/', (req, res) => {
     const { email, password } = req.body;
-    // if (!email || !password ) return res.status(400).json({ msg: "please enter all fields" });
+    if (!email || !password) return res.status(400).json({ msg: "please enter all fields" });
     User.findOne({ email })
         .then(user => {
             console.log(user)
@@ -73,11 +73,11 @@ router.put('/change-creds/:token', auth, async (req, res) => {
     const { token } = req.params;
     try {
         const decoded = jwt.verify(token, config.get('jwtSecret'))
-        await User.findOneAndUpdate({ _id: decoded.id }, { $set: { ...req.body } }) 
+        await User.findOneAndUpdate({ _id: decoded.id }, { $set: { ...req.body } })
         return res.status(200).send(req.body);
     }
     catch (err) {
-        return res.status(400).json({msg: err})
+        return res.status(400).json({ msg: err })
     }
 })
 

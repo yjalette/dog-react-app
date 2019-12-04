@@ -9,24 +9,16 @@ const icons = {
 const Details = (props) => {
     const animal = props.location.state;
     console.log(animal)
-    const [slide, setSlide] = useState({ photo: animal.photos[0], index: 1 });
+    const [slide, setSlide] = useState(0);
     const currSlide = animal.photos.find((photo, index) => index === slide.index);
     const environment = Object.keys(animal.environment).filter(key => animal.environment[key] === true)
 
     const handleIncrement = () => {
-        setSlide({
-            ...slide,
-            photo: currSlide,
-            index: slide.index === animal.photos.length - 1 ? 0 : slide.index + 1
-        })
+        setSlide((index) => index === animal.photos.length - 1 ? 0 : index + 1)
     }
 
     const handleDecrement = () => {
-        setSlide({
-            ...slide,
-            photo: currSlide,
-            index: slide.index === 0 ? animal.photos.length - 1 : slide.index - 1
-        })
+        setSlide((index) => index === 0 ? animal.photos.length - 1 : index - 1)
     }
 
     return (
@@ -85,7 +77,7 @@ const Details = (props) => {
                         </div>
                     </section>
                     <section className="dog-slider">
-                        <img src={slide.photo.large} alt="photo" />
+                        <img src={animal.photos[slide].large} alt="photo" />
                         <div className="prev-next-btn-wrapper">
                             <i className='fas fa-chevron-circle-left' onClick={handleDecrement}></i>
                             <p>{animal.photos.length}&nbsp;{animal.photos.length === 1 ? "photo" : "photos"}</p>

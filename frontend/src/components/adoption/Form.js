@@ -23,7 +23,7 @@ const colors = [
     "White"
 ]
 
-const Form = ({ handleSubmit, handleEnvironmentChange, handleChange, inputs, filter, myDivToFocus, handleClick, handleCancel }) => {
+const Form = ({ handleSubmit, handleEnvironmentChange, handleChange, inputs, filter, myDivToFocus, handleClick, handleCancel, reset }) => {
 
     return (
         <>
@@ -77,6 +77,7 @@ const Form = ({ handleSubmit, handleEnvironmentChange, handleChange, inputs, fil
                     </select>
                 </div> */}
                 <div className="input-wrapper">
+                    <button type="button" onClick={reset}>clear</button>
                     <button type="submit">search</button>
                 </div>
             </form>}

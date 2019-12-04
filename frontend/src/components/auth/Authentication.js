@@ -13,12 +13,12 @@ const Authentication = () => {
     const msg_context = useContext(MsgContext);
     return (
         <div className="wrapper">
-            <hr/>
+            <hr />
             <div className="registration">
                 <section className="form-wrapper">
                     {signUp ? <SignUp msg_context={msg_context} /> : <Login msg_context={msg_context} />}
                     <div className="switch_btn_wrapper" onClick={() => signUp ? setSignUp(false) : setSignUp(true)}>
-                        <p className="regis-link">{signUp ? "New here? Sign up and book your first appt today!" : "If you already has an account, just sign in. We've missed you!"}</p>
+                        <p className="regis-link">{!signUp ? "New here? Sign up and book your first appt today!" : "If you already has an account, just sign in. We've missed you!"}</p>
                     </div>
                 </section>
                 <div className="sub-cont" style={bg_style}></div>

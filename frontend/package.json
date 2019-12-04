@@ -5,6 +5,7 @@
   "dependencies": {
     "js-cookie": "^2.2.1",
     "node-sass": "^4.12.0",
+    "query-string": "^6.9.0",
     "react": "^16.10.2",
     "react-calendar": "^2.19.2",
     "react-dom": "^16.10.2",

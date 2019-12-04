@@ -9,7 +9,7 @@ const User = require('../../models/User');
 router.post('/', (req, res) => {
     const { firstName, lastName, email, password } = req.body;
 
-    // if (!email || !password || !name) return res.status(400).json({ msg: "please enter all fields" });
+    if (!email || !password || !firstName || !lastName) return res.status(400).json({ msg: "please enter all fields" });
 
     User.findOne({ email })
         .then(user => {
@@ -55,16 +55,16 @@ router.post('/', (req, res) => {
 
 
 router.put('/reset/:token', (req, res) => {
-    const { temp_token} = req.body;
+    const { temp_token } = req.body;
     jwt.verify(temp_token, config.get('jwtSecret'), (err, decoded) => {
         try {
             bcrypt.genSalt(10, (err, salt) => {
-                bcrypt.hash(req.body.password , salt, async (err, hash) => {
+                bcrypt.hash(req.body.password, salt, async (err, hash) => {
                     req.body.password = hash
-                    await User.findOneAndUpdate({ _id: decoded.id }, { password: hash }) 
-                    res.status(200).json(true);  
-                });    
-            });   
+                    await User.findOneAndUpdate({ _id: decoded.id }, { password: hash })
+                    res.status(200).json(true);
+                });
+            });
         }
         catch (err) {
             console.log("reset password error", err)

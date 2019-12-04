@@ -455,58 +455,70 @@ label {
 
 .registration {
     @include flex(space-between);
+
     flex-direction: row;
-    @include mQ($screen-lg){
+
+    @include mQ($screen-lg) {
         flex-direction: column;
     }
+
+
     .form-wrapper {
-       padding: 1em;
-       width: 100%;
+        padding: 1em;
+        width: 100%;
+
         form {
             label {
                 color: $pink;
             }
-            .remember-me-wrapper{
+
+            .remember-me-wrapper {
                 @include flex(flex-end);
-                
+
                 label, input {
                     width: auto;
                 }
             }
-            .forgot-pwd{
+
+            .forgot-pwd {
                 width: 100%;
                 opacity: .7;
                 text-align: right;
                 text-decoration: underline;
             }
+
             button {
-                float: right;
+                    float: right;
             }
         }
-        .switch_btn_wrapper{
+
+        .switch_btn_wrapper {
             color: $pink;
             cursor: pointer;
-            &:hover{
-text-decoration: underline;
-color: darken($color: $pink, $amount: 15);
+
+            &:hover {
+                text-decoration: underline;
+                color: darken($color: $pink, $amount: 15);
             }
         }
     }
+
     .sub-cont {
         background-position: center;
         background-size: cover;
         height: 600px;
         width: 100%;
         background-repeat: no-repeat;
-        @include mQ($screen-lg){
-            
-        }
+
+        @include mQ($screen-lg) {}
     }
 }
 
 .wrapper {
     @include flex(center);
+
     flex-direction: column;
+
     .wrapper-header {
         @include flex(center);
 
