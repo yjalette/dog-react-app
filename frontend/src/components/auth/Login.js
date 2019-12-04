@@ -54,20 +54,25 @@ const Login = (props) => {
             <form className="form sign-in" onSubmit={handleSubmit}>
                 <h2>{title}</h2>
                 <h2 className="error"></h2>
-                <label>
-                    <span>Email</span>
+                <div className="input-wrapper" >
+                    <label>Email</label>
                     <input type="email" name="email" value={inputs.email} onChange={handleChange} />
-                </label>
-                <label>
-                    <span>Password</span>
+                </div>
+                <div className="input-wrapper" >
+                    <label>Password</label>
                     <input type="password" name="password" value={inputs.password} onChange={handleChange} />
-                </label>
-                <label className="remember-me-wrapper">
-                    <span>remember me</span>
+                </div>
+                <div className="remember-me-wrapper">
+                    <label>remember me</label>
                     <input type="checkbox" name="remember" checked={user_context.isChecked} onChange={rememberPwd} />
-                </label>
-                <Link className="forgot-pwd" to="password-reset">Forgot password?</Link>
-                <button type="submit" className="submit">Sign In</button>
+                </div>
+                <div className="input-wrapper" >
+                <Link className="forgot-pwd" to="password-reset">forgot password?</Link>
+                </div>
+                <div className="input-wrapper" >
+                <button type="submit" className="submit">login</button>
+                </div>  
+                
             </form>
         </>
     )

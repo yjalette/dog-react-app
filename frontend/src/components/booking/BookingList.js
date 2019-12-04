@@ -22,8 +22,8 @@ const BookingList = ({ handleDelete, events, onEdit }) => {
                                 <td>{name}</td>
                                 <td>{appt_date.slice(0, 10)}</td>
                                 <td>{timeTransformer[appt_time]}</td>
-                                <td className="tooltip"><span className="tooltiptext"></span><i className="fa fa-edit" onClick={() => onEdit(_id)}></i></td>
-                                <td><i className="fa fa-trash" onClick={() => handleDelete(_id)}></i></td>
+                                <td className="tooltip"><i className="fa fa-edit" onClick={() => onEdit(_id)}></i><span className="tooltiptext">we respectfully request at least 24 hour notice for rescheduling</span></td>
+                                <td className="tooltip"><i className="fa fa-trash" onClick={() => handleDelete(_id)}></i><span className="tooltiptext">we respectfully request at least 24 hour notice for cancellations</span></td>
                             </tr>
                         ))}
                     </tbody>

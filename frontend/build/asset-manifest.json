@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.2b1de19e.chunk.css",
-    "main.js": "/static/js/main.7c22f330.chunk.js",
-    "main.js.map": "/static/js/main.7c22f330.chunk.js.map",
+    "main.css": "/static/css/main.4859b1d3.chunk.css",
+    "main.js": "/static/js/main.f77e3ddc.chunk.js",
+    "main.js.map": "/static/js/main.f77e3ddc.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.e73818e5.js",
     "runtime-main.js.map": "/static/js/runtime-main.e73818e5.js.map",
     "static/css/2.c51b6406.chunk.css": "/static/css/2.c51b6406.chunk.css",
-    "static/js/2.ff16c572.chunk.js": "/static/js/2.ff16c572.chunk.js",
-    "static/js/2.ff16c572.chunk.js.map": "/static/js/2.ff16c572.chunk.js.map",
+    "static/js/2.a1b7787d.chunk.js": "/static/js/2.a1b7787d.chunk.js",
+    "static/js/2.a1b7787d.chunk.js.map": "/static/js/2.a1b7787d.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.909451e8ff9fc329fb1f183004b6efa1.js": "/precache-manifest.909451e8ff9fc329fb1f183004b6efa1.js",
+    "precache-manifest.9b725ed1fd3d289ccf83a0ba05ab91fe.js": "/precache-manifest.9b725ed1fd3d289ccf83a0ba05ab91fe.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.c51b6406.chunk.css.map": "/static/css/2.c51b6406.chunk.css.map",
-    "static/css/main.2b1de19e.chunk.css.map": "/static/css/main.2b1de19e.chunk.css.map",
-    "static/media/DogGroomingServices.jpg": "/static/media/DogGroomingServices.1a59317c.jpg",
-    "static/media/DogWalkingServices.jpg": "/static/media/DogWalkingServices.a7c3a4ae.jpg",
+    "static/css/main.4859b1d3.chunk.css.map": "/static/css/main.4859b1d3.chunk.css.map",
+    "static/media/DogGroomingServices.jpg": "/static/media/DogGroomingServices.4330560d.jpg",
+    "static/media/DogWalkingServices.jpg": "/static/media/DogWalkingServices.9dda2426.jpg",
     "static/media/adopt.jpg": "/static/media/adopt.b4a3e32c.jpg",
     "static/media/ball-pink.png": "/static/media/ball-pink.099c4fd2.png",
     "static/media/client-1.jpeg": "/static/media/client-1.e7bd73e9.jpeg",
@@ -27,15 +27,16 @@
     "static/media/dog-on-phone.png": "/static/media/dog-on-phone.5a4da986.png",
     "static/media/dogphone.png": "/static/media/dogphone.656a9be4.png",
     "static/media/happy-dog.png": "/static/media/happy-dog.fa333da2.png",
-    "static/media/App.scss": "/static/media/waving-dog.ab001438.jpg",
+    "static/media/hero_image.jpg": "/static/media/hero_image.a4836c57.jpg",
+    "static/media/App.scss": "/static/media/hr.550a3d19.jpg",
     "static/media/services.png": "/static/media/services.697ccc3a.png",
     "static/media/vizla-two.png": "/static/media/vizla-two.2de82ae1.png"
   },
   "entrypoints": [
     "static/js/runtime-main.e73818e5.js",
     "static/css/2.c51b6406.chunk.css",
-    "static/js/2.ff16c572.chunk.js",
-    "static/css/main.2b1de19e.chunk.css",
-    "static/js/main.7c22f330.chunk.js"
+    "static/js/2.a1b7787d.chunk.js",
+    "static/css/main.4859b1d3.chunk.css",
+    "static/js/main.f77e3ddc.chunk.js"
   ]
 }

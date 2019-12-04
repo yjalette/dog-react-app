@@ -21,6 +21,7 @@ import EnterNewCred from './components/auth/EnterNewCred';
 import Details from './components/grid/Details';
 import UpdateInputs from './components/account/UpdateInputs';
 import Services from './components/services/Services';
+import { isContext } from 'vm';
 
 
 function App() {
@@ -28,6 +29,10 @@ function App() {
     type: {
       error: "",
       success: ""
+    },
+    alert: {
+      error: false,
+      success: false
     }
   });
 
@@ -54,7 +59,7 @@ function App() {
             <Nav />
             <Route key='landing' component={Landing} exact path="/" />
             <Route key='services' component={Services} exact path="/services" />
-            <AlertProvider>
+            {/* <AlertProvider> */}
               <div className="showcase">
                 <Switch>
                   <Route key='authentication' component={Authentication} path='/authentication' />
@@ -70,7 +75,7 @@ function App() {
                   <Route key='contact' component={Contact} path='/contact' />
                 </Switch>
               </div>
-            </AlertProvider>
+            {/* </AlertProvider> */}
           </Router>
         </MsgContext.Provider>
       </AuthContext.Provider>

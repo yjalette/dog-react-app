@@ -1,35 +1,35 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "77f35616fac68e0a685d5af519c36b34",
+    "revision": "977f45c49751100469ecbec007446ce1",
     "url": "/index.html"
   },
   {
-    "revision": "bf40b2e230c0eb49d2d9",
+    "revision": "38dd31da0625fc3e343e",
     "url": "/static/css/2.c51b6406.chunk.css"
   },
   {
-    "revision": "d0e4577c359ba4a537ca",
-    "url": "/static/css/main.2b1de19e.chunk.css"
+    "revision": "965e631ae3899711d10c",
+    "url": "/static/css/main.4859b1d3.chunk.css"
   },
   {
-    "revision": "bf40b2e230c0eb49d2d9",
-    "url": "/static/js/2.ff16c572.chunk.js"
+    "revision": "38dd31da0625fc3e343e",
+    "url": "/static/js/2.a1b7787d.chunk.js"
   },
   {
-    "revision": "d0e4577c359ba4a537ca",
-    "url": "/static/js/main.7c22f330.chunk.js"
+    "revision": "965e631ae3899711d10c",
+    "url": "/static/js/main.f77e3ddc.chunk.js"
   },
   {
     "revision": "8bac65c430d186c31b70",
     "url": "/static/js/runtime-main.e73818e5.js"
   },
   {
-    "revision": "1a59317cf961ad21fce33624b5e80de9",
-    "url": "/static/media/DogGroomingServices.1a59317c.jpg"
+    "revision": "4330560d50b65128475e7b5f99644cde",
+    "url": "/static/media/DogGroomingServices.4330560d.jpg"
   },
   {
-    "revision": "a7c3a4ae60a90effb3fbb3a2399620ae",
-    "url": "/static/media/DogWalkingServices.a7c3a4ae.jpg"
+    "revision": "9dda242693c7e782f2495d9e2f0b0e5f",
+    "url": "/static/media/DogWalkingServices.9dda2426.jpg"
   },
   {
     "revision": "b4a3e32c27a766280c745801db06bd87",
@@ -80,6 +80,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/happy-dog.fa333da2.png"
   },
   {
+    "revision": "a4836c570b291b4aa749d8d3ec097dac",
+    "url": "/static/media/hero_image.a4836c57.jpg"
+  },
+  {
     "revision": "550a3d19ba9666289a4b32617fb65cf4",
     "url": "/static/media/hr.550a3d19.jpg"
   },
@@ -90,9 +94,5 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "2de82ae1f4e887d393159b299f6f9918",
     "url": "/static/media/vizla-two.2de82ae1.png"
-  },
-  {
-    "revision": "ab00143827ccde77f420764d292ca4df",
-    "url": "/static/media/waving-dog.ab001438.jpg"
   }
 ]);

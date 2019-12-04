@@ -45,6 +45,7 @@ const Form = ({ onSubmit, defaultValues, error, msg }) => {
             <form onSubmit={handleSubmit}>
                 <div className="col">
                     <DatePicker handleDate={handleDate} eventDate={new Date(newEvent.appt_date)} />
+                    <p>*we respectfully request at least 24 hour notice for cancellations or rescheduling</p>
                 </div>
                 <div className="col">
                     <div className="input-wrapper">

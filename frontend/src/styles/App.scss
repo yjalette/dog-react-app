@@ -86,7 +86,8 @@ hr {
 button {
     border: none;
     outline: 0;
-    padding: .8em;
+    padding: .5em 1.3em;
+    border-radius: 5px;
     margin: .4em 0;
     color: $white;
     background-color: darken($color: $pink, $amount: 15);
@@ -146,30 +147,6 @@ label {
     height: 100%;
 }
 
-.tooltip {
-    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
-}
-
-/* Tooltip text */
-.tooltip .tooltiptext {
-    visibility: hidden;
-    display: none;
-    width: 50px;
-    background-color: $blue;
-    color: $white;
-    text-align: center;
-    padding: 5px 0;
-    border-radius: 6px;
-    position: absolute;
-    z-index: 1;
-}
-
-/* Show the tooltip text when you mouse over the tooltip container */
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-    display: block;
-}
-
 .showcase {
     @include flex(center);
 
@@ -180,15 +157,6 @@ label {
     @include mQ($screen-md) {
         width: 100%;
     }
-}
-
-.error {
-    color: red;
-    font-weight: 400;
-    text-align: center;
-    width: 100%;
-    background: none;
-    padding: 1em 0;
 }
 
 .none {
@@ -314,11 +282,15 @@ label {
 .homepage {
     width: 100%;
     height: 100vh;
+
     @include mQ($screen-md) {
         height: auto;
     }
+
+
     .landing {
-     @include flex(center);
+        @include flex(center);
+
         align-items: flex-start;
         padding: 0 5em;
         height: 100%;
@@ -328,8 +300,10 @@ label {
             padding: 1em;
         }
 
+
         div {
             height: 100%;
+
             @include mQ($screen-md) {
                 height: auto;
             }
@@ -390,12 +364,15 @@ label {
 
 .services {
     @include flex(center);
+
     flex-direction: column;
+
     .wrapper-header {
         div {
             span {
                 color: $white;
             }
+
             img {
                 width: 100%;
             }
@@ -474,20 +451,78 @@ label {
     }
 }
 
+//auth
+
+.registration {
+    @include flex(space-between);
+    flex-direction: row;
+    @include mQ($screen-lg){
+        flex-direction: column;
+    }
+    .form-wrapper {
+       padding: 1em;
+       width: 100%;
+        form {
+            label {
+                color: $pink;
+            }
+            .remember-me-wrapper{
+                @include flex(flex-end);
+                
+                label, input {
+                    width: auto;
+                }
+            }
+            .forgot-pwd{
+                width: 100%;
+                opacity: .7;
+                text-align: right;
+                text-decoration: underline;
+            }
+            button {
+                float: right;
+            }
+        }
+        .switch_btn_wrapper{
+            color: $pink;
+            cursor: pointer;
+            &:hover{
+text-decoration: underline;
+color: darken($color: $pink, $amount: 15);
+            }
+        }
+    }
+    .sub-cont {
+        background-position: center;
+        background-size: cover;
+        height: 600px;
+        width: 100%;
+        background-repeat: no-repeat;
+        @include mQ($screen-lg){
+            
+        }
+    }
+}
+
 .wrapper {
     @include flex(center);
     flex-direction: column;
     .wrapper-header {
         @include flex(center);
+
         background-color: darken($color: $pink, $amount: 25);
         padding: 2em;
+
         @include mQ($screen-lg) {
             flex-direction: column;
             filter: none;
             padding: 1em;
         }
+
+
         .news-heroimage {
             width: 80%;
+
             @include mQ($screen-sm) {
                 width: 100%;
             }
@@ -503,14 +538,17 @@ label {
 
         div {
             @include flex(space-evenly);
+
             flex-direction: column;
             padding: .1em;
             text-align: center;
+
             span {
                 color: $white;
                 text-transform: lowercase;
                 opacity: .8;
-                &::first-letter{
+
+                &::first-letter {
                     text-transform: uppercase;
                 }
             }
@@ -573,340 +611,107 @@ label {
 
 .adoption-wrapper {
     background-color: $pink;
-.adoption_details {
-    background-color: $white;
-    @include flex(space-between);
-    align-items: flex-start;
-    padding: 2em;
-    margin: 2em 0;
-    @include mQ($screen-sm){
-        flex-direction: column-reverse;
-    }
-    .input-wrapper {
-        @include flex(flex-start);
 
-        label {
-            width: auto;
-            margin-right: .3em;
-            color: $pink;
-        }
+    .adoption_details {
+        background-color: $white;
 
-        span {
-            font-size: $small;
-            text-transform: lowercase;
-            color: rgba(0, 0, 0, 0.6);
-        }
+        @include flex(space-between);
 
-        i {
-            color: darken($color: $green, $amount: 10);
-        }
-    }
-
-    .adoption_address {
-        @include flex(flex-start);
         align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .dog-slider {
-        @include flex(center);
-        flex-direction: column;
-        width: 50%;
-        @include mQ($screen-sm){
-            width: 100%;
-        }
-img {
-    max-width: 500px;
-    max-height: 500px;
-    object-fit: cover;
-    @include mQ($screen-sm){
-        width: 100%;
-    }
-}
-        .prev-next-btn-wrapper {
-            @include flex(space-between);
-            i {
-                font-size: $lg;
-                color: $green;
-            }
-        }
-    }
-}
-}
-// auth
-.tip {
-    font-size: 20px;
-    margin: 40px auto 50px;
-    text-align: center;
-}
-
-.cont {
-    overflow: hidden;
-    position: relative;
-    width: $contW;
-    height: 550px;
-    background-color: $white;
-
-    @include mQ($screen-sm) {
-        @include flex(center);
-
-        flex-direction: column;
-        height: 1200px;
-    }
-}
-
-.form {
-    position: relative;
-    width: $formW;
-    height: 100%;
-    transition: transform $switchAT ease-in-out;
-    padding: 50px 30px 0;
-
-    @include mQ($screen-sm) {
-        width: 100%;
-        padding: .5em;
-    }
-}
-
-.s--signup {
-    @include mQ($screen-sm) {
-        background-color: darkgoldenrod;
-        height: 100%;
-    }
-}
-
-.sub-cont {
-    overflow: hidden;
-    position: absolute;
-    left: $formW;
-    top: 0;
-    width: $contW;
-    height: 100%;
-    padding-left: $imgW;
-    transition: transform $switchAT ease-in-out;
-
-    @include mQ($screen-sm) {
-        @include flex(center);
-
-        flex-direction: column;
-        position: relative;
-        overflow: hidden;
-        left: 0;
-        height: 100%;
-        padding-left: 0;
-    }
-
-
-    @include signUpActive {
-        transform: translate3d($formW * -1, 0, 0);
+        padding: 2em;
+        margin: 2em 0;
 
         @include mQ($screen-sm) {
-            transform: translate3d(0, $formW * -1, 0);
-        }
-    }
-}
-
-.img {
-    overflow: hidden;
-    z-index: 2;
-    position: relative;
-    left: 0;
-    top: 0;
-    width: $imgW;
-    height: 100%;
-    padding-top: 360px;
-
-    &:before {
-        content: '';
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: $contW;
-        height: 100%;
-        background-image: url("../images/waving-dog.jpg");
-        background-size: cover;
-        transition: transform $switchAT ease-in-out;
-    }
-
-    &:after {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.6);
-    }
-
-    @include signUpActive {
-        &:before {
-            transform: translate3d($formW, 0, 0);
-        }
-    }
-
-
-    @include mQ($screen-sm) {
-        width: 100%;
-        height: 600px;
-    }
-
-
-    &__text {
-        z-index: 2;
-        position: absolute;
-        left: 0;
-        top: 30%;
-        width: 100%;
-        padding: 0 20px;
-        text-align: center;
-        color: $white;
-        transition: transform $switchAT ease-in-out;
-
-        h2 {
-            margin-bottom: 10px;
-            font-weight: normal;
+            flex-direction: column-reverse;
         }
 
-        &.m--up {
-            @include signUpActive {
-                transform: translateX($imgW * 2);
+
+        .input-wrapper {
+            @include flex(flex-start);
+
+            label {
+                width: auto;
+                margin-right: .3em;
+                color: $pink;
+            }
+
+            span {
+                font-size: $small;
+                text-transform: lowercase;
+                color: rgba(0, 0, 0, 0.6);
+            }
+
+            i {
+                color: darken($color: $green, $amount: 10);
             }
         }
 
-        &.m--in {
-            transform: translateX($imgW * -2);
+        .adoption_address {
+            @include flex(flex-start);
 
-            @include signUpActive {
-                transform: translateX(0);
-            }
-        }
-    }
-
-    &__btn {
-        overflow: hidden;
-        z-index: 2;
-        position: relative;
-        width: 100px;
-        height: $btnH;
-        margin: 0 auto;
-        background: transparent;
-        color: #fff;
-        text-transform: uppercase;
-        font-size: 15px;
-        cursor: pointer;
-
-        &:after {
-            content: '';
-            z-index: 2;
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
+            align-items: flex-start;
+            flex-direction: column;
         }
 
-        span {
+        .dog-slider {
             @include flex(center);
 
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            transition: transform $switchAT;
-            text-decoration: underline;
+            flex-direction: column;
+            width: 50%;
 
-            &.m--in {
-                transform: translateY($btnH * -2);
+            @include mQ($screen-sm) {
+                width: 100%;
+            }
 
-                @include signUpActive {
-                    transform: translateY(0);
+
+            img {
+                max-width: 500px;
+                max-height: 500px;
+                object-fit: cover;
+
+                @include mQ($screen-sm) {
+                    width: 100%;
                 }
             }
 
-            &.m--up {
-                @include signUpActive {
-                    transform: translateY($btnH * 2);
+            .prev-next-btn-wrapper {
+                @include flex(space-between);
+
+                i {
+                    font-size: $lg;
+                    color: $green;
                 }
             }
         }
     }
 }
 
-h2 {
-    width: 100%;
-    font-size: 26px;
-    text-align: center;
-}
-
-label {
-    display: block;
-    width: $inputW;
-    margin: 25px auto 0;
-
-    span {
-        font-size: $small / 1.5;
-        color: darken($color: gray, $amount: 4);
-        text-transform: uppercase;
-    }
-}
-
-.forgot-pass {
-    margin-top: 15px;
-    font-size: 12px;
-    text-align: center;
-}
-
-.submit {
-    text-transform: uppercase;
-    width: 30%;
-    margin: 1em;
-}
-
-.fb-btn {
-    border: 2px solid #d3dae9;
-    color: darken(#d3dae9, 20%);
-
-    span {
-        font-weight: bold;
-        color: darken(#768cb6, 20%);
-    }
-}
-
-.sign-in {
-    transition-timing-function: ease-out;
-
-    @include signUpActive {
-        transition-timing-function: ease-in-out;
-        transition-duration: $switchAT;
-        transform: translate3d($formW, 0, 0);
-    }
-}
-
-.sign-up {
-    transform: translate3d($contW * -1, 0, 0);
-    background-color: $white;
-
-    @include signUpActive {
-        transform: translate3d(0, 0, 0);
-    }
-}
+// auth
 
 // booking
 .booking {
     background-color: $pink;
+
     @include flex(space-between);
+
     flex-direction: column;
     padding: 3em 0;
+
     @include mQ($screen-md) {
         padding: 0;
     }
-    .wrapper-header {      
+
+
+    .wrapper-header {
         @include mQ($screen-md) {
             padding: 0;
             flex-direction: column;
         }
+
+
         img {
             width: 100%;
+
             @include mQ($screen-md) {
                 width: 100%;
             }
@@ -915,17 +720,20 @@ label {
         div {
             text-align: left;
             padding: .7em;
+
             h1 {
                 @include mQ($screen-md) {
                     height: 100%;
                 }
-        }
+            }
         }
     }
 
     .booking-list {
         background-color: $white;
+
         @include flex(center);
+
         flex-direction: column;
         margin: 2em 0;
         padding: 2em;
@@ -935,7 +743,9 @@ label {
             margin: 0;
             padding: 0;
         }
-        h3{
+
+
+        h3 {
             color: $pink;
         }
 
@@ -945,8 +755,9 @@ label {
             margin: 2em;
             height: 100%;
             border: 2px solid $pink;
+
             @include mQ($screen-md) {
-                width: 100%;
+                width: 90%;
                 height: auto;
             }
 
@@ -956,7 +767,7 @@ label {
             }
 
             tr:nth-child(odd) {
-                background-color: darken($color: $white, $amount: 1);
+                background-color: darken($color: $white, $amount: 3);
             }
 
             th {
@@ -990,22 +801,35 @@ label {
         padding: .2em;
     }
 
-h3 {
-    color: $pink;
-}
+
+    h3 {
+        color: $pink;
+    }
+
     form {
         @include flex(space-evenly);
+
         align-items: flex-start;
+
         @include mQ($screen-md) {
             flex-direction: column;
         }
+
+
         label {
-color: $pink;
+            color: $pink;
         }
+
         .col {
-            @include flex(space-evenly);
+            @include flex(center);
+
             flex-direction: column;
             padding: 1em;
+
+            p {
+                padding: 1em;
+            }
+
             .react-calendar {
                 background-color: darken($color: $white, $amount: 2);
                 filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.26));
@@ -1072,17 +896,24 @@ color: $pink;
 
 .contact {
     @include flex(center);
+
     flex-direction: column;
     background-color: $pink;
+
     h1 {
         padding: .5em;
     }
+
     .wrapper-header {
         @include flex(space-around);
+
         padding: 2em;
+
         @include mQ($screen-sm) {
             flex-direction: column-reverse;
         }
+
+
         div {
             img {
                 width: auto;
@@ -1091,14 +922,15 @@ color: $pink;
 
         form {
             width: 100%;
-            .input-wrapper{
+
+            .input-wrapper {
                 width: 100%;
-                button{
+
+                button {
                     float: right;
                     width: 30%;
                 }
             }
-            
         }
     }
 }
@@ -1118,4 +950,96 @@ footer {
             color: $blue;
         }
     }
+}
+
+// alerts
+
+.overlay {
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 2000;
+    transition: opacity 500ms;
+
+    .popup {
+        @include flex(center);
+
+        flex-direction: column;
+        padding: .8em;
+        background: #fff;
+        border-radius: 5px;
+        width: 50%;
+        position: relative;
+        transition: all 5s ease-in-out;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        @include mQ($screen-md) {
+            width: 80%;
+            padding: .4em;
+        }
+
+
+        .close {
+            width: 100%;
+            padding: .2em;
+            text-align: right;
+            transition: all 200ms;
+            font-size: $small;
+            font-weight: bold;
+            text-decoration: none;
+            color: black;
+            cursor: pointer;
+        }
+
+        .content {
+            max-height: 30%;
+            overflow: auto;
+            font-size: $md;
+        }
+    }
+}
+
+.success {
+    color: $green;
+}
+
+.error {
+    color: red;
+}
+
+.error, .success {
+    font-weight: 400;
+    text-align: center;
+    width: 100%;
+    background: none;
+    padding: 1em 0;
+}
+
+// tooltip
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    display: none;
+    width: 30%;
+    word-break: break-word;
+    padding: .2em;
+    background-color: $pink;
+    color: $white;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    margin: .3em;
+    font-size: $small;
+    right: 0;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    display: block;
 }

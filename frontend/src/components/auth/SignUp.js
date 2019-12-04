@@ -49,26 +49,25 @@ const SignUp = ({msg_context}) => {
     }
 
     return (
-        <>
-            
+        <>           
             <form className="form sign-up" onSubmit={handleSubmit}>
                 <h2>{msg_context.msg.type.error === "" ? "Sign Up" : msg_context.msg.type.error}</h2>
-                <label>
-                    <span>First Name</span>
+                <div className="input-wrapper">
+                    <label>First Name</label>
                     <input type="text" name="firstName" value={inputs.firstName} onChange={handleChange} />
-                </label>
-                <label>
-                    <span>Last Name</span>
+                </div>
+                <div className="input-wrapper">
+                    <label>Last Name</label>
                     <input type="text" name="lastName" value={inputs.lastName} onChange={handleChange} />
-                </label>
-                <label>
-                    <span>Email</span>
+                </div>
+                <div className="input-wrapper">
+                    <label>Email</label>
                     <input type="email" name="email" value={inputs.email} onChange={handleChange} />
-                </label>
-                <label>
-                    <span>Password</span>
+                </div>
+                <div className="input-wrapper">
+                    <label>Password</label>
                     <input type="password" name="password" value={inputs.password} onChange={handleChange} />
-                </label>
+                </div>
                 <button type="submit" className="submit">Sign Up</button>
             </form>
         </>
